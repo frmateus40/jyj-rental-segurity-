@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PQRS - J&J Rental Security</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #f5f7fa; }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --navy: #0d2c54;
+      --green: #2e8b57;
+      --green-hover: #256b45;
+      --red: #e83232;
+      --light: #f5f7fa;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #000000;
+      box-shadow: none;
+      border-bottom: 1px solid #222;
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .nav-inner {
+      max-width: 100%; margin: 0; padding: 0 20px 0 8px;
+      display: flex; align-items: center; justify-content: space-between; height: 110px;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px;
+      color: #fff; background: #c0392b; padding: 8px 16px; border-radius: 4px;
+      transition: background .2s, color .2s; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .nav-links a:hover, .nav-links a.active { background: #96281b; color: #fff; }
+    .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
+    @media(max-width:768px){
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 110px; left: 0; right: 0;
+        background: #ffffff; padding: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.3);
+      }
+    }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, #0b0d1a 0%, #0d2c54 60%, #1a4f8a 100%);
+      padding: 70px 20px 60px; text-align: center; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content:''; position:absolute; inset:0;
+      background: url('logo.png') center/30% no-repeat; opacity:.06;
+    }
+    .page-hero h1 {
+      font-family:'Montserrat',sans-serif; font-size:clamp(26px,5vw,50px);
+      font-weight:800; color:#fff; text-transform:uppercase; letter-spacing:2px;
+      position:relative; z-index:1; margin-bottom: 10px;
+    }
+    .page-hero h1 span { color:#e83232; }
+    .page-hero p { color:rgba(255,255,255,.8); font-size:16px; position:relative; z-index:1; max-width:600px; margin:0 auto; line-height:1.6; }
+    .breadcrumb {
+      display:flex; justify-content:center; gap:8px; margin-top:18px;
+      font-size:13px; color:rgba(255,255,255,.5); position:relative; z-index:1;
+    }
+    .breadcrumb a { color:#4fc88e; }
+
+    /* ── LAYOUT ── */
+    .main-wrap {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 340px 1fr;
+      gap: 32px; padding: 50px 20px 70px;
+      align-items: start;
+    }
+    @media(max-width:900px){ .main-wrap { grid-template-columns: 1fr; } }
+
+    /* ── SIDEBAR SERVICIOS ── */
+    .sidebar {
+      background: #0d2c54;
+      border-radius: 16px;
+      padding: 32px 28px;
+      position: sticky; top: 108px;
+    }
+    .sidebar h3 {
+      font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 16px;
+      color: #fff; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .sidebar-divider { width: 40px; height: 3px; background: #e83232; border-radius: 2px; margin: 10px 0 22px; }
+    .sidebar-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+      color: rgba(255,255,255,.82); font-size: 13px; line-height: 1.5;
+    }
+    .sidebar-item:last-child { border-bottom: none; }
+    .sidebar-item i { color: #4fc88e; font-size: 15px; margin-top: 2px; flex-shrink: 0; }
+    .sidebar-cta {
+      margin-top: 24px; display: block; text-align: center;
+      background: var(--green); color: #fff; padding: 13px;
+      border-radius: 8px; font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: .5px;
+      transition: background .2s;
+    }
+    .sidebar-cta:hover { background: var(--green-hover); }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.08); overflow: hidden;
+    }
+    .form-card-head {
+      background: var(--navy); padding: 28px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .form-card-head .head-icon {
+      width: 52px; height: 52px; background: #e83232; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; color: #fff; flex-shrink: 0;
+    }
+    .form-card-head h2 {
+      font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(16px,2vw,22px);
+      color: #fff; text-transform: uppercase; line-height: 1.2;
+    }
+    .form-card-head p { color: rgba(255,255,255,.65); font-size: 13px; margin-top: 4px; }
+
+    .form-body { padding: 32px; }
+
+    /* grupos */
+    .form-group-title {
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 12px;
+      color: #fff; text-transform: uppercase; letter-spacing: 1.5px;
+      background: var(--navy); padding: 10px 16px; border-radius: 6px;
+      margin: 28px 0 18px; display: flex; align-items: center; gap: 8px;
+    }
+    .form-group-title:first-child { margin-top: 0; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-grid.col3 { grid-template-columns: 1fr 1fr 1fr; }
+    .form-grid.col1 { grid-template-columns: 1fr; }
+    @media(max-width:600px){
+      .form-grid, .form-grid.col3 { grid-template-columns: 1fr; }
+    }
+
+    label.field { display: flex; flex-direction: column; gap: 6px; }
+    label.field span {
+      font-size: 12px; font-weight: 700; color: #666;
+      text-transform: uppercase; letter-spacing: .8px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    label.field span em { color: #e83232; font-style: normal; margin-left: 2px; }
+    .form-body input,
+    .form-body select,
+    .form-body textarea {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid #dde3ec; border-radius: 8px;
+      font-size: 14px; font-family: 'Open Sans', sans-serif;
+      background: #fafbfc; color: #333; outline: none;
+      transition: border .2s, background .2s;
+    }
+    .form-body input:focus,
+    .form-body select:focus,
+    .form-body textarea:focus { border-color: var(--green); background: #fff; }
+    .form-body textarea { min-height: 130px; resize: vertical; }
+
+    /* adjuntos */
+    .file-upload {
+      border: 2px dashed #c8d0dc; border-radius: 10px;
+      padding: 28px; text-align: center; cursor: pointer;
+      transition: border-color .2s, background .2s;
+      position: relative; background: #fafbfc;
+    }
+    .file-upload:hover { border-color: var(--green); background: #f0faf4; }
+    .file-upload input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .file-upload i { font-size: 32px; color: #b0bcc8; margin-bottom: 10px; display: block; }
+    .file-upload p { font-size: 14px; color: #888; line-height: 1.6; }
+    .file-upload p strong { color: var(--navy); }
+    .file-upload p small { display: block; font-size: 11px; color: #aaa; margin-top: 4px; }
+    #file-name { font-size: 12px; color: var(--green); margin-top: 8px; font-weight: 600; }
+
+    /* submit */
+    .btn-submit {
+      width: 100%; padding: 16px; margin-top: 28px;
+      background: var(--green); color: #fff; border: none;
+      border-radius: 8px; font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 15px; text-transform: uppercase;
+      letter-spacing: 1px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: background .2s, transform .2s;
+      box-shadow: 0 4px 16px rgba(46,139,87,.3);
+    }
+    .btn-submit:hover { background: var(--green-hover); transform: translateY(-2px); }
+
+    /* aviso privacidad */
+    .privacy-note {
+      margin-top: 16px; font-size: 12px; color: #999; text-align: center; line-height: 1.6;
+    }
+    .privacy-note a { color: var(--green); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0b0d1a; color: rgba(255,255,255,.6);
+      text-align: center; padding: 12px 20px; font-size: 12px;
+    }
+    footer a { color: #4fc88e; }
+
+    .whatsapp-float {
+      position:fixed; bottom:28px; right:28px;
+      width:56px; height:56px; background:#25d366; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:28px; color:#fff; box-shadow:0 4px 16px rgba(0,0,0,.25);
+      z-index:9999; transition:transform .2s;
+    }
+    .whatsapp-float:hover { transform:scale(1.1); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; gap:16px; margin-left:200px; padding:10px 0;">
+      <a href="index.html">
+        <img src="logo-texto.png" alt="Rental Security" style="height:88px; width:auto; display:block;" />
+      </a>
+      <img src="logo-full.png" alt="J&J Rental Security" style="height:72px; width:auto; display:block;" />
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="vehiculos.html">Vehículos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="index.html#clientes">Clientes</a>
+      <a href="index.html#blog">Blog</a>
+      <a href="index.html#contacto">Contacto</a>
+    </div>
+    <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <h1>Sistema <span>PQRS</span></h1>
+  <p>Permítanos atender sus solicitudes. Su opinión es fundamental para mejorar nuestros servicios.</p>
+  <div class="breadcrumb">
+    <a href="index.html">Inicio</a><span>›</span><span>PQRS</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Nuestros Servicios</h3>
+    <div class="sidebar-divider"></div>
+
+    <div class="sidebar-item"><i class="fas fa-road"></i><span>Kilometraje ilimitado para contratos superiores a 7 días</span></div>
+    <div class="sidebar-item"><i class="fas fa-shield-halved"></i><span>Cobertura de seguro todo riesgo incluida en el precio</span></div>
+    <div class="sidebar-item"><i class="fas fa-location-dot"></i><span>Sistema GPS con monitoreo en tiempo real</span></div>
+    <div class="sidebar-item"><i class="fas fa-comments"></i><span>Conductores bilingües (español/inglés) disponibles</span></div>
+    <div class="sidebar-item"><i class="fas fa-truck-tow"></i><span>Servicio de grúa 24/7 incluido</span></div>
+    <div class="sidebar-item"><i class="fas fa-certificate"></i><span>Vehículos con blindaje certificado nivel II, III y V</span></div>
+    <div class="sidebar-item"><i class="fas fa-wrench"></i><span>Mantenimiento preventivo garantizado en toda la flota</span></div>
+    <div class="sidebar-item"><i class="fas fa-triangle-exclamation"></i><span>Reporte de incidentes con atención inmediata</span></div>
+    <div class="sidebar-item"><i class="fas fa-car-burst"></i><span>Vehículo de reemplazo ante cualquier eventualidad</span></div>
+    <div class="sidebar-item"><i class="fas fa-handshake"></i><span>Planes personalizados según sus necesidades de seguridad</span></div>
+
+    <a href="index.html#cotizar" class="sidebar-cta">
+      <i class="fas fa-paper-plane" style="margin-right:8px;"></i>Solicitar Presupuesto
+    </a>
+  </aside>
+
+  <!-- FORMULARIO -->
+  <div class="form-card">
+    <div class="form-card-head">
+      <div class="head-icon"><i class="fas fa-inbox"></i></div>
+      <div>
+        <h2>Permítanos Atender sus Solicitudes</h2>
+        <p>Sistema PQRS — Peticiones, Quejas, Reclamos y Sugerencias</p>
+      </div>
+    </div>
+
+    <div class="form-body">
+      <form onsubmit="submitPQRS(event)" enctype="multipart/form-data">
+
+        <!-- TIPO -->
+        <div class="form-group-title"><i class="fas fa-tags"></i> Información de la Solicitud</div>
+        <div class="form-grid">
+
+          <label class="field">
+            <span>Tipo de Solicitud <em>*</em></span>
+            <select required>
+              <option value="" disabled selected>Seleccionar...</option>
+              <option>Petición</option>
+              <option>Reclamo</option>
+              <option>Sugerencia</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Tipo de Solicitante <em>*</em></span>
+            <select required>
+              <option value="" disabled selected>Seleccionar...</option>
+              <option>Cliente</option>
+              <option>Proveedor</option>
+              <option>Colaborador</option>
+              <option>Aliado Estratégico</option>
+            </select>
+          </label>
+
+        </div>
+
+        <!-- UBICACIÓN -->
+        <div class="form-group-title"><i class="fas fa-map-location-dot"></i> Ubicación</div>
+        <div class="form-grid col3">
+
+          <label class="field">
+            <span>País <em>*</em></span>
+            <input type="text" placeholder="Ej: Colombia" required />
+          </label>
+
+          <label class="field">
+            <span>Departamento <em>*</em></span>
+            <input type="text" placeholder="Ej: Cundinamarca" required />
+          </label>
+
+          <label class="field">
+            <span>Municipio <em>*</em></span>
+            <input type="text" placeholder="Ej: Bogotá" required />
+          </label>
+
+        </div>
+
+        <!-- IDENTIFICACIÓN -->
+        <div class="form-group-title"><i class="fas fa-id-card"></i> Datos de Identificación</div>
+        <div class="form-grid">
+
+          <label class="field">
+            <span>Tipo de Identificación <em>*</em></span>
+            <select required>
+              <option value="" disabled selected>Seleccionar...</option>
+              <option value="CC">C.C — Cédula de Ciudadanía</option>
+              <option value="CE">C.E — Cédula de Extranjería</option>
+              <option value="NIT">NIT — Número de Identificación Tributaria</option>
+              <option value="OTRO">Otro</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Número de Identificación <em>*</em></span>
+            <input type="text" placeholder="Número de identificación" required />
+          </label>
+
+          <label class="field">
+            <span>Razón Social</span>
+            <input type="text" placeholder="Nombre de la empresa (si aplica)" />
+          </label>
+
+          <label class="field" style="grid-column: span 1;">
+            <!-- espacio reservado -->
+          </label>
+
+        </div>
+
+        <!-- DATOS PERSONALES -->
+        <div class="form-group-title"><i class="fas fa-user"></i> Datos Personales</div>
+        <div class="form-grid">
+
+          <label class="field">
+            <span>Primer Nombre <em>*</em></span>
+            <input type="text" placeholder="Primer nombre" required />
+          </label>
+
+          <label class="field">
+            <span>Segundo Nombre</span>
+            <input type="text" placeholder="Segundo nombre" />
+          </label>
+
+          <label class="field">
+            <span>Primer Apellido <em>*</em></span>
+            <input type="text" placeholder="Primer apellido" required />
+          </label>
+
+          <label class="field">
+            <span>Segundo Apellido</span>
+            <input type="text" placeholder="Segundo apellido" />
+          </label>
+
+        </div>
+
+        <!-- CONTACTO -->
+        <div class="form-group-title"><i class="fas fa-address-book"></i> Información de Contacto</div>
+        <div class="form-grid">
+
+          <label class="field">
+            <span>Correo Electrónico <em>*</em></span>
+            <input type="email" placeholder="correo@ejemplo.com" required />
+          </label>
+
+          <label class="field">
+            <span>Teléfono de Contacto <em>*</em></span>
+            <input type="tel" placeholder="300 000 0000" required />
+          </label>
+
+        </div>
+
+        <!-- SOLICITUD -->
+        <div class="form-group-title"><i class="fas fa-file-alt"></i> Contenido de la Solicitud</div>
+        <div class="form-grid col1">
+
+          <label class="field">
+            <span>Describa el Contenido de su Solicitud <em>*</em></span>
+            <textarea placeholder="Escriba aquí el detalle de su petición, reclamo o sugerencia de manera clara y completa..." required></textarea>
+          </label>
+
+        </div>
+
+        <!-- ADJUNTOS -->
+        <div class="form-group-title" style="margin-top:24px;"><i class="fas fa-paperclip"></i> Archivos Adjuntos</div>
+        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+          <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xlsx"
+                 onchange="showFileName(this)" style="display:none;" />
+          <i class="fas fa-cloud-arrow-up"></i>
+          <p><strong>Haga clic para seleccionar archivos</strong> o arrástrelos aquí</p>
+          <p><small>PDF, Word, Excel, JPG, PNG — Máximo 10 MB por archivo</small></p>
+          <div id="file-name"></div>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <i class="fas fa-paper-plane"></i> Enviar Solicitud PQRS
+        </button>
+
+        <p class="privacy-note">
+          Al enviar este formulario acepta nuestra
+          <a href="#">Política de Tratamiento de Datos Personales</a>.
+          Su solicitud será atendida en un plazo máximo de 15 días hábiles.
+        </p>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 J&J Rental Security. Todos los derechos reservados. &nbsp;|&nbsp; <a href="index.html">Volver al inicio</a></p>
+</footer>
+
+<a href="https://wa.me/573004353879" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+  function showFileName(input) {
+    const el = document.getElementById('file-name');
+    if (input.files.length === 0) { el.textContent = ''; return; }
+    const names = Array.from(input.files).map(f => f.name).join(', ');
+    el.textContent = '✓ ' + names;
+  }
+
+  function submitPQRS(e) {
+    e.preventDefault();
+    alert('¡Su solicitud PQRS ha sido enviada exitosamente!\n\nNos comunicaremos con usted en un plazo máximo de 15 días hábiles.\n\nGracias por contactar a J&J Rental Security.');
+    e.target.reset();
+    document.getElementById('file-name').textContent = '';
+  }
+</script>
+</body>
+</html>

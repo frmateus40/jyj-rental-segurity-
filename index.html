@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JYJ Rental - Alquiler de Vehículos Blindados</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================
+       RESET & BASE
+    ============================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+
+    /* ============================
+       VARIABLES
+    ============================ */
+    :root {
+      --navy: #0d2c54;
+      --blue: #1a4f8a;
+      --green: #2e8b57;
+      --green-hover: #256b45;
+      --light-gray: #f5f7fa;
+      --mid-gray: #e0e4ea;
+      --text: #333;
+      --white: #ffffff;
+    }
+
+    /* ============================
+       TOP BAR
+    ============================ */
+    .top-bar {
+      background: var(--navy);
+      color: var(--white);
+      font-size: 12px;
+      padding: 6px 0;
+    }
+    .top-bar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .top-bar a { color: #cdd9e8; margin-left: 12px; }
+    .top-bar a:hover { color: #fff; }
+    .top-bar .social-icons a { font-size: 14px; }
+
+    /* ============================
+       NAVBAR
+    ============================ */
+    nav {
+      background: #000000;
+      box-shadow: none;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-inner {
+      max-width: 100%;
+      margin: 0;
+      padding: 0 20px 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 110px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      background: none;
+    }
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--navy);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+    }
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: #111111;
+      line-height: 1.1;
+    }
+    .logo-text span { color: var(--green); }
+    .logo-sub { font-size: 10px; color: #888; letter-spacing: 2px; text-transform: uppercase; }
+    .nav-links {
+      display: flex;
+      gap: 36px;
+    }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: #fff;
+      background: #c0392b;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a:hover { background: #96281b; color: #fff; }
+    .nav-links a.active { background: #96281b; }
+    .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
+
+    /* Dropdown Clientes */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { cursor: pointer; display: flex; align-items: center; gap: 5px; }
+    .nav-dropdown > a::after { content: '\f107'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 11px; }
+    .dropdown-panel {
+      display: none;
+      position: fixed;
+      top: 88px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+      padding: 28px 32px;
+      width: 700px;
+      z-index: 999;
+      border-top: 3px solid var(--green);
+    }
+    .dropdown-panel.open { display: block; }
+    .dropdown-panel h4 {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 14px; color: var(--navy); text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 18px;
+      padding-bottom: 10px; border-bottom: 2px solid #e0e4ea;
+    }
+    .dropdown-clients {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+    .dropdown-client {
+      background: #f5f7fa;
+      border-radius: 8px;
+      height: 64px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 11px;
+      color: #888; text-transform: uppercase; letter-spacing: 0.5px;
+      border: 1px solid #e0e4ea;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .dropdown-client:hover { border-color: var(--green); color: var(--navy); background: #fff; }
+
+    /* ============================
+       HERO CAROUSEL
+    ============================ */
+    .hero {
+      position: relative;
+      height: 680px;
+      overflow: hidden;
+      background: #000000;
+    }
+    .carousel-slides {
+      display: flex;
+      height: 100%;
+      transition: transform 0.7s ease;
+    }
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+      background: #4a4a4a;
+      overflow: hidden;
+    }
+    /* Camioneta centrada, ocupa todo el recuadro */
+    .slide-car {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* Banda oscura solo arriba para que el texto se lea */
+    .slide-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(
+        to bottom,
+        rgba(13,44,84,0.78) 0%,
+        rgba(13,44,84,0.52) 30%,
+        rgba(13,44,84,0.0)  55%
+      );
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 52px 20px 20px;
+      text-align: center;
+    }
+    .slide-content {
+      color: #fff;
+      max-width: 720px;
+      text-align: center;
+    }
+    .slide-content h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(22px, 3.8vw, 44px);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.9);
+    }
+    .slide-content h1 span { color: #4fc88e; }
+    .slide-content p {
+      font-size: clamp(13px, 1.8vw, 17px);
+      margin-bottom: 22px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.8);
+      line-height: 1.6;
+    }
+    /* Quita el fondo blanco de la imagen fusionándolo con el fondo blanco del slide */
+
+    /* Tagline en la parte baja de cada slide */
+    .slide-tagline {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      text-align: center;
+      padding: 40px 20px 52px;
+      background: linear-gradient(to top, rgba(13,44,84,0.85) 0%, rgba(13,44,84,0.0) 100%);
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(18px, 2.8vw, 32px);
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+    }
+    .slide-tagline span { color: #4fc88e; }
+
+    /* Slide con fondo blanco — sin overlay oscuro */
+    .slide-overlay-light {
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.75) 0%,
+        rgba(255,255,255,0.45) 35%,
+        rgba(255,255,255,0.0)  60%
+      ) !important;
+    }
+    .slide-content-dark h1 {
+      color: var(--navy) !important;
+      text-shadow: 0 1px 4px rgba(255,255,255,0.8) !important;
+    }
+    .slide-content-dark p {
+      color: #333 !important;
+      text-shadow: 0 1px 3px rgba(255,255,255,0.9) !important;
+    }
+    .btn-hero {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-hero:hover { background: var(--green-hover); transform: translateY(-2px); }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.2s;
+    }
+    .carousel-btn:hover { background: rgba(255,255,255,0.4); }
+    .carousel-prev { left: 16px; }
+    .carousel-next { right: 16px; }
+    .carousel-dots {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .dot.active { background: #fff; }
+
+    /* ============================
+       QUOTE FORM BAR
+    ============================ */
+    .quote-bar {
+      background: #f8f9fb;
+      padding: 50px 20px;
+    }
+    .quote-bar .container { max-width: 1100px; margin: 0 auto; }
+    .quote-bar-header { text-align: center; margin-bottom: 32px; }
+    .quote-bar-header h3 {
+      color: #7a4a4a;
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .quote-bar-header h3 span { color: #c0392b; }
+    .quote-bar-header p { color: #9e7070; font-size: 14px; }
+    .quote-divider { width: 50px; height: 3px; background: #c0392b; border-radius: 2px; margin: 12px auto 0; }
+    .quote-form {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media(max-width: 768px) { .quote-form { grid-template-columns: 1fr; } }
+    @media(max-width: 1024px) and (min-width: 769px) { .quote-form { grid-template-columns: repeat(2, 1fr); } }
+    .quote-form-label {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .quote-form-label span {
+      font-size: 11px; font-weight: 700; color: #9e7070;
+      text-transform: uppercase; letter-spacing: 1px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .quote-form input,
+    .quote-form select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #d0d5dd;
+      border-radius: 6px;
+      background: #fff;
+      color: #111;
+      font-size: 13px;
+      font-family: 'Open Sans', sans-serif;
+      outline: none;
+      transition: border .2s, box-shadow .2s;
+    }
+    .quote-form input::placeholder { color: #aaa; }
+    .quote-form select option { background: #fff; color: #111; }
+    .quote-form input:focus,
+    .quote-form select:focus { border-color: #c0392b; box-shadow: 0 0 0 3px rgba(192,57,43,0.1); }
+    .quote-form-full { grid-column: 1 / -1; }
+    .btn-quote {
+      background: #c0392b;
+      color: #fff; border: none;
+      padding: 15px 24px; border-radius: 6px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px;
+      text-transform: uppercase; letter-spacing: 1px;
+      cursor: pointer; transition: background .2s, transform .2s;
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-quote:hover { background: #96281b; transform: translateY(-1px); }
+
+    /* ============================
+       SECTION BASE
+    ============================ */
+    section { padding: 70px 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-title h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800;
+      color: var(--navy);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title p { color: #666; font-size: 15px; max-width: 600px; margin: 0 auto; }
+    .divider {
+      width: 60px;
+      height: 4px;
+      background: var(--green);
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
+
+    /* ============================
+       VEHICLES
+    ============================ */
+    .vehicles { background: var(--light-gray); }
+    .vehicles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 28px;
+    }
+    .vehicle-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px quitar en navdar de blargba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .vehicle-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.14); }
+    .vehicle-img {
+      height: 180px;
+      background: linear-gradient(135deg, #0d2c54, #1a4f8a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      color: rgba(255,255,255,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .vehicle-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+    .vehicle-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--green);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
+    }
+    .vehicle-info { padding: 20px; }
+    .vehicle-info h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .vehicle-info .brand { color: #888; font-size: 13px; margin-bottom: 12px; }
+    .vehicle-specs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .spec {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: #555;
+    }
+    .spec i { color: var(--green); }
+    .btn-vehicle {
+      display: block;
+      text-align: center;
+      background: var(--navy);
+      color: #fff;
+      padding: 10px;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .btn-vehicle:hover { background: var(--blue); }
+
+    /* ============================
+       NOSOTROS
+    ============================ */
+    .nosotros-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      margin-bottom: 10px;
+    }
+    @media (max-width: 860px) {
+      .nosotros-top { grid-template-columns: 1fr; }
+      .nosotros-logo-wrap { min-height: 260px; }
+      .nosotros-intro { text-align: center; }
+      .nosotros-intro .divider { margin: 12px auto 20px; }
+    }
+    .nosotros-logo-wrap {
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      min-height: 340px;
+    }
+    .nosotros-logo {
+      width: 100%;
+      max-width: 420px;
+      display: block;
+      border-radius: 8px;
+      filter: drop-shadow(0 0 24px rgba(220,50,50,0.4));
+    }
+    .nosotros-intro {
+      background: var(--navy);
+      padding: 48px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .nosotros-intro h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(22px, 2.5vw, 34px);
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+    .nosotros-intro p {
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .nosotros-intro strong { color: #4fc88e; }
+
+    /* ── BRAND LOGOS ROW ── */
+    .brands-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin: 0;
+    }
+    .brand-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 2px solid #e0e6ef;
+      border-radius: 16px;
+      padding: 28px 36px;
+      cursor: pointer;
+      transition: border-color .25s, box-shadow .25s, transform .25s;
+      text-decoration: none;
+      min-width: 160px;
+    }
+    .brand-pill:hover {
+      border-color: var(--navy);
+      box-shadow: 0 8px 28px rgba(13,44,84,.14);
+      transform: translateY(-5px);
+    }
+    .brand-pill span {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* ============================
+       FEATURES
+    ============================ */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+    }
+    .feature-card {
+      text-align: center;
+      padding: 36px 24px;
+      border-radius: 10px;
+      background: #e00000;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(224,0,0,0.35); }
+    .feature-icon {
+      width: 90px;
+      height: 90px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 38px;
+      color: #fff;
+    }
+    .feature-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #ffffff;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .feature-card p { color: rgba(255,255,255,0.85); font-size: 14px; line-height: 1.7; }
+
+    /* ============================
+       SERVICE LIST
+    ============================ */
+    .service-list { background: var(--navy); }
+    .service-list .section-title h2 { color: #fff; }
+    .service-list .section-title p { color: rgba(255,255,255,0.7); }
+    .service-list .divider { background: #4fc88e; }
+    .services-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .services-two-col { grid-template-columns: 1fr; } }
+    .services-text-img img {
+      border-radius: 10px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+    .services-text-img .img-placeholder {
+      height: 320px;
+      background: linear-gradient(135deg, #1a4f8a, #0d2c54);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      color: rgba(255,255,255,0.15);
+    }
+    .service-items { display: flex; flex-direction: column; gap: 14px; }
+    .service-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      color: rgba(255,255,255,0.9);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .service-item i {
+      color: #4fc88e;
+      font-size: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ============================
+       CERTIFICATIONS
+    ============================ */
+    .certifications { background: var(--light-gray); }
+    .cert-grid {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .cert-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .cert-badge {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: #fff;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .cert-badge.iso9001 { background: var(--navy); }
+    .cert-badge.iso14001 { background: var(--green); }
+    .cert-badge.iso45001 { background: #c0392b; }
+    .cert-label {
+      font-size: 11px;
+      color: #888;
+      text-align: center;
+      max-width: 120px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ============================
+       CLIENTS
+    ============================ */
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      align-items: center;
+    }
+    .client-logo {
+      background: var(--light-gray);
+      border-radius: 8px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #aaa;
+      border: 1px solid var(--mid-gray);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .client-logo:hover { border-color: var(--green); color: var(--navy); }
+
+    /* ============================
+       BLOG
+    ============================ */
+    .blog { background: var(--light-gray); }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .blog-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      transition: transform 0.2s;
+    }
+    .blog-card:hover { transform: translateY(-4px); }
+    .blog-img {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+    .blog-img-1 { background: linear-gradient(135deg, #0d2c54, #1a4f8a); color: rgba(255,255,255,0.3); }
+    .blog-img-2 { background: linear-gradient(135deg, #1a3a1a, #2e8b57); color: rgba(255,255,255,0.3); }
+    .blog-img-3 { background: linear-gradient(135deg, #3a1a1a, #8b2e2e); color: rgba(255,255,255,0.3); }
+    .blog-body { padding: 22px; }
+    .blog-date { font-size: 11px; color: var(--green); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .blog-body h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--navy);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .blog-body p { color: #666; font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
+    .btn-blog {
+      color: var(--green);
+      font-weight: 700;
+      font-size: 13px;
+      font-family: 'Montserrat', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: gap 0.2s;
+    }
+    .btn-blog:hover { gap: 10px; }
+
+    /* ============================
+       CONTACT
+    ============================ */
+    .contact { background: var(--white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-info h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .contact-item i {
+      font-size: 20px;
+      color: var(--green);
+      width: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .contact-item div { font-size: 14px; color: #555; line-height: 1.7; }
+    .contact-item strong { display: block; color: var(--navy); font-weight: 600; margin-bottom: 2px; }
+    .contact-form-wrap h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      padding: 12px 16px;
+      border: 1px solid var(--mid-gray);
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: 'Open Sans', sans-serif;
+      outline: none;
+      transition: border 0.2s;
+      background: #fafbfc;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus { border-color: var(--green); background: #fff; }
+    .contact-form textarea { min-height: 120px; resize: vertical; }
+    .btn-contact {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+    }
+    .btn-contact:hover { background: var(--green-hover); }
+
+    /* ============================
+       FOOTER
+    ============================ */
+    footer {
+      background: #1e1e1e;
+      color: rgba(255,255,255,0.8);
+    }
+    .footer-top {
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      padding: 28px 20px 18px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; } }
+    .footer-brand .logo-text { color: #fff; font-size: 24px; }
+    .footer-brand p { font-size: 13px; line-height: 1.8; margin: 16px 0; opacity: 0.75; }
+    .footer-social { display: flex; gap: 10px; margin-top: 12px; justify-content: center; }
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 15px;
+      transition: background 0.2s;
+    }
+    .footer-social a:hover { background: var(--green); }
+    .footer-col h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--green);
+      display: inline-block;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 6px; align-items: center; }
+    .footer-col ul li a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      justify-content: center;
+    }
+    .footer-col ul li a:hover { color: #4fc88e; }
+    .footer-col ul li a::before { content: '›'; color: var(--green); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      opacity: 0.65;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ============================
+       WHATSAPP FLOAT
+    ============================ */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 56px;
+      height: 56px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 9999;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+
+    /* ============================
+       STATS BANNER
+    ============================ */
+    .stats {
+      background: var(--blue);
+      padding: 40px 20px;
+    }
+    .stats-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+    @media (max-width: 600px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    .stat-item { color: #fff; }
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1;
+      color: #4fc88e;
+    }
+    .stat-label { font-size: 13px; margin-top: 6px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* ============================
+       RESPONSIVE
+    ============================ */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 110px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      }
+      .hero { height: 460px; }
+      .slide-car { height: 70%; }
+      .slide-overlay { padding-top: 36px; }
+      .quote-form { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero { height: 360px; }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; gap:16px; margin-left:200px; padding:10px 0;">
+      <a href="#">
+        <img src="logo-texto.png" alt="Rental Security" style="height:88px; width:auto; display:block;" />
+      </a>
+      <img src="logo-full.png" alt="J&J Rental Security" style="height:72px; width:auto; display:block;" />
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="active">Inicio</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="vehiculos.html">Vehículos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="clientes.html">Clientes</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+  </div>
+</nav>
+
+<!-- HERO CAROUSEL -->
+<section class="hero" id="inicio">
+  <div class="carousel-slides" id="carouselSlides">
+    <div class="slide slide-1">
+      <img src="prado.png" class="slide-car" alt="Toyota Prado TXL 2026" />
+      <div class="slide-overlay"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-2">
+      <img src="montero.png" class="slide-car slide-car-nobg" alt="Mitsubishi Montero Sport 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-3">
+      <img src="4runner.png" class="slide-car slide-car-nobg" alt="Toyota 4Runner 2024" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-4">
+      <img src="yaris.png" class="slide-car slide-car-nobg" alt="Toyota Yaris Híbrido 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-5">
+      <img src="explorer.png" class="slide-car slide-car-nobg" alt="Ford Explorer 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-6">
+      <img src="escape.png" class="slide-car slide-car-nobg" alt="Ford Escape Híbrida 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-7">
+      <img src="expedition.png" class="slide-car slide-car-nobg" alt="Ford Expedition 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-8">
+      <img src="f150.png" class="slide-car slide-car-nobg" alt="Ford F-150 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-9">
+      <img src="tracker.png" class="slide-car slide-car-nobg" alt="Chevrolet Tracker SUV 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-10">
+      <img src="traverse.png" class="slide-car slide-car-nobg" alt="Chevrolet Traverse 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-11">
+      <img src="suburman.png" class="slide-car slide-car-nobg" alt="Chevrolet Suburban Premier 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-12">
+      <img src="sonet.png" class="slide-car slide-car-nobg" alt="Kia Sonet Desire MT 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-13">
+      <img src="stonic.png" class="slide-car slide-car-nobg" alt="Kia Stonic Híbrida 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-14">
+      <img src="sportage.png" class="slide-car slide-car-nobg" alt="Kia Sportage 2026" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+    <div class="slide slide-15">
+      <img src="corolla.png" class="slide-car slide-car-nobg" alt="Toyota Corolla" />
+      <div class="slide-overlay slide-overlay-light"></div>
+      <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
+    </div>
+  </div>
+  <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+  <button class="carousel-btn carousel-next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+  <div class="carousel-dots">
+    <div class="dot active" onclick="goToSlide(0)"></div>
+    <div class="dot" onclick="goToSlide(1)"></div>
+    <div class="dot" onclick="goToSlide(2)"></div>
+    <div class="dot" onclick="goToSlide(3)"></div>
+    <div class="dot" onclick="goToSlide(4)"></div>
+    <div class="dot" onclick="goToSlide(5)"></div>
+    <div class="dot" onclick="goToSlide(6)"></div>
+    <div class="dot" onclick="goToSlide(7)"></div>
+    <div class="dot" onclick="goToSlide(8)"></div>
+    <div class="dot" onclick="goToSlide(9)"></div>
+    <div class="dot" onclick="goToSlide(10)"></div>
+    <div class="dot" onclick="goToSlide(11)"></div>
+    <div class="dot" onclick="goToSlide(12)"></div>
+    <div class="dot" onclick="goToSlide(13)"></div>
+    <div class="dot" onclick="goToSlide(14)"></div>
+  </div>
+</section>
+
+<!-- QUOTE FORM -->
+<div class="quote-bar" id="cotizar">
+  <div class="container">
+    <div class="quote-bar-header">
+      <h3>Solicite un presupuesto <span>a la medida de sus necesidades</span></h3>
+      <p>Complete el formulario y un asesor se comunicará con usted a la brevedad</p>
+      <div class="quote-divider"></div>
+    </div>
+    <form class="quote-form" onsubmit="submitQuote(event)">
+
+      <label class="quote-form-label">
+        <span><i class="fas fa-user" style="margin-right:4px;"></i>Nombre del cliente</span>
+        <input type="text" placeholder="Nombre completo" required />
+      </label>
+
+      <label class="quote-form-label">
+        <span><i class="fas fa-envelope" style="margin-right:4px;"></i>Correo electrónico</span>
+        <input type="email" placeholder="ejemplo@correo.com" required />
+      </label>
+
+      <label class="quote-form-label">
+        <span><i class="fas fa-phone" style="margin-right:4px;"></i>Teléfono</span>
+        <input type="tel" placeholder="+1 (000) 000-0000" required />
+      </label>
+
+      <label class="quote-form-label">
+        <span><i class="fas fa-city" style="margin-right:4px;"></i>Ciudad</span>
+        <input type="text" placeholder="Ciudad de origen" />
+      </label>
+
+      <label class="quote-form-label">
+        <span><i class="fas fa-building" style="margin-right:4px;"></i>Empresa que solicita</span>
+        <input type="text" placeholder="Nombre de la empresa" />
+      </label>
+
+      <label class="quote-form-label">
+        <span><i class="fas fa-shield-halved" style="margin-right:4px;"></i>Nivel de blindaje</span>
+        <select required>
+          <option value="" disabled selected>Seleccionar nivel</option>
+          <option value="II">Nivel II — Protección básica</option>
+          <option value="III">Nivel III — Protección media</option>
+          <option value="V">Nivel V — Protección máxima</option>
+        </select>
+      </label>
+
+      <label class="quote-form-label">
+        <span><i class="fas fa-calendar-days" style="margin-right:4px;"></i>Tiempo de alquiler</span>
+        <select required>
+          <option value="" disabled selected>Seleccionar período</option>
+          <option>Días</option>
+          <option>Semanas</option>
+          <option>Meses</option>
+          <option>Años</option>
+        </select>
+      </label>
+
+      <label class="quote-form-label" style="grid-column: span 2;">
+        <span><i class="fas fa-comment-dots" style="margin-right:4px;"></i>Información adicional (opcional)</span>
+        <input type="text" placeholder="Destino, número de pasajeros, requerimientos especiales..." />
+      </label>
+
+      <div class="quote-form-full" style="display:flex; justify-content:center; margin-top:6px;">
+        <button type="submit" class="btn-quote" style="max-width:340px;">
+          <i class="fas fa-paper-plane"></i> Enviar Solicitud de Presupuesto
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div style="height:5px; background:#8b0000;"></div>
+
+<!-- MARCAS -->
+<section class="vehicles" id="vehiculos">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nuestras Marcas</h2>
+      <p>Trabajamos con las mejores marcas del mundo para garantizar la más alta calidad y seguridad en cada vehículo.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="brands-row">
+
+      <!-- Toyota -->
+      <a href="vehiculos.html" class="brand-pill">
+        <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" width="110" height="66">
+          <ellipse cx="100" cy="60" rx="96" ry="56" fill="none" stroke="#cc0000" stroke-width="8"/>
+          <ellipse cx="100" cy="60" rx="40" ry="56" fill="none" stroke="#cc0000" stroke-width="8"/>
+          <ellipse cx="100" cy="36" rx="60" ry="22" fill="none" stroke="#cc0000" stroke-width="8"/>
+        </svg>
+        <span>Toyota</span>
+      </a>
+
+      <!-- Ford -->
+      <a href="vehiculos.html" class="brand-pill">
+        <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" width="130" height="66">
+          <ellipse cx="100" cy="50" rx="96" ry="46" fill="#003399"/>
+          <text x="100" y="66" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="bold" font-size="48" fill="white">Ford</text>
+        </svg>
+        <span>Ford</span>
+      </a>
+
+      <!-- Mitsubishi -->
+      <a href="vehiculos.html" class="brand-pill">
+        <svg viewBox="0 0 120 100" xmlns="http://www.w3.org/2000/svg" width="90" height="66">
+          <polygon points="60,4 80,38 40,38" fill="#c41e3a"/>
+          <polygon points="22,42 42,76 2,76"  fill="#c41e3a"/>
+          <polygon points="98,42 118,76 78,76" fill="#c41e3a"/>
+        </svg>
+        <span>Mitsubishi</span>
+      </a>
+
+      <!-- Chevrolet -->
+      <a href="vehiculos.html" class="brand-pill">
+        <svg viewBox="0 0 200 90" xmlns="http://www.w3.org/2000/svg" width="130" height="60">
+          <path d="M0,25 H65 L80,0 H120 L105,25 H200 V65 H105 L120,90 H80 L65,65 H0 Z" fill="#c8a400"/>
+          <path d="M8,32 H65 L80,8 H120 L105,32 H192 V58 H105 L120,82 H80 L65,58 H8 Z" fill="white"/>
+          <path d="M16,36 H65 L80,14 H120 L105,36 H184 V54 H105 L120,76 H80 L65,54 H16 Z" fill="#c8a400"/>
+        </svg>
+        <span>Chevrolet</span>
+      </a>
+
+      <!-- Kia -->
+      <a href="vehiculos.html" class="brand-pill">
+        <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" width="110" height="60">
+          <rect x="2" y="2" width="196" height="76" rx="10" ry="10" fill="#bb162b"/>
+          <text x="100" y="57" text-anchor="middle" font-family="Arial,sans-serif" font-weight="900" font-size="52" fill="white" letter-spacing="4">KIA</text>
+        </svg>
+        <span>Kia</span>
+      </a>
+
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+      <a href="vehiculos.html" style="
+        display: inline-flex; align-items: center; gap: 10px;
+        background: var(--navy); color: #fff;
+        padding: 15px 44px; border-radius: 6px;
+        font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px;
+        text-transform: uppercase; letter-spacing: 1px;
+        text-decoration: none;
+        transition: background .2s, transform .2s;
+        box-shadow: 0 4px 16px rgba(13,44,84,.2);
+      " onmouseover="this.style.background='#2e8b57';this.style.transform='translateY(-2px)'"
+         onmouseout="this.style.background='#0d2c54';this.style.transform='translateY(0)'">
+        <i class="fas fa-car-side"></i> Ver Vehículos
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="nosotros">
+  <div class="container">
+
+    <div class="section-title" style="margin-top:0;">
+      <h2>¿Por qué elegir J&J Rental?</h2>
+      <p>Ofrecemos los más altos estándares de calidad, protección y confiabilidad en cada servicio.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-gauge-high"></i></div>
+        <h4>Desempeño</h4>
+        <p>Vehículos de alta gama con mantenimiento preventivo constante para garantizar un rendimiento óptimo en cualquier terreno.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-gas-pump"></i></div>
+        <h4>Combustible</h4>
+        <p>Bajo consumo de combustible sin sacrificar potencia ni capacidad de protección. Eficiencia garantizada en cada viaje.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-shield-halved"></i></div>
+        <h4>Protección</h4>
+        <p>Blindaje certificado bajo estándares NIJ 0108.01. Máxima seguridad para usted, su familia y su equipo de trabajo.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-location-dot"></i></div>
+        <h4>GPS Control</h4>
+        <p>Monitoreo en tiempo real de toda nuestra flota. Control total del recorrido y acceso a reportes detallados de cada servicio.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+        <h4>Soporte 24/7</h4>
+        <p>Atención al cliente disponible las 24 horas del día, los 7 días de la semana. Servicio de grúa incluido en todos los planes.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fas fa-star"></i></div>
+        <h4>Calidad Premium</h4>
+        <p>Certificados con ISO 9001, 14001 y 45001. Nos comprometemos con los más altos estándares de calidad del sector.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CERTIFICATIONS -->
+<section class="certifications">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nuestras Certificaciones</h2>
+      <p>Contamos con las más importantes certificaciones internacionales de calidad y gestión.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-item">
+        <div class="cert-badge iso9001">ISO<br>9001</div>
+        <div class="cert-label">Gestión de Calidad</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge iso14001">ISO<br>14001</div>
+        <div class="cert-label">Gestión Ambiental</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge iso45001">ISO<br>45001</div>
+        <div class="cert-label">Seguridad y Salud</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge" style="background:#8b2e2e;">NIJ<br>0108</div>
+        <div class="cert-label">Certificación de Blindaje</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col">
+      <h4>Contáctenos</h4>
+      <ul>
+        <li><a href="#contacto"><i class="fas fa-location-dot" style="margin-right:6px;"></i>Av. Suba 115-58 Torre B 219, Bogotá</a></li>
+        <li><a href="tel:+573004353879"><i class="fas fa-phone" style="margin-right:6px;"></i>300 435 3879</a></li>
+        <li><a href="mailto:info@jyjvehiculosblindados.com"><i class="fas fa-envelope" style="margin-right:6px;"></i>jyjvehiculosblindados.com</a></li>
+        <li><a href="#contacto"><i class="fas fa-clock" style="margin-right:6px;"></i>Lun–Vie 8:00–17:30</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Síguenos en redes</h4>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Términos de servicio</a></li>
+        <li><a href="pqrs.html">PQRS</a></li>
+        <li><a href="#">Trabaje con nosotros</a></li>
+        <li><a href="#">Colaboradores</a></li>
+        <li><a href="#">Proveedores</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 JYJ Rental. Todos los derechos reservados.</span>
+    <span>Diseñado con <i class="fas fa-heart" style="color:#e74c3c;"></i> por JYJ Rental</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/573004353879" class="whatsapp-float" target="_blank" title="Chatea por WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ============================
+     JAVASCRIPT
+============================ -->
+<script>
+  // ---- CAROUSEL ----
+  let currentSlide = 0;
+  const totalSlides = 8;
+  let autoplayTimer;
+
+  function updateCarousel() {
+    document.getElementById('carouselSlides').style.transform = `translateX(-${currentSlide * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  function changeSlide(dir) {
+    currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+    updateCarousel();
+    resetAutoplay();
+  }
+
+  function goToSlide(idx) {
+    currentSlide = idx;
+    updateCarousel();
+    resetAutoplay();
+  }
+
+  function resetAutoplay() {
+    clearInterval(autoplayTimer);
+    autoplayTimer = setInterval(() => changeSlide(1), 5000);
+  }
+
+  resetAutoplay();
+
+  // ---- MOBILE MENU ----
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  function toggleClientes(e) {
+    e.stopPropagation();
+    document.getElementById('clientesPanel').classList.toggle('open');
+  }
+  document.addEventListener('click', function() {
+    document.getElementById('clientesPanel').classList.remove('open');
+  });
+
+  // Close menu when a link is clicked
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // ---- ANIMATED COUNTERS ----
+  function animateCounters() {
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const target = parseInt(el.getAttribute('data-target'));
+      let current = 0;
+      const step = Math.ceil(target / 60);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = current + (target === 24 ? 'h' : '+');
+        if (current >= target) clearInterval(timer);
+      }, 25);
+    });
+  }
+
+  // Trigger counters when stats section is visible
+  const statsSection = document.querySelector('.stats');
+  let counted = false;
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      animateCounters();
+    }
+  }, { threshold: 0.4 });
+  observer.observe(statsSection);
+
+  // ---- FORM HANDLERS ----
+  function submitQuote(e) {
+    e.preventDefault();
+    alert('¡Gracias! Hemos recibido su solicitud de cotización. Nos comunicaremos con usted a la brevedad.');
+    e.target.reset();
+  }
+
+  function submitContact(e) {
+    e.preventDefault();
+    alert('¡Mensaje enviado! Nos pondremos en contacto con usted pronto. Gracias por comunicarse con JYJ Rental.');
+    e.target.reset();
+  }
+
+  // ---- SMOOTH SCROLL for older browsers ----
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ---- NAVBAR SCROLL EFFECT ----
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 20
+      ? '0 4px 20px rgba(0,0,0,0.15)'
+      : '0 2px 8px rgba(0,0,0,0.1)';
+  });
+</script>
+</body>
+</html>

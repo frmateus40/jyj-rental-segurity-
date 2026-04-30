@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vehículos - J&J Rental Security</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #f5f7fa; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    :root {
+      --navy: #0d2c54;
+      --green: #2e8b57;
+      --green-hover: #256b45;
+      --red: #e83232;
+      --light: #f5f7fa;
+      --white: #fff;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #000000;
+      box-shadow: none;
+      border-bottom: 1px solid #222;
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .nav-inner {
+      max-width: 100%; margin: 0; padding: 0 20px 0 8px;
+      display: flex; align-items: center; justify-content: space-between; height: 110px;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px;
+      color: #fff; background: #c0392b; padding: 8px 16px; border-radius: 4px;
+      transition: background .2s, color .2s; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .nav-links a:hover, .nav-links a.active { background: #96281b; color: #fff; }
+    .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
+    @media(max-width:768px){
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 110px; left: 0; right: 0;
+        background: #ffffff; padding: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.3);
+      }
+    }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg,#0b0d1a 0%,#0d2c54 60%,#1a4f8a 100%);
+      padding: 70px 20px 60px; text-align: center; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content:''; position:absolute; inset:0;
+      background: url('prado.png') center/45% no-repeat; opacity:.07;
+    }
+    .page-hero h1 {
+      font-family:'Montserrat',sans-serif; font-size:clamp(28px,5vw,52px);
+      font-weight:800; color:#fff; text-transform:uppercase; letter-spacing:2px; position:relative; z-index:1;
+    }
+    .page-hero h1 span { color:#e83232; }
+    .page-hero p { color:rgba(255,255,255,.75); font-size:16px; margin-top:12px; position:relative; z-index:1; }
+    .breadcrumb {
+      display:flex; justify-content:center; gap:8px; margin-top:18px;
+      font-size:13px; color:rgba(255,255,255,.5); position:relative; z-index:1;
+    }
+    .breadcrumb a { color:#4fc88e; }
+
+    /* ── BRAND TABS ── */
+    .brand-tabs {
+      background: #fff; border-bottom: 2px solid #e0e4ea;
+      position: sticky; top: 88px; z-index: 900;
+      box-shadow: 0 3px 12px rgba(0,0,0,.07);
+    }
+    .brand-tabs-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      display: flex; gap: 4px; overflow-x: auto;
+    }
+    .brand-tab {
+      display: flex; align-items: center; gap: 10px;
+      padding: 18px 28px; cursor: pointer;
+      font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: 13px;
+      color: #888; text-transform: uppercase; letter-spacing: .5px;
+      border-bottom: 3px solid transparent; margin-bottom: -2px;
+      white-space: nowrap; transition: color .2s, border-color .2s;
+    }
+    .brand-tab:hover { color: var(--navy); }
+    .brand-tab.active { color: var(--navy); border-bottom-color: var(--red); }
+    .brand-tab .brand-logo-text {
+      font-size: 16px; font-weight: 800; letter-spacing: 1px;
+    }
+    .tab-toyota    .brand-logo-text { color: #cc0000; }
+    .tab-ford      .brand-logo-text { color: #003476; }
+    .tab-mitsu     .brand-logo-text { color: #c41e3a; }
+    .tab-chevrolet .brand-logo-text { color: #c8a400; }
+    .tab-kia       .brand-logo-text { color: #bb162b; }
+    .brand-tab.active .brand-logo-text { opacity:1; }
+
+    /* ── SECTIONS ── */
+    .brand-section { padding: 60px 20px; display: none; }
+    .brand-section.active { display: block; }
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    .brand-header {
+      display: flex; align-items: center; gap: 20px; margin-bottom: 40px;
+      padding-bottom: 24px; border-bottom: 2px solid #e0e4ea;
+    }
+    .brand-badge {
+      height: 56px; padding: 8px 22px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat',sans-serif; font-weight: 900; font-size: 20px;
+      letter-spacing: 2px; color: #fff;
+    }
+    .badge-toyota    { background: #cc0000; }
+    .badge-ford      { background: #003476; }
+    .badge-mitsu     { background: #c41e3a; }
+    .badge-chevrolet { background: linear-gradient(135deg,#c8a400,#f0c800); color:#222; }
+    .badge-kia       { background: #bb162b; }
+    .brand-header h2 {
+      font-family: 'Montserrat',sans-serif; font-size: clamp(20px,3vw,30px);
+      font-weight: 800; color: var(--navy); text-transform: uppercase;
+    }
+    .brand-header p { font-size: 14px; color: #777; margin-top: 4px; }
+
+    /* ── VEHICLE GRID ── */
+    .vehicles-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 28px;
+    }
+    .v-card {
+      background: #fff; border-radius: 14px; overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+      transition: transform .25s, box-shadow .25s;
+      display: flex; flex-direction: column;
+    }
+    .v-card:hover { transform: translateY(-6px); box-shadow: 0 14px 36px rgba(0,0,0,.14); }
+
+    /* imagen */
+    .v-img {
+      position: relative; height: 210px; overflow: hidden;
+      background: #f0f0f0; display: flex; align-items: center; justify-content: center;
+    }
+    .v-img img {
+      width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 12px;
+    }
+    .v-img .no-img {
+      font-size: 72px; color: rgba(0,0,0,.1);
+    }
+    .v-badge-new {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--red); color: #fff;
+      font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: 10px;
+      padding: 4px 12px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .v-badge-avail {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--green); color: #fff;
+      font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: 10px;
+      padding: 4px 12px; border-radius: 20px; letter-spacing: .5px;
+    }
+
+    /* info */
+    .v-info { padding: 22px 22px 0; flex: 1; }
+    .v-name {
+      font-family: 'Montserrat',sans-serif; font-weight: 800; font-size: 18px;
+      color: var(--navy); margin-bottom: 2px;
+    }
+    .v-sub { font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 18px; }
+
+    /* características */
+    .v-specs {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px;
+    }
+    .v-spec {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: #555; line-height: 1.4;
+    }
+    .v-spec i { color: var(--green); font-size: 14px; width: 16px; flex-shrink: 0; }
+    .v-spec strong { display: block; font-size: 11px; color: #aaa; font-weight: 600; text-transform: uppercase; }
+
+    /* nivel de blindaje */
+    .v-nivel {
+      background: var(--light); border-radius: 8px; padding: 12px 16px;
+      display: flex; align-items: center; gap: 12px; margin-bottom: 18px;
+    }
+    .v-nivel i { color: var(--red); font-size: 20px; }
+    .v-nivel div { font-size: 13px; color: #555; }
+    .v-nivel strong { color: var(--navy); font-size: 14px; }
+
+    /* acordeón características */
+    .v-accordion { border-top: 1px solid #eee; }
+    .v-accordion-btn {
+      width: 100%; padding: 14px 22px; display: flex; align-items: center;
+      justify-content: space-between; background: none; border: none; cursor: pointer;
+      font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: 12px;
+      color: var(--navy); text-transform: uppercase; letter-spacing: .5px;
+      transition: background .2s;
+    }
+    .v-accordion-btn:hover { background: #f9f9f9; }
+    .v-accordion-btn i { transition: transform .3s; font-size: 14px; color: #999; }
+    .v-accordion-btn.open i { transform: rotate(180deg); }
+    .v-accordion-body {
+      max-height: 0; overflow: hidden; transition: max-height .35s ease;
+      padding: 0 22px;
+    }
+    .v-accordion-body.open { max-height: 300px; padding-bottom: 16px; }
+    .v-accordion-body ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .v-accordion-body ul li {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; color: #555;
+    }
+    .v-accordion-body ul li i { color: var(--green); font-size: 13px; }
+
+    /* botón solicitar */
+    .v-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--navy); color: #fff;
+      padding: 16px; margin: 0;
+      font-family: 'Montserrat',sans-serif; font-weight: 700; font-size: 13px;
+      text-transform: uppercase; letter-spacing: .5px; border: none; cursor: pointer;
+      transition: background .2s; width: 100%;
+    }
+    .v-btn:hover { background: var(--green); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,.6); z-index: 9000;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff; border-radius: 16px; width: 100%; max-width: 520px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.3); overflow: hidden;
+      animation: modalIn .3s ease;
+    }
+    @keyframes modalIn { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    .modal-head {
+      background: var(--navy); padding: 24px 28px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-head h3 { font-family:'Montserrat',sans-serif; font-weight:800; font-size:18px; color:#fff; text-transform:uppercase; }
+    .modal-head span { font-size:12px; color:rgba(255,255,255,.6); margin-top:4px; display:block; }
+    .modal-close {
+      background: none; border: none; color: rgba(255,255,255,.7);
+      font-size: 22px; cursor: pointer; padding: 4px;
+      transition: color .2s;
+    }
+    .modal-close:hover { color: #fff; }
+    .modal-body { padding: 28px; }
+    .modal-body .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .modal-body input, .modal-body select, .modal-body textarea {
+      width:100%; padding:12px 14px; border:1px solid #dde3ec; border-radius:6px;
+      font-size:14px; font-family:'Open Sans',sans-serif; outline:none;
+      background:#fafbfc; transition:border .2s; margin-bottom:14px;
+    }
+    .modal-body input:focus, .modal-body select:focus, .modal-body textarea:focus { border-color:var(--green); background:#fff; }
+    .modal-body textarea { min-height:90px; resize:vertical; margin-bottom:0; }
+    .modal-vehicle-info {
+      background: var(--light); border-radius: 8px; padding: 12px 16px;
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .modal-vehicle-info i { color: var(--green); font-size: 24px; }
+    .modal-vehicle-info strong { display:block; color:var(--navy); font-size:15px; }
+    .modal-vehicle-info span { font-size:12px; color:#999; }
+    .btn-modal-send {
+      width:100%; background:var(--green); color:#fff; border:none;
+      padding:15px; border-radius:6px; font-family:'Montserrat',sans-serif;
+      font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:1px;
+      cursor:pointer; margin-top:16px; transition:background .2s;
+      display:flex; align-items:center; justify-content:center; gap:8px;
+    }
+    .btn-modal-send:hover { background:var(--green-hover); }
+
+    /* ── FOOTER ── */
+    footer {
+      background:#0b0d1a; color:rgba(255,255,255,.6);
+      text-align:center; padding:12px 20px; font-size:12px;
+    }
+    footer a { color:#4fc88e; }
+
+    .whatsapp-float {
+      position:fixed; bottom:28px; right:28px;
+      width:56px; height:56px; background:#25d366; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:28px; color:#fff; box-shadow:0 4px 16px rgba(0,0,0,.25);
+      z-index:9999; transition:transform .2s;
+    }
+    .whatsapp-float:hover { transform:scale(1.1); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; gap:16px; margin-left:200px; padding:10px 0;">
+      <a href="index.html">
+        <img src="logo-texto.png" alt="Rental Security" style="height:88px; width:auto; display:block;" />
+      </a>
+      <img src="logo-full.png" alt="J&J Rental Security" style="height:72px; width:auto; display:block;" />
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="vehiculos.html" class="active">Vehículos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="clientes.html">Clientes</a>
+    </div>
+    <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <h1>Nuestra <span>Flota</span></h1>
+  <p>Vehículos blindados certificados de las mejores marcas del mundo</p>
+  <div class="breadcrumb">
+    <a href="index.html">Inicio</a><span>›</span><span>Vehículos</span>
+  </div>
+</div>
+
+<!-- BRAND TABS -->
+<div class="brand-tabs">
+  <div class="brand-tabs-inner">
+    <div class="brand-tab tab-toyota active" onclick="showBrand('toyota')">
+      <span class="brand-logo-text">TOYOTA</span>
+      <i class="fas fa-chevron-down" style="font-size:10px;color:#ccc;"></i>
+    </div>
+    <div class="brand-tab tab-ford" onclick="showBrand('ford')">
+      <span class="brand-logo-text">FORD</span>
+      <i class="fas fa-chevron-down" style="font-size:10px;color:#ccc;"></i>
+    </div>
+    <div class="brand-tab tab-mitsu" onclick="showBrand('mitsu')">
+      <span class="brand-logo-text">MITSUBISHI</span>
+      <i class="fas fa-chevron-down" style="font-size:10px;color:#ccc;"></i>
+    </div>
+    <div class="brand-tab tab-chevrolet" onclick="showBrand('chevrolet')">
+      <span class="brand-logo-text">CHEVROLET</span>
+      <i class="fas fa-chevron-down" style="font-size:10px;color:#ccc;"></i>
+    </div>
+    <div class="brand-tab tab-kia" onclick="showBrand('kia')">
+      <span class="brand-logo-text">KIA</span>
+      <i class="fas fa-chevron-down" style="font-size:10px;color:#ccc;"></i>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TOYOTA ══════════════════ -->
+<section class="brand-section active" id="brand-toyota">
+  <div class="container">
+    <div class="brand-header">
+      <div class="brand-badge badge-toyota">TOYOTA</div>
+      <div>
+        <h2>Toyota — Flota Blindada</h2>
+        <p>Confiabilidad japonesa con máxima protección certificada</p>
+      </div>
+    </div>
+    <div class="vehicles-grid">
+
+      <!-- Prado TXL 2026 -->
+      <div class="v-card">
+        <div class="v-img">
+          <img src="prado.png" alt="Toyota Prado TXL 2026" />
+          <span class="v-badge-new">2026 ★ NEW</span>
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Land Cruiser Prado TXL</div>
+          <div class="v-sub">Toyota · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>7 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>2.8L Diésel</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>204 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática</div></div>
+            <div class="v-spec"><i class="fas fa-snowflake"></i><div><strong>Clima</strong>A/C Dual Zone</div></div>
+            <div class="v-spec"><i class="fas fa-wifi"></i><div><strong>Conectividad</strong>WiFi + USB</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Vidrios blindados de 40mm con lámina de policarbonato</li>
+              <li><i class="fas fa-check"></i>Carrocería reforzada con acero balístico</li>
+              <li><i class="fas fa-check"></i>Llantas de emergencia run-flat</li>
+              <li><i class="fas fa-check"></i>Cámara de reversa y sensores 360°</li>
+              <li><i class="fas fa-check"></i>Sistema GPS de rastreo en tiempo real</li>
+              <li><i class="fas fa-check"></i>Sistema de audio premium JBL</li>
+              <li><i class="fas fa-check"></i>Asientos de cuero con calefacción</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Land Cruiser Prado TXL','Toyota · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- 4Runner 2024 -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f5f5f5;">
+          <img src="4runner.png" alt="Toyota 4Runner 2024" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">4Runner</div>
+          <div class="v-sub">Toyota · 2024</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>7 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>3.5L V6 Turbo</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>415 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática 10v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>4WD Full Time</div></div>
+            <div class="v-spec"><i class="fas fa-location-dot"></i><div><strong>GPS</strong>Monitoreo 24/7</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Nivel de blindaje ajustable de acuerdo a los requerimientos</li>
+              <li><i class="fas fa-check"></i>Suspensión reforzada para mayor carga blindada</li>
+              <li><i class="fas fa-check"></i>Llantas run-flat Michelin</li>
+              <li><i class="fas fa-check"></i>Sistema de comunicación de emergencia integrado</li>
+              <li><i class="fas fa-check"></i>Pantallas traseras de entretenimiento</li>
+              <li><i class="fas fa-check"></i>Techo panorámico blindado</li>
+              <li><i class="fas fa-check"></i>Frenos de alta performance Brembo</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Toyota 4Runner','Toyota · 2024')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- 4Runner -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f5f5f5;">
+          <img src="yaris.png" alt="Toyota Yaris Híbrido 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Yaris Híbrido</div>
+          <div class="v-sub">Toyota · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>5 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>4.0L V6</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>270 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática 5v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>4WD</div></div>
+            <div class="v-spec"><i class="fas fa-snowflake"></i><div><strong>Clima</strong>A/C Automático</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Puertas con capas múltiples de acero balístico</li>
+              <li><i class="fas fa-check"></i>Vidrios laminados de seguridad nivel III</li>
+              <li><i class="fas fa-check"></i>Interruptor de emergencia de combustible</li>
+              <li><i class="fas fa-check"></i>Bocinas y sirena de emergencia opcionales</li>
+              <li><i class="fas fa-check"></i>Cámara delantera y trasera</li>
+              <li><i class="fas fa-check"></i>Asientos ergonómicos de cuero</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Yaris Híbrido','Toyota · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- Corolla 2026 -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f5f5f5;">
+          <img src="corolla.png" alt="Toyota Corolla 2026" />
+          <span class="v-badge-new">2026 ★ NEW</span>
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Corolla</div>
+          <div class="v-sub">Toyota · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>5 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>2.0L Híbrido</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>150 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>CVT Automática</div></div>
+            <div class="v-spec"><i class="fas fa-snowflake"></i><div><strong>Clima</strong>A/C Dual Zone</div></div>
+            <div class="v-spec"><i class="fas fa-wifi"></i><div><strong>Conectividad</strong>WiFi + USB</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Nivel de blindaje ajustable de acuerdo a los requerimientos</li>
+              <li><i class="fas fa-check"></i>Vidrios blindados con lámina de policarbonato</li>
+              <li><i class="fas fa-check"></i>Carrocería reforzada con acero balístico</li>
+              <li><i class="fas fa-check"></i>Llantas de emergencia run-flat</li>
+              <li><i class="fas fa-check"></i>Cámara de reversa y sensores 360°</li>
+              <li><i class="fas fa-check"></i>Sistema GPS de rastreo en tiempo real</li>
+              <li><i class="fas fa-check"></i>Asientos de cuero con calefacción</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Corolla','Toyota · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FORD ══════════════════ -->
+<section class="brand-section" id="brand-ford">
+  <div class="container">
+    <div class="brand-header">
+      <div class="brand-badge badge-ford">FORD</div>
+      <div>
+        <h2>Ford — Flota Blindada</h2>
+        <p>Potencia americana con tecnología de blindaje de vanguardia</p>
+      </div>
+    </div>
+    <div class="vehicles-grid">
+
+      <!-- Ford Explorer 2026 -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f5f5f5;">
+          <img src="explorer.png" alt="Ford Explorer 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Explorer</div>
+          <div class="v-sub">Ford · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>8 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>3.5L EcoBoost V6</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>400 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática 10v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>4WD</div></div>
+            <div class="v-spec"><i class="fas fa-wifi"></i><div><strong>Conectividad</strong>SYNC 4A + WiFi</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Blindaje completo puertas, techo y piso</li>
+              <li><i class="fas fa-check"></i>Tanque de combustible autosellante</li>
+              <li><i class="fas fa-check"></i>Llantas Runflat de alto desempeño</li>
+              <li><i class="fas fa-check"></i>Sistema de cámaras 360° integrado</li>
+              <li><i class="fas fa-check"></i>Tercera fila de asientos con acceso fácil</li>
+              <li><i class="fas fa-check"></i>Pantallas traseras de entretenimiento 12"</li>
+              <li><i class="fas fa-check"></i>Batería auxiliar de respaldo</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Explorer','Ford · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- Ford Explorer -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f5f5f5;">
+          <img src="escape.png" alt="Ford Escape Híbrida 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Escape Híbrida</div>
+          <div class="v-sub">Ford · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>6 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>3.0L EcoBoost V6</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>400 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática 10v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>AWD</div></div>
+            <div class="v-spec"><i class="fas fa-snowflake"></i><div><strong>Clima</strong>A/C Tri-Zone</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Vidrios blindados nivel II de 25mm</li>
+              <li><i class="fas fa-check"></i>Puertas y pilares reforzados con acero balístico</li>
+              <li><i class="fas fa-check"></i>Sistema de frenado de alto rendimiento</li>
+              <li><i class="fas fa-check"></i>GPS y monitoreo en tiempo real</li>
+              <li><i class="fas fa-check"></i>Pantalla táctil SYNC 4 de 13.2"</li>
+              <li><i class="fas fa-check"></i>Sonido Bang & Olufsen 14 parlantes</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Escape Híbrida','Ford · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- Ford Expedition 2026 -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f5f5f5;">
+          <img src="expedition.png" alt="Ford Expedition 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Expedition</div>
+          <div class="v-sub">Ford · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>5 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>3.5L EcoBoost</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>450 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática 10v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>4WD</div></div>
+            <div class="v-spec"><i class="fas fa-weight-hanging"></i><div><strong>Carga</strong>900 kg</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Cabina blindada con protección nivel II</li>
+              <li><i class="fas fa-check"></i>Suspensión FOX Live Valve reforzada</li>
+              <li><i class="fas fa-check"></i>Placa balística en piso y techo de cabina</li>
+              <li><i class="fas fa-check"></i>Vidrios de seguridad laminados</li>
+              <li><i class="fas fa-check"></i>Cámara trasera de alta resolución</li>
+              <li><i class="fas fa-check"></i>Control de tracción avanzado</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Expedition','Ford · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- Ford F-150 2026 -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f5f5f5;">
+          <img src="f150.png" alt="Ford F-150 2026" />
+          <span class="v-badge-new">2026 ★ NEW</span>
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">F-150</div>
+          <div class="v-sub">Ford · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>5 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>3.5L EcoBoost V6</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>400 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática 10v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>4WD</div></div>
+            <div class="v-spec"><i class="fas fa-location-dot"></i><div><strong>GPS</strong>Monitoreo 24/7</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Nivel de blindaje ajustable de acuerdo a los requerimientos</li>
+              <li><i class="fas fa-check"></i>Vidrios blindados con lámina de policarbonato</li>
+              <li><i class="fas fa-check"></i>Carrocería reforzada con acero balístico</li>
+              <li><i class="fas fa-check"></i>Llantas de emergencia run-flat</li>
+              <li><i class="fas fa-check"></i>Cámara de reversa y sensores 360°</li>
+              <li><i class="fas fa-check"></i>Sistema GPS de rastreo en tiempo real</li>
+              <li><i class="fas fa-check"></i>Asientos de cuero con calefacción</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('F-150','Ford · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ MITSUBISHI ══════════════════ -->
+<section class="brand-section" id="brand-mitsu">
+  <div class="container">
+    <div class="brand-header">
+      <div class="brand-badge badge-mitsu">MITSUBISHI</div>
+      <div>
+        <h2>Mitsubishi — Flota Blindada</h2>
+        <p>Tecnología japonesa con rendimiento todoterreno superior</p>
+      </div>
+    </div>
+    <div class="vehicles-grid">
+
+      <!-- Montero -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f5f5f5;">
+          <img src="montero.png" alt="Mitsubishi Montero Sport 2026" />
+          <span class="v-badge-new">2026 ★ NEW</span>
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Montero Sport</div>
+          <div class="v-sub">Mitsubishi · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>7 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>3.0L V6</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>220 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>4WD Super Select</div></div>
+            <div class="v-spec"><i class="fas fa-snowflake"></i><div><strong>Clima</strong>A/C Dual</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Carrocería monocoque reforzada con placas balísticas</li>
+              <li><i class="fas fa-check"></i>Vidrios de 38mm resistentes a impactos</li>
+              <li><i class="fas fa-check"></i>Sistema 4WD Super Select II de última generación</li>
+              <li><i class="fas fa-check"></i>Llantas run-flat de alta resistencia</li>
+              <li><i class="fas fa-check"></i>GPS integrado y monitoreo satelital</li>
+              <li><i class="fas fa-check"></i>Apertura de emergencia interior</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Montero Sport','Mitsubishi · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ CHEVROLET ══════════════════ -->
+<section class="brand-section" id="brand-chevrolet">
+  <div class="container">
+    <div class="brand-header">
+      <div class="brand-badge badge-chevrolet">CHEVROLET</div>
+      <div>
+        <h2>Chevrolet — Flota Blindada</h2>
+        <p>Solidez americana con acabados de lujo y máxima seguridad</p>
+      </div>
+    </div>
+    <div class="vehicles-grid">
+
+      <!-- Tracker -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f0f0e8;">
+          <img src="tracker.png" class="slide-car slide-car-nobg" alt="Chevrolet Tracker SUV 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Tracker SUV</div>
+          <div class="v-sub">Chevrolet · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>5 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>1.2L Turbo</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>133 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática CVT</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>FWD</div></div>
+            <div class="v-spec"><i class="fas fa-snowflake"></i><div><strong>Clima</strong>A/C Bi-Zone</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Blindaje nivel III-A puertas, techo, piso y columna</li>
+              <li><i class="fas fa-check"></i>Vidrios laminados de alta resistencia</li>
+              <li><i class="fas fa-check"></i>Tanque de combustible autosellante reforzado</li>
+              <li><i class="fas fa-check"></i>Sistema de seguridad perimetral con sensores</li>
+              <li><i class="fas fa-check"></i>Pantalla táctil 8" con Android Auto y Apple CarPlay</li>
+              <li><i class="fas fa-check"></i>Asientos de cuero con ajuste eléctrico</li>
+              <li><i class="fas fa-check"></i>Cámara de reversa y sensores de proximidad</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Tracker SUV','Chevrolet · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- Traverse -->
+      <div class="v-card">
+        <div class="v-img" style="background:#eef0e8;">
+          <img src="traverse.png" class="slide-car slide-car-nobg" alt="Chevrolet Traverse 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Traverse</div>
+          <div class="v-sub">Chevrolet · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>8 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>2.5L Turbo</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>328 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática 8v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>AWD</div></div>
+            <div class="v-spec"><i class="fas fa-wifi"></i><div><strong>Conectividad</strong>WiFi + Apple CarPlay</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Refuerzo balístico en puertas laterales</li>
+              <li><i class="fas fa-check"></i>Vidrios de seguridad laminados de alta resistencia</li>
+              <li><i class="fas fa-check"></i>Frenos de disco ventilados de alta performance</li>
+              <li><i class="fas fa-check"></i>Sistema de rastreo GPS incorporado</li>
+              <li><i class="fas fa-check"></i>Pantalla táctil 17.7" con navegación</li>
+              <li><i class="fas fa-check"></i>Cámara HD delantera y trasera</li>
+              <li><i class="fas fa-check"></i>Techo panorámico de cristal templado</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Traverse','Chevrolet · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- Suburban -->
+      <div class="v-card">
+        <div class="v-img" style="background:#e8f0ec;">
+          <img src="suburman.png" class="slide-car slide-car-nobg" alt="Chevrolet Suburban Premier 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Suburban Premier</div>
+          <div class="v-sub">Chevrolet · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>9 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>6.2L V8</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>420 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática 10v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>4WD</div></div>
+            <div class="v-spec"><i class="fas fa-location-dot"></i><div><strong>GPS</strong>Monitoreo 24/7</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Nivel de blindaje ajustable de acuerdo a los requerimientos</li>
+              <li><i class="fas fa-check"></i>Piso reforzado contra explosivos</li>
+              <li><i class="fas fa-check"></i>Sistema de intercomunicación interior blindado</li>
+              <li><i class="fas fa-check"></i>Suspensión neumática con ajuste automático</li>
+              <li><i class="fas fa-check"></i>Tres filas de asientos con configuración ejecutiva</li>
+              <li><i class="fas fa-check"></i>Sistema de entretenimiento trasero con WiFi</li>
+              <li><i class="fas fa-check"></i>Botón de pánico y sistema de alerta de emergencia</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Suburban Premier','Chevrolet · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ KIA ══════════════════ -->
+<section class="brand-section" id="brand-kia">
+  <div class="container">
+    <div class="brand-header">
+      <div class="brand-badge badge-kia">KIA</div>
+      <div>
+        <h2>Kia — Flota Blindada</h2>
+        <p>Tecnología coreana con diseño audaz y máxima seguridad</p>
+      </div>
+    </div>
+    <div class="vehicles-grid">
+
+      <!-- Sonet -->
+      <div class="v-card">
+        <div class="v-img" style="background:#f0eef0;">
+          <img src="sonet.png" class="slide-car slide-car-nobg" alt="Kia Sonet Desire MT 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Sonet Desire MT</div>
+          <div class="v-sub">Kia · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>5 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>1.5L MPI</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>115 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Manual 6v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>FWD</div></div>
+            <div class="v-spec"><i class="fas fa-location-dot"></i><div><strong>GPS</strong>Monitoreo 24/7</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Blindaje nivel III-A en puertas, techo y piso</li>
+              <li><i class="fas fa-check"></i>Vidrios laminados de alta resistencia</li>
+              <li><i class="fas fa-check"></i>Pantalla táctil 8" con Apple CarPlay y Android Auto</li>
+              <li><i class="fas fa-check"></i>Sistema de rastreo GPS incorporado</li>
+              <li><i class="fas fa-check"></i>Cámara de reversa con sensores de proximidad</li>
+              <li><i class="fas fa-check"></i>Frenos ABS con distribución electrónica</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Sonet Desire MT','Kia · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- Stonic -->
+      <div class="v-card">
+        <div class="v-img" style="background:#eef0ee;">
+          <img src="stonic.png" class="slide-car slide-car-nobg" alt="Kia Stonic Híbrida 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Stonic Híbrida</div>
+          <div class="v-sub">Kia · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>5 personas</div></div>
+            <div class="v-spec"><i class="fas fa-bolt"></i><div><strong>Motor</strong>1.0L T-GDI Híbrido</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>120 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática DCT 7v</div></div>
+            <div class="v-spec"><i class="fas fa-leaf"></i><div><strong>Autonomía</strong>850 km</div></div>
+            <div class="v-spec"><i class="fas fa-location-dot"></i><div><strong>GPS</strong>Monitoreo 24/7</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Tecnología mild-hybrid con blindaje optimizado</li>
+              <li><i class="fas fa-check"></i>Vidrios laminados de alta resistencia</li>
+              <li><i class="fas fa-check"></i>Pantalla táctil 10.25" con navegación integrada</li>
+              <li><i class="fas fa-check"></i>Sistema de rastreo GPS incorporado</li>
+              <li><i class="fas fa-check"></i>Asistente de mantenimiento de carril</li>
+              <li><i class="fas fa-check"></i>Frenado autónomo de emergencia</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Stonic Híbrida','Kia · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+      <!-- Sportage -->
+      <div class="v-card">
+        <div class="v-img" style="background:#eaeef2;">
+          <img src="sportage.png" class="slide-car slide-car-nobg" alt="Kia Sportage 2026" />
+          <span class="v-badge-avail">Disponible</span>
+        </div>
+        <div class="v-info">
+          <div class="v-name">Sportage</div>
+          <div class="v-sub">Kia · 2026</div>
+          <div class="v-nivel">
+            <i class="fas fa-shield-halved"></i>
+            <div><strong>Nivel de blindaje ajustable</strong> de acuerdo a los requerimientos</div>
+          </div>
+          <div class="v-specs">
+            <div class="v-spec"><i class="fas fa-users"></i><div><strong>Pasajeros</strong>5 personas</div></div>
+            <div class="v-spec"><i class="fas fa-gas-pump"></i><div><strong>Motor</strong>2.0L MPI</div></div>
+            <div class="v-spec"><i class="fas fa-tachometer-alt"></i><div><strong>Potencia</strong>149 HP</div></div>
+            <div class="v-spec"><i class="fas fa-cog"></i><div><strong>Transmisión</strong>Automática 6v</div></div>
+            <div class="v-spec"><i class="fas fa-mountain"></i><div><strong>Tracción</strong>AWD</div></div>
+            <div class="v-spec"><i class="fas fa-location-dot"></i><div><strong>GPS</strong>Monitoreo 24/7</div></div>
+          </div>
+        </div>
+        <div class="v-accordion">
+          <button class="v-accordion-btn" onclick="toggleAcc(this)">
+            <span><i class="fas fa-list" style="margin-right:8px;"></i>Ver todas las características</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="v-accordion-body">
+            <ul>
+              <li><i class="fas fa-check"></i>Blindaje nivel III-A en puertas, techo, piso y columna</li>
+              <li><i class="fas fa-check"></i>Vidrios laminados de alta resistencia</li>
+              <li><i class="fas fa-check"></i>Techo panorámico de cristal templado</li>
+              <li><i class="fas fa-check"></i>Sistema de rastreo GPS incorporado</li>
+              <li><i class="fas fa-check"></i>Pantalla táctil 12.3" con navegación integrada</li>
+              <li><i class="fas fa-check"></i>Asientos de cuero con calefacción delantera</li>
+              <li><i class="fas fa-check"></i>Sistema de sonido premium Harman Kardon</li>
+            </ul>
+          </div>
+        </div>
+        <button class="v-btn" onclick="openModal('Sportage','Kia · 2026')">
+          <i class="fas fa-paper-plane"></i> Solicitar este Vehículo
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ MODAL SOLICITUD ══════════════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h3>Solicitar Vehículo</h3>
+        <span id="modalVehicleSub">Complete el formulario y nos contactamos</span>
+      </div>
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-vehicle-info">
+        <i class="fas fa-car"></i>
+        <div>
+          <strong id="modalVehicleName">Vehículo</strong>
+          <span id="modalVehicleBrand">Marca</span>
+        </div>
+      </div>
+      <form onsubmit="submitModal(event)">
+        <div class="form-row">
+          <input type="text"  placeholder="Nombre completo *" required />
+          <input type="tel"   placeholder="Teléfono *" required />
+        </div>
+        <input type="email" placeholder="Correo electrónico *" required />
+        <div class="form-row">
+          <input type="text" placeholder="Ciudad" />
+          <select>
+            <option value="" disabled selected>Duración del alquiler</option>
+            <option>1 – 3 días</option>
+            <option>1 semana</option>
+            <option>2 semanas</option>
+            <option>1 mes</option>
+            <option>Más de 1 mes</option>
+          </select>
+        </div>
+        <textarea placeholder="Cuéntenos más sobre su necesidad de seguridad (opcional)"></textarea>
+        <button type="submit" class="btn-modal-send">
+          <i class="fas fa-paper-plane"></i> Enviar Solicitud
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 J&J Rental Security. Todos los derechos reservados. &nbsp;|&nbsp; <a href="index.html">Volver al inicio</a></p>
+</footer>
+
+<a href="https://wa.me/15550000000" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+  // ── BRAND TABS ──
+  function showBrand(brand) {
+    document.querySelectorAll('.brand-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.brand-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('brand-' + brand).classList.add('active');
+    document.querySelector('.tab-' + brand).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.brand-tabs').offsetTop - 100, behavior: 'smooth' });
+  }
+
+  // ── ACCORDION ──
+  function toggleAcc(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    // cierra todos los del mismo card
+    btn.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+  }
+
+  // ── MODAL ──
+  function openModal(name, brand) {
+    document.getElementById('modalVehicleName').textContent = name;
+    document.getElementById('modalVehicleBrand').textContent = brand;
+    document.getElementById('modalVehicleSub').textContent  = name + ' · ' + brand;
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+  function submitModal(e) {
+    e.preventDefault();
+    closeModal();
+    setTimeout(() => alert('¡Solicitud enviada! Nos comunicaremos con usted a la brevedad para confirmar la disponibilidad del vehículo.'), 200);
+  }
+
+  // Cerrar con ESC
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

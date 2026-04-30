@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nosotros - J&J Rental Security</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    :root {
+      --navy: #0d2c54;
+      --blue: #1a4f8a;
+      --green: #2e8b57;
+      --green-hover: #256b45;
+      --light-gray: #f5f7fa;
+      --white: #ffffff;
+    }
+
+    /* NAVBAR */
+    nav {
+      background: #000000;
+      box-shadow: none;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-inner {
+      max-width: 100%;
+      margin: 0;
+      padding: 0 20px 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 110px;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: #fff;
+      background: #c0392b;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background 0.2s, color 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a:hover, .nav-links a.active { background: #96281b; color: #fff; }
+    .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 110px; left: 0; right: 0;
+        background: #ffffff; padding: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      }
+    }
+
+    /* HERO BANNER */
+    .page-hero {
+      background: linear-gradient(135deg, #0b0d1a 0%, #0d2c54 60%, #1a4f8a 100%);
+      padding: 80px 20px 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url('logo.png');
+      background-size: 40%;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.06;
+    }
+    .page-hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero h1 span { color: #e83232; }
+    .page-hero p {
+      color: rgba(255,255,255,0.75);
+      font-size: 16px;
+      margin-top: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .breadcrumb {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      position: relative;
+      z-index: 1;
+    }
+    .breadcrumb a { color: #4fc88e; }
+    .breadcrumb span { color: rgba(255,255,255,0.4); }
+
+    /* SECTIONS */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .section-divider {
+      width: 60px; height: 4px;
+      background: var(--green);
+      border-radius: 2px;
+      margin: 14px 0 22px;
+    }
+
+    /* QUIÉNES SOMOS */
+    .quienes {
+      padding: 80px 20px;
+      background: #fff;
+    }
+    .quienes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .quienes-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .quienes-img {
+      background: #111;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    }
+    .quienes-img img { width: 100%; border-radius: 8px; }
+    .quienes-text h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 800;
+      color: var(--navy);
+      text-transform: uppercase;
+    }
+    .quienes-text p {
+      font-size: 15px;
+      line-height: 1.85;
+      color: #555;
+      margin-bottom: 14px;
+    }
+    .quienes-text strong { color: var(--navy); }
+    .valores-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .chip {
+      background: var(--light-gray);
+      border: 1px solid #dde3ec;
+      color: var(--navy);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* MISIÓN Y VISIÓN */
+    .mv-section {
+      padding: 80px 20px;
+      background: var(--light-gray);
+    }
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 900px) { .mv-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 580px) { .mv-grid { grid-template-columns: 1fr; } }
+    .mv-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 44px 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .mv-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,0.12); }
+    .mv-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+    }
+    .mv-card.mision::before { background: var(--green); }
+    .mv-card.vision::before  { background: #e83232; }
+    .mv-icon {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .mv-card.mision .mv-icon { background: var(--green); }
+    .mv-card.vision  .mv-icon { background: #e83232; }
+    .mv-card h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .mv-card .mv-divider {
+      width: 48px; height: 3px;
+      border-radius: 2px;
+      margin-bottom: 18px;
+    }
+    .mv-card.mision .mv-divider { background: var(--green); }
+    .mv-card.vision  .mv-divider { background: #e83232; }
+    .mv-card.objetivos::before { background: #e87c00; }
+    .mv-card.objetivos .mv-icon { background: #e87c00; }
+    .mv-card.objetivos .mv-divider { background: #e87c00; }
+    .mv-card.objetivos ul li i { color: #e87c00; }
+    .mv-card p {
+      font-size: 15px;
+      line-height: 1.85;
+      color: #555;
+    }
+    .mv-card ul {
+      margin-top: 14px;
+      padding-left: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mv-card ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .mv-card ul li i { font-size: 15px; margin-top: 2px; flex-shrink: 0; }
+    .mv-card.mision ul li i { color: var(--green); }
+    .mv-card.vision  ul li i { color: #e83232; }
+
+    /* VALORES */
+    .valores-section {
+      padding: 80px 20px;
+      background: #ffffff;
+    }
+    .valores-section .section-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .valores-section .section-title h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800;
+      color: #111;
+      text-transform: uppercase;
+    }
+    .valores-section .section-divider { background: #4fc88e; margin: 14px auto 0; }
+    .valores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .valor-card {
+      background: #b30000;
+      border: none;
+      border-radius: 12px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .valor-card:hover { background: #cc0000; transform: translateY(-4px); }
+    .valor-icon {
+      font-size: 36px;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .valor-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .valor-card p { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.7; }
+
+    /* CTA */
+    .cta-section {
+      background: var(--green);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .cta-section p { color: rgba(255,255,255,0.9); font-size: 16px; margin-bottom: 28px; }
+    .btn-cta {
+      display: inline-block;
+      background: #fff;
+      color: var(--green);
+      padding: 14px 40px;
+      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+
+    /* FOOTER */
+    footer {
+      background: #0b0d1a;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 12px 20px;
+      font-size: 12px;
+    }
+    footer a { color: #4fc88e; }
+
+    /* WHATSAPP */
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 56px; height: 56px;
+      background: #25d366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      z-index: 9999;
+      transition: transform 0.2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; gap:16px; margin-left:200px; padding:10px 0;">
+      <a href="index.html">
+        <img src="logo-texto.png" alt="Rental Security" style="height:88px; width:auto; display:block;" />
+      </a>
+      <img src="logo-full.png" alt="J&J Rental Security" style="height:72px; width:auto; display:block;" />
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html" class="active">Nosotros</a>
+      <a href="vehiculos.html">Vehículos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="clientes.html">Clientes</a>
+    </div>
+    <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO BANNER -->
+<div class="page-hero">
+  <h1>Sobre <span>Nosotros</span></h1>
+  <p>Conozca quiénes somos, nuestra misión y visión</p>
+  <div class="breadcrumb">
+    <a href="index.html">Inicio</a>
+    <span>›</span>
+    <span>Nosotros</span>
+  </div>
+</div>
+
+<!-- QUIÉNES SOMOS -->
+<section class="quienes" id="quienes">
+  <div class="container">
+    <div class="quienes-grid">
+      <div class="quienes-img">
+        <img src="logo.png" alt="J&J Rental Security" />
+      </div>
+      <div class="quienes-text">
+        <h2>Quiénes Somos</h2>
+        <div class="section-divider"></div>
+        <p>Somos <strong>J&J Rental Security</strong>, una empresa líder en el alquiler de vehículos blindados con más de 20 años de experiencia en el sector de la seguridad privada y el transporte blindado.</p>
+        <p>Nacimos con el propósito de brindar soluciones de movilidad segura a empresas, ejecutivos, organizaciones gubernamentales y familias que requieren los más altos estándares de protección durante sus desplazamientos.</p>
+        <p>Contamos con una flota moderna de vehículos certificados bajo la norma <strong>NIJ 0108.01</strong>, operadores altamente capacitados y un sistema de monitoreo GPS en tiempo real que garantiza la trazabilidad y seguridad de cada servicio.</p>
+        <div class="valores-chips">
+          <span class="chip"><i class="fas fa-shield-halved"></i> &nbsp;Seguridad</span>
+          <span class="chip"><i class="fas fa-handshake"></i> &nbsp;Confianza</span>
+          <span class="chip"><i class="fas fa-star"></i> &nbsp;Calidad</span>
+          <span class="chip"><i class="fas fa-clock"></i> &nbsp;Puntualidad</span>
+          <span class="chip"><i class="fas fa-certificate"></i> &nbsp;Certificados</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISIÓN Y VISIÓN -->
+<section class="mv-section" id="mision-vision">
+  <div class="container">
+    <div class="mv-grid">
+
+      <!-- MISIÓN -->
+      <div class="mv-card mision">
+        <div class="mv-icon"><i class="fas fa-bullseye"></i></div>
+        <h3>Misión</h3>
+        <div class="mv-divider"></div>
+        <p>Proveer servicios de alquiler de vehículos blindados de alta calidad, garantizando la seguridad, confianza y tranquilidad de nuestros clientes mediante:</p>
+        <ul>
+          <li><i class="fas fa-check-circle"></i><span>Una flota de vehículos con blindaje certificado bajo estándares internacionales</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Personal altamente capacitado y comprometido con la excelencia</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Tecnología de monitoreo GPS y atención al cliente 24/7</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Soluciones personalizadas adaptadas a cada necesidad de seguridad</span></li>
+          <li><i class="fas fa-check-circle"></i><span>Cumplimiento estricto de las normativas ISO 9001, 14001 y 45001</span></li>
+        </ul>
+      </div>
+
+      <!-- VISIÓN -->
+      <div class="mv-card vision">
+        <div class="mv-icon"><i class="fas fa-eye"></i></div>
+        <h3>Visión</h3>
+        <div class="mv-divider"></div>
+        <p>Ser reconocidos para el año 2030 como la empresa de alquiler de vehículos blindados más confiable y de mayor cobertura a nivel nacional, destacándonos por:</p>
+        <ul>
+          <li><i class="fas fa-arrow-circle-right"></i><span>Liderar el mercado con la flota más moderna y certificada del país</span></li>
+          <li><i class="fas fa-arrow-circle-right"></i><span>Expandir nuestra presencia a todas las principales ciudades</span></li>
+          <li><i class="fas fa-arrow-circle-right"></i><span>Innovar continuamente en tecnología de seguridad y blindaje</span></li>
+          <li><i class="fas fa-arrow-circle-right"></i><span>Consolidar alianzas estratégicas con empresas del sector seguridad</span></li>
+          <li><i class="fas fa-arrow-circle-right"></i><span>Ser el aliado número uno en seguridad de movilidad empresarial</span></li>
+        </ul>
+      </div>
+
+      <!-- OBJETIVOS -->
+      <div class="mv-card objetivos">
+        <div class="mv-icon"><i class="fas fa-flag-checkered"></i></div>
+        <h3>Objetivos</h3>
+        <div class="mv-divider"></div>
+        <p>Alcanzar metas concretas que impulsen el crecimiento y la excelencia de nuestros servicios:</p>
+        <ul>
+          <li><i class="fas fa-star"></i><span>Ampliar la flota con vehículos de último modelo cada año</span></li>
+          <li><i class="fas fa-star"></i><span>Reducir tiempos de respuesta al cliente a menos de 2 horas</span></li>
+          <li><i class="fas fa-star"></i><span>Obtener y mantener certificaciones de calidad internacionales</span></li>
+          <li><i class="fas fa-star"></i><span>Capacitar al 100% del personal en estándares de seguridad</span></li>
+          <li><i class="fas fa-star"></i><span>Expandir cobertura a 5 ciudades principales antes de 2027</span></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VALORES -->
+<section class="valores-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nuestros Valores</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="valores-grid">
+      <div class="valor-card">
+        <div class="valor-icon"><i class="fas fa-shield-halved"></i></div>
+        <h4>Seguridad</h4>
+        <p>La protección de nuestros clientes es nuestra prioridad absoluta en cada servicio.</p>
+      </div>
+      <div class="valor-card">
+        <div class="valor-icon"><i class="fas fa-handshake"></i></div>
+        <h4>Confianza</h4>
+        <p>Construimos relaciones duraderas basadas en la transparencia y el compromiso.</p>
+      </div>
+      <div class="valor-card">
+        <div class="valor-icon"><i class="fas fa-medal"></i></div>
+        <h4>Excelencia</h4>
+        <p>Superamos las expectativas con estándares de calidad de clase mundial.</p>
+      </div>
+      <div class="valor-card">
+        <div class="valor-icon"><i class="fas fa-users"></i></div>
+        <h4>Compromiso</h4>
+        <p>Nos dedicamos plenamente al bienestar y satisfacción de cada cliente.</p>
+      </div>
+      <div class="valor-card">
+        <div class="valor-icon"><i class="fas fa-lightbulb"></i></div>
+        <h4>Innovación</h4>
+        <p>Adoptamos las últimas tecnologías para ofrecer siempre el mejor servicio.</p>
+      </div>
+      <div class="valor-card">
+        <div class="valor-icon"><i class="fas fa-leaf"></i></div>
+        <h4>Responsabilidad</h4>
+        <p>Actuamos con ética, respeto al medio ambiente y a las comunidades donde operamos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 J&J Rental Security. Todos los derechos reservados. &nbsp;|&nbsp; <a href="index.html">Volver al inicio</a></p>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/15550000000" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+</body>
+</html>

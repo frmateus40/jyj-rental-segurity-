@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios - J&J Rental Security</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #f5f7fa; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    :root {
+      --navy: #0d2c54;
+      --green: #2e8b57;
+      --green-hover: #256b45;
+      --red: #e83232;
+      --light: #f5f7fa;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: #000000;
+      box-shadow: none;
+      border-bottom: 1px solid #222;
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .nav-inner {
+      max-width: 100%; margin: 0; padding: 0 20px 0 8px;
+      display: flex; align-items: center; justify-content: space-between; height: 110px;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px;
+      color: #fff; background: #c0392b; padding: 8px 16px; border-radius: 4px;
+      transition: background .2s, color .2s; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .nav-links a:hover, .nav-links a.active { background: #96281b; color: #fff; }
+    .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
+    @media(max-width:768px){
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 110px; left: 0; right: 0;
+        background: #ffffff; padding: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.3);
+      }
+    }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, #0b0d1a 0%, #0d2c54 60%, #1a4f8a 100%);
+      padding: 80px 20px 70px; text-align: center; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('logo.png') center/35% no-repeat; opacity: .06;
+    }
+    .page-hero h1 {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(28px,5vw,52px);
+      font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px;
+      position: relative; z-index: 1;
+    }
+    .page-hero h1 span { color: #e83232; }
+    .page-hero p { color: rgba(255,255,255,.75); font-size: 16px; margin-top: 12px; position: relative; z-index: 1; }
+    .breadcrumb {
+      display: flex; justify-content: center; gap: 8px; margin-top: 18px;
+      font-size: 13px; color: rgba(255,255,255,.5); position: relative; z-index: 1;
+    }
+    .breadcrumb a { color: #4fc88e; }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+    /* ── INTRO ── */
+    .intro-section {
+      background: #fff; padding: 60px 20px 20px;
+      text-align: center;
+    }
+    .intro-section h2 {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(22px,3vw,34px);
+      font-weight: 800; color: var(--navy); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .intro-section p { color: #666; font-size: 15px; max-width: 640px; margin: 0 auto; line-height: 1.8; }
+    .divider { width: 56px; height: 4px; background: var(--green); border-radius: 2px; margin: 14px auto 0; }
+
+    /* ── SERVICES GRID ── */
+    .services-section { background: #fff; padding: 40px 20px 70px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid #e0e6ef;
+      border-radius: 14px;
+      padding: 32px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      box-shadow: 0 3px 14px rgba(0,0,0,.06);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: var(--green);
+      border-radius: 4px 0 0 4px;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0,0,0,.12);
+      border-color: var(--green);
+    }
+    .service-card:nth-child(2n)::before  { background: var(--navy); }
+    .service-card:nth-child(3n)::before  { background: var(--red); }
+    .service-icon {
+      width: 90px; height: 90px; flex-shrink: 0;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 42px; color: #fff;
+    }
+    .service-card:nth-child(1)  .service-icon { background: #2e8b57; }
+    .service-card:nth-child(2)  .service-icon { background: #1a4f8a; }
+    .service-card:nth-child(3)  .service-icon { background: #7b3fa0; }
+    .service-card:nth-child(4)  .service-icon { background: #c0580a; }
+    .service-card:nth-child(5)  .service-icon { background: #c41e3a; }
+    .service-card:nth-child(6)  .service-icon { background: #0d2c54; }
+    .service-card:nth-child(7)  .service-icon { background: #2e7d6e; }
+    .service-card:nth-child(8)  .service-icon { background: #8b2e2e; }
+    .service-card:nth-child(9)  .service-icon { background: #4a7a2e; }
+    .service-card:nth-child(10) .service-icon { background: #1a3a7a; }
+    .service-body h4 {
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px;
+      color: var(--navy); margin-bottom: 6px; line-height: 1.3;
+    }
+    .service-body p { font-size: 13px; color: #666; line-height: 1.7; }
+
+    /* ── HIGHLIGHT BANNER ── */
+    .highlight-banner {
+      background: linear-gradient(135deg, #0b0d1a, #0d2c54);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .highlight-banner h2 {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(20px,3vw,32px);
+      font-weight: 800; color: #fff; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .highlight-banner h2 span { color: #4fc88e; }
+    .highlight-banner p { color: rgba(255,255,255,.75); font-size: 15px; margin-bottom: 28px; }
+    .highlight-stats {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-bottom: 36px;
+    }
+    .h-stat { color: #fff; text-align: center; }
+    .h-stat-num {
+      font-family: 'Montserrat', sans-serif; font-size: 42px; font-weight: 800;
+      color: #4fc88e; line-height: 1;
+    }
+    .h-stat-label { font-size: 12px; opacity: .75; text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; }
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #fff;
+      padding: 15px 40px; border-radius: 6px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: background .2s, transform .2s;
+    }
+    .btn-cta:hover { background: var(--green-hover); transform: translateY(-2px); }
+
+    /* ── PROCESO ── */
+    .proceso-section { background: #fff; padding: 70px 20px; }
+    .proceso-section .section-head {
+      text-align: center; margin-bottom: 48px;
+    }
+    .proceso-section .section-head h2 {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(22px,3vw,32px);
+      font-weight: 800; color: var(--navy); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .proceso-section .section-head p { color: #777; font-size: 14px; }
+    .proceso-steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 0; position: relative;
+    }
+    .paso {
+      text-align: center; padding: 24px 20px; position: relative;
+    }
+    .paso:not(:last-child)::after {
+      content: '';
+      position: absolute; top: 40px; right: -1px;
+      width: 2px; height: 40px;
+      background: #e0e6ef;
+    }
+    @media(max-width:600px){ .paso:not(:last-child)::after { display:none; } }
+    .paso-num {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--navy); color: #fff;
+      font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 22px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px; box-shadow: 0 4px 16px rgba(13,44,84,.25);
+    }
+    .paso h4 {
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px;
+      color: var(--navy); text-transform: uppercase; margin-bottom: 8px;
+    }
+    .paso p { font-size: 13px; color: #777; line-height: 1.6; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0b0d1a; color: rgba(255,255,255,.6);
+      text-align: center; padding: 12px 20px; font-size: 12px;
+    }
+    footer a { color: #4fc88e; }
+
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 56px; height: 56px; background: #25d366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: #fff; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      z-index: 9999; transition: transform .2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; gap:16px; margin-left:200px; padding:10px 0;">
+      <a href="index.html">
+        <img src="logo-texto.png" alt="Rental Security" style="height:88px; width:auto; display:block;" />
+      </a>
+      <img src="logo-full.png" alt="J&J Rental Security" style="height:72px; width:auto; display:block;" />
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="vehiculos.html">Vehículos</a>
+      <a href="servicios.html" class="active">Servicios</a>
+      <a href="clientes.html">Clientes</a>
+    </div>
+    <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <h1>Nuestros <span>Servicios</span></h1>
+  <p>Todo lo que necesita para movilizarse con seguridad y tranquilidad</p>
+  <div class="breadcrumb">
+    <a href="index.html">Inicio</a><span>›</span><span>Servicios</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="intro-section">
+  <div class="container">
+    <h2>¿Qué incluye nuestro servicio?</h2>
+    <div class="divider"></div>
+    <p style="margin-top:16px;">En J&J Rental Security cada servicio está diseñado para brindarle la máxima protección, comodidad y tranquilidad. Conozca todo lo que hacemos por usted.</p>
+  </div>
+</div>
+
+<!-- SERVICES GRID -->
+<section class="services-section">
+  <div class="container">
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-road"></i></div>
+        <div class="service-body">
+          <h4>Kilometraje Ilimitado</h4>
+          <p>Para contratos superiores a 7 días no se cobra kilómetro adicional. Desplácese con total libertad sin preocuparse por el recorrido.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="service-body">
+          <h4>Seguro Todo Riesgo Incluido</h4>
+          <p>Cobertura de seguro todo riesgo incluida en el precio del alquiler. Sin costos adicionales ni sorpresas al finalizar el contrato.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-location-dot"></i></div>
+        <div class="service-body">
+          <h4>Sistema GPS en Tiempo Real</h4>
+          <p>Monitoreo satelital activo las 24 horas. Seguimiento preciso de cada desplazamiento con acceso a reportes detallados de ruta.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-comments"></i></div>
+        <div class="service-body">
+          <h4>Conductores Bilingües</h4>
+          <p>Conductores certificados en español e inglés disponibles para misiones nacionales e internacionales con altos estándares de seguridad.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-truck-tow"></i></div>
+        <div class="service-body">
+          <h4>Servicio de Grúa 24/7</h4>
+          <p>Asistencia en carretera y servicio de grúa disponible las 24 horas del día, los 7 días de la semana. Incluido en todos los planes.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-certificate"></i></div>
+        <div class="service-body">
+          <h4>Blindaje Certificado Nivel II, III y V</h4>
+          <p>Vehículos con certificación NIJ 0108.01. Cada unidad es verificada periódicamente para garantizar la integridad del blindaje.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-wrench"></i></div>
+        <div class="service-body">
+          <h4>Mantenimiento Preventivo</h4>
+          <p>Revisión técnica periódica garantizada en toda la flota. Vehículos en óptimas condiciones mecánicas y de seguridad en todo momento.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-triangle-exclamation"></i></div>
+        <div class="service-body">
+          <h4>Reporte de Incidentes</h4>
+          <p>Protocolo de atención inmediata ante cualquier incidente. Línea de emergencias activa y equipo de respuesta disponible en todo momento.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-car-burst"></i></div>
+        <div class="service-body">
+          <h4>Vehículo de Reemplazo</h4>
+          <p>Ante cualquier eventualidad mecánica o de seguridad, le garantizamos un vehículo de reemplazo para que su servicio no se vea interrumpido.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-handshake"></i></div>
+        <div class="service-body">
+          <h4>Planes Personalizados</h4>
+          <p>Diseñamos el plan de seguridad ideal según sus necesidades, presupuesto y nivel de riesgo. Asesoría especializada sin costo adicional.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHT BANNER -->
+<div class="highlight-banner">
+  <div class="container">
+    <h2>Más de <span>20 años</span> protegiendo lo que más importa</h2>
+    <p>Empresas líderes, ejecutivos y familias confían en J&J Rental Security para su seguridad en movilidad</p>
+    <div class="highlight-stats">
+      <div class="h-stat">
+        <div class="h-stat-num">200+</div>
+        <div class="h-stat-label">Vehículos en flota</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">500+</div>
+        <div class="h-stat-label">Clientes satisfechos</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">20+</div>
+        <div class="h-stat-label">Años de experiencia</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">24h</div>
+        <div class="h-stat-label">Atención de emergencias</div>
+      </div>
+    </div>
+    <a href="index.html#cotizar" class="btn-cta">
+      <i class="fas fa-paper-plane"></i> Solicitar Presupuesto
+    </a>
+  </div>
+</div>
+
+<!-- PROCESO -->
+<section class="proceso-section">
+  <div class="container">
+    <div class="section-head">
+      <h2>¿Cómo funciona?</h2>
+      <div class="divider" style="margin:12px auto 10px;"></div>
+      <p>Solicitar un vehículo blindado con J&J Rental Security es simple y rápido</p>
+    </div>
+    <div class="proceso-steps">
+      <div class="paso">
+        <div class="paso-num">1</div>
+        <h4>Solicitud</h4>
+        <p>Complete el formulario de presupuesto o contáctenos por WhatsApp con sus necesidades</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">2</div>
+        <h4>Asesoría</h4>
+        <p>Un especialista le asesora sobre el vehículo y nivel de blindaje más adecuado para su situación</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">3</div>
+        <h4>Propuesta</h4>
+        <p>Recibe una propuesta económica personalizada en menos de 24 horas hábiles</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">4</div>
+        <h4>Activación</h4>
+        <p>Firmamos el contrato y su vehículo blindado queda disponible en el lugar acordado</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 J&J Rental Security. Todos los derechos reservados. &nbsp;|&nbsp; <a href="index.html">Volver al inicio</a></p>
+</footer>
+
+<a href="https://wa.me/573004353879" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+</body>
+</html>

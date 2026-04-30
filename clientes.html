@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nuestros Clientes - J&J Rental Security</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #333; background: #f5f7fa; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    :root {
+      --navy: #0d2c54;
+      --green: #2e8b57;
+      --green-hover: #256b45;
+      --light: #f5f7fa;
+    }
+
+    /* NAVBAR */
+    nav {
+      background: #000000;
+      box-shadow: none;
+      border-bottom: 1px solid #222;
+      position: sticky; top: 0; z-index: 1000;
+    }
+    .nav-inner {
+      max-width: 100%; margin: 0; padding: 0 20px 0 8px;
+      display: flex; align-items: center; justify-content: space-between; height: 110px;
+    }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px;
+      color: #fff; background: #c0392b; padding: 8px 16px; border-radius: 4px;
+      transition: background .2s, color .2s; text-transform: uppercase; letter-spacing: .5px;
+    }
+    .nav-links a:hover, .nav-links a.active { background: #96281b; color: #fff; }
+    .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
+    @media(max-width:768px){
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column;
+        position: absolute; top: 110px; left: 0; right: 0;
+        background: #ffffff; padding: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.3);
+      }
+    }
+
+    /* HERO BANNER */
+    .page-hero {
+      background: linear-gradient(135deg, #0b0d1a 0%, #0d2c54 100%);
+      padding: 70px 20px;
+      text-align: center;
+    }
+    .page-hero h1 {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: clamp(24px, 4vw, 42px); color: #fff;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .page-hero h1 span { color: #4fc88e; }
+    .page-hero p { color: rgba(255,255,255,.75); font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.8; }
+
+    /* CONTAINER */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* SECTION TITLE */
+    .section-title { text-align: center; margin-bottom: 48px; }
+    .section-title h2 {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: clamp(20px, 3vw, 32px); color: var(--navy);
+      text-transform: uppercase; margin-bottom: 10px;
+    }
+    .section-title p { color: #666; font-size: 15px; }
+    .divider { width: 56px; height: 4px; background: var(--green); border-radius: 2px; margin: 14px auto 0; }
+
+    /* CLIENTS GRID */
+    .clients-section { padding: 70px 20px; background: #fff; }
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 24px;
+      align-items: center;
+    }
+    .client-logo {
+      background: #f5f7fa;
+      border-radius: 10px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #888;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid #e0e4ea;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .client-logo:hover { border-color: var(--green); color: var(--navy); background: #fff; }
+
+    /* CTA BANNER */
+    .cta-banner {
+      background: linear-gradient(135deg, #0b0d1a, #0d2c54);
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .cta-banner h2 {
+      font-family: 'Montserrat', sans-serif; font-size: clamp(20px,3vw,30px);
+      font-weight: 800; color: #fff; text-transform: uppercase; margin-bottom: 14px;
+    }
+    .cta-banner h2 span { color: #4fc88e; }
+    .cta-banner p { color: rgba(255,255,255,.75); font-size: 15px; margin-bottom: 28px; }
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #fff;
+      padding: 15px 40px; border-radius: 6px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 14px;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: background .2s, transform .2s;
+    }
+    .btn-cta:hover { background: var(--green-hover); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.8); }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 24px;
+      max-width: 1200px; margin: 0 auto; padding: 24px 20px;
+    }
+    @media(max-width:900px){ .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:560px){ .footer-top { grid-template-columns: 1fr; } }
+    .footer-brand .logo-text { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 24px; color: #fff; }
+    .footer-brand .logo-text span { color: var(--green); }
+    .footer-brand p { font-size: 13px; line-height: 1.8; margin: 16px 0; opacity: .75; }
+    .footer-social { display: flex; gap: 10px; margin-top: 12px; }
+    .footer-social a {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 14px; transition: background .2s;
+    }
+    .footer-social a:hover { background: var(--green); }
+    .footer-col h4 {
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 13px; text-transform: uppercase; letter-spacing: 1px;
+      color: #fff; margin-bottom: 18px; padding-bottom: 10px;
+      border-bottom: 2px solid var(--green); display: inline-block;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: 13px; color: rgba(255,255,255,.7);
+      display: flex; align-items: center; gap: 6px;
+      transition: color .2s, padding-left .2s;
+    }
+    .footer-col ul li a:hover { color: #4fc88e; padding-left: 4px; }
+    .footer-col ul li a::before { content: '›'; color: var(--green); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding: 18px 20px;
+      max-width: 1200px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px;
+    }
+
+    /* WHATSAPP */
+    .whatsapp-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 999;
+      background: #25d366; color: #fff;
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      transition: transform .2s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; gap:16px; margin-left:200px; padding:10px 0;">
+      <a href="index.html">
+        <img src="logo-texto.png" alt="Rental Security" style="height:88px; width:auto; display:block;" />
+      </a>
+      <img src="logo-full.png" alt="J&J Rental Security" style="height:72px; width:auto; display:block;" />
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="vehiculos.html">Vehículos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="clientes.html" class="active">Clientes</a>
+    </div>
+    <div class="hamburger" onclick="this.previousElementSibling.classList.toggle('open')"><i class="fas fa-bars"></i></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <h1>Nuestros <span>Clientes</span></h1>
+  <p>Empresas líderes de diferentes sectores confían en J&J Rental Security para su seguridad en movilidad.</p>
+</div>
+
+<!-- CLIENTS -->
+<section class="clients-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Nuestros Clientes</h2>
+      <p>Empresas líderes de diferentes sectores confían en JYJ Rental para su seguridad.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="clients-grid">
+      <div class="client-logo">Empresa A</div>
+      <div class="client-logo">Corporación B</div>
+      <div class="client-logo">Grupo C</div>
+      <div class="client-logo">Industrias D</div>
+      <div class="client-logo">Servicios E</div>
+      <div class="client-logo">Holdings F</div>
+      <div class="client-logo">Energy G</div>
+      <div class="client-logo">Logistics H</div>
+      <div class="client-logo">Capital I</div>
+      <div class="client-logo">Partners J</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <div class="container">
+    <h2>¿Quiere ser parte de nuestros <span>clientes</span>?</h2>
+    <p>Contáctenos hoy y diseñamos el plan de seguridad ideal para su empresa.</p>
+    <a href="index.html#cotizar" class="btn-cta"><i class="fas fa-paper-plane"></i> Solicitar Presupuesto</a>
+  </div>
+</div>
+
+
+<a href="https://wa.me/573004353879" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+</body>
+</html>
