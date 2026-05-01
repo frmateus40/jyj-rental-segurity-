@@ -1000,11 +1000,24 @@
       .slide-overlay { padding-top: 36px; }
       .quote-form { grid-template-columns: 1fr; }
       .nav-inner > div:first-child { margin-left: 8px !important; }
-      .footer-top { padding-left: 40px; }
-      .footer-bottom { padding-left: 40px; }
+      .footer-top { flex-direction: column; align-items: center; gap: 20px; padding: 20px 16px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 6px; padding: 12px 16px; }
+      .footer-col { width: 100%; }
+      .nosotros-top { grid-template-columns: 1fr; }
+      .services-two-col { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .cert-grid { gap: 16px; }
+      section { padding: 40px 16px; }
+      .quote-bar { padding: 32px 16px; }
+      .brands-row { gap: 12px; }
+      .brand-pill { padding: 16px 20px; min-width: 120px; }
     }
     @media (max-width: 480px) {
       .hero { height: 360px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .brand-pill { min-width: 100px; padding: 12px 14px; }
+      .nav-inner > div:first-child img:last-child { display: none; }
     }
   </style>
 </head>
