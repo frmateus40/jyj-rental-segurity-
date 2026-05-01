@@ -870,8 +870,8 @@
       color: rgba(255,255,255,0.8);
     }
     .footer-top {
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
       gap: 36px;
       padding: 28px 20px 18px;
       max-width: 1200px;
@@ -1376,28 +1376,37 @@
         <li><a href="#contacto"><i class="fas fa-location-dot" style="margin-right:6px;"></i>Av. Suba 115-58 Torre B 219, Bogotá</a></li>
         <li><a href="tel:+573004353879"><i class="fas fa-phone" style="margin-right:6px;"></i>300 435 3879</a></li>
         <li><a href="mailto:info@jyjvehiculosblindados.com"><i class="fas fa-envelope" style="margin-right:6px;"></i>jyjvehiculosblindados.com</a></li>
-        <li><a href="#contacto"><i class="fas fa-clock" style="margin-right:6px;"></i>Lun–Vie 8:00–17:30</a></li>
       </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Síguenos en redes</h4>
-      <div class="footer-social">
+      <div class="footer-social" style="margin-top:18px;">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
         <a href="#"><i class="fab fa-instagram"></i></a>
         <a href="#"><i class="fab fa-linkedin-in"></i></a>
         <a href="#"><i class="fab fa-twitter"></i></a>
       </div>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
+      <ul style="margin-top:16px;">
+        <li><a href="pqrs.html"><i class="fas fa-file-alt" style="margin-right:6px;"></i>PQRS</a></li>
         <li><a href="#">Política de privacidad</a></li>
         <li><a href="#">Términos de servicio</a></li>
-        <li></li>
         <li><a href="#">Trabaje con nosotros</a></li>
         <li><a href="#">Colaboradores</a></li>
         <li><a href="#">Proveedores</a></li>
       </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contáctenos</h4>
+      <form onsubmit="submitFooterContact(event)" style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+        <input type="text" placeholder="Su nombre" required
+          style="padding:8px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:12px;font-family:'Open Sans',sans-serif;outline:none;" />
+        <input type="email" placeholder="Su correo" required
+          style="padding:8px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:12px;font-family:'Open Sans',sans-serif;outline:none;" />
+        <textarea placeholder="Su mensaje" rows="3" required
+          style="padding:8px 10px;border-radius:4px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:#fff;font-size:12px;font-family:'Open Sans',sans-serif;resize:none;outline:none;"></textarea>
+        <button type="submit"
+          style="background:#2e8b57;color:#fff;border:none;padding:10px 16px;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;cursor:pointer;text-transform:uppercase;letter-spacing:0.5px;transition:background 0.2s;"
+          onmouseover="this.style.background='#256b45'" onmouseout="this.style.background='#2e8b57'">
+          <i class="fas fa-paper-plane" style="margin-right:6px;"></i>Enviar mensaje
+        </button>
+      </form>
     </div>
   </div>
   <div class="footer-bottom">
@@ -1507,6 +1516,12 @@
   function submitContact(e) {
     e.preventDefault();
     alert('¡Mensaje enviado! Nos pondremos en contacto con usted pronto. Gracias por comunicarse con JYJ Rental.');
+    e.target.reset();
+  }
+
+  function submitFooterContact(e) {
+    e.preventDefault();
+    alert('¡Gracias por contactarnos! Nos comunicaremos con usted a la brevedad.');
     e.target.reset();
   }
 
