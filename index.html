@@ -171,17 +171,54 @@
     .hero {
       position: relative;
       height: 600px;
-      overflow: hidden;
+      overflow: visible;
       background: #111;
       margin: 24px auto;
       max-width: 1300px;
       border-radius: 20px;
-      border: 2px solid #f2b705;
-      box-shadow: 0 0 0 4px rgba(242,183,5,0.15), 0 16px 56px rgba(0,0,0,0.6);
+      box-shadow: 0 16px 56px rgba(0,0,0,0.6);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 110px; height: 110px;
+      border-top: 3px solid #f2b705;
+      border-right: 3px solid #f2b705;
+      border-top-right-radius: 20px;
+      z-index: 10;
+      pointer-events: none;
+      animation: cornerDraw 2.5s ease-in-out infinite;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 110px; height: 110px;
+      border-bottom: 3px solid #f2b705;
+      border-left: 3px solid #f2b705;
+      border-bottom-left-radius: 20px;
+      z-index: 10;
+      pointer-events: none;
+      animation: cornerDraw 2.5s ease-in-out infinite 1.25s;
+    }
+    @keyframes cornerDraw {
+      0%, 100% {
+        width: 18px; height: 18px;
+        opacity: 0.35;
+        filter: drop-shadow(0 0 2px rgba(242,183,5,0.3));
+      }
+      45%, 55% {
+        width: 110px; height: 110px;
+        opacity: 1;
+        filter: drop-shadow(0 0 10px rgba(242,183,5,0.95)) drop-shadow(0 0 22px rgba(242,183,5,0.5));
+      }
     }
     .carousel-slides {
       display: flex;
       height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
       transition: transform 0.7s cubic-bezier(.4,0,.2,1);
     }
     .slide {
