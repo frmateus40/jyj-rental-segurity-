@@ -168,58 +168,83 @@
     /* ============================
        HERO CAROUSEL
     ============================ */
-    .hero {
+    .hero-wrap {
       position: relative;
-      height: 600px;
-      overflow: visible;
-      background: #111;
       margin: 24px auto;
       max-width: 1300px;
       border-radius: 20px;
-      box-shadow: 0 16px 56px rgba(0,0,0,0.6);
     }
-    .hero::before {
+    .hero-wrap::before {
       content: '';
       position: absolute;
       top: 0; right: 0;
       width: 110px; height: 110px;
-      border-top: 3px solid #f2b705;
-      border-right: 3px solid #f2b705;
+      border-top: 3px solid #FFD700;
+      border-right: 3px solid #FFD700;
       border-top-right-radius: 20px;
-      z-index: 10;
+      z-index: 20;
       pointer-events: none;
       animation: cornerDraw 2.5s ease-in-out infinite;
     }
-    .hero::after {
+    .hero-wrap::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0;
       width: 110px; height: 110px;
-      border-bottom: 3px solid #f2b705;
-      border-left: 3px solid #f2b705;
+      border-bottom: 3px solid #FFD700;
+      border-left: 3px solid #FFD700;
       border-bottom-left-radius: 20px;
-      z-index: 10;
+      z-index: 20;
       pointer-events: none;
       animation: cornerDraw 2.5s ease-in-out infinite 1.25s;
     }
     @keyframes cornerDraw {
       0%, 100% {
         width: 18px; height: 18px;
-        opacity: 0.35;
-        filter: drop-shadow(0 0 2px rgba(242,183,5,0.3));
+        opacity: 0.3;
+        filter: drop-shadow(0 0 3px rgba(255,215,0,0.4));
       }
       45%, 55% {
         width: 110px; height: 110px;
         opacity: 1;
-        filter: drop-shadow(0 0 10px rgba(242,183,5,0.95)) drop-shadow(0 0 22px rgba(242,183,5,0.5));
+        filter: drop-shadow(0 0 12px #FFD700) drop-shadow(0 0 28px rgba(255,215,0,0.8)) drop-shadow(0 0 4px #fff);
       }
+    }
+    .hero {
+      position: relative;
+      height: 600px;
+      overflow: hidden;
+      background: #111;
+      border-radius: 20px;
+      box-shadow: 0 16px 56px rgba(0,0,0,0.6);
     }
     .carousel-slides {
       display: flex;
       height: 100%;
-      border-radius: 20px;
-      overflow: hidden;
       transition: transform 0.7s cubic-bezier(.4,0,.2,1);
+    }
+    .carousel-playpause {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.55);
+      border: 2px solid #FFD700;
+      color: #FFD700;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      font-size: 17px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 10px rgba(255,215,0,0.3);
+    }
+    .carousel-playpause:hover {
+      background: rgba(255,215,0,0.15);
+      transform: translateX(-50%) scale(1.12);
+      box-shadow: 0 0 18px rgba(255,215,0,0.6);
     }
     .slide {
       min-width: 100%;
@@ -1130,6 +1155,7 @@
 </nav>
 
 <!-- HERO CAROUSEL -->
+<div class="hero-wrap">
 <section class="hero" id="inicio">
   <div class="carousel-slides" id="carouselSlides">
     <div class="slide slide-1">
@@ -1210,24 +1236,11 @@
   </div>
   <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
   <button class="carousel-btn carousel-next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
-  <div class="carousel-dots">
-    <div class="dot active" onclick="goToSlide(0)"></div>
-    <div class="dot" onclick="goToSlide(1)"></div>
-    <div class="dot" onclick="goToSlide(2)"></div>
-    <div class="dot" onclick="goToSlide(3)"></div>
-    <div class="dot" onclick="goToSlide(4)"></div>
-    <div class="dot" onclick="goToSlide(5)"></div>
-    <div class="dot" onclick="goToSlide(6)"></div>
-    <div class="dot" onclick="goToSlide(7)"></div>
-    <div class="dot" onclick="goToSlide(8)"></div>
-    <div class="dot" onclick="goToSlide(9)"></div>
-    <div class="dot" onclick="goToSlide(10)"></div>
-    <div class="dot" onclick="goToSlide(11)"></div>
-    <div class="dot" onclick="goToSlide(12)"></div>
-    <div class="dot" onclick="goToSlide(13)"></div>
-    <div class="dot" onclick="goToSlide(14)"></div>
-  </div>
+  <button class="carousel-playpause" onclick="togglePlayPause()" title="Play / Pausa">
+    <i class="fas fa-pause" id="playPauseIcon"></i>
+  </button>
 </section>
+</div>
 
 <!-- QUOTE FORM -->
 <div class="quote-bar" id="cotizar">
@@ -1525,31 +1538,41 @@
 <script>
   // ---- CAROUSEL ----
   let currentSlide = 0;
-  const totalSlides = 8;
+  const totalSlides = 15;
   let autoplayTimer;
+  let isPlaying = true;
 
   function updateCarousel() {
     document.getElementById('carouselSlides').style.transform = `translateX(-${currentSlide * 100}%)`;
-    document.querySelectorAll('.dot').forEach((d, i) => {
-      d.classList.toggle('active', i === currentSlide);
-    });
   }
 
   function changeSlide(dir) {
     currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
     updateCarousel();
-    resetAutoplay();
+    if (isPlaying) resetAutoplay();
   }
 
   function goToSlide(idx) {
     currentSlide = idx;
     updateCarousel();
-    resetAutoplay();
+    if (isPlaying) resetAutoplay();
   }
 
   function resetAutoplay() {
     clearInterval(autoplayTimer);
     autoplayTimer = setInterval(() => changeSlide(1), 5000);
+  }
+
+  function togglePlayPause() {
+    isPlaying = !isPlaying;
+    const icon = document.getElementById('playPauseIcon');
+    if (isPlaying) {
+      icon.className = 'fas fa-pause';
+      resetAutoplay();
+    } else {
+      icon.className = 'fas fa-play';
+      clearInterval(autoplayTimer);
+    }
   }
 
   resetAutoplay();
