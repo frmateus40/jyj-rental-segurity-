@@ -669,14 +669,36 @@
       text-align: center;
       padding: 36px 24px;
       border-radius: 10px;
-      background: #e00000;
+      background: #111111;
+      position: relative;
       transition: transform 0.2s, box-shadow 0.2s;
+      overflow: visible;
     }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(224,0,0,0.35); }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(255,255,255,0.08); }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      border-top: 2px solid #fff;
+      border-right: 2px solid #fff;
+      border-top-right-radius: 10px;
+      pointer-events: none;
+      animation: cornerDraw 2.5s ease-in-out infinite;
+    }
+    .feature-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      border-bottom: 2px solid #fff;
+      border-left: 2px solid #fff;
+      border-bottom-left-radius: 10px;
+      pointer-events: none;
+      animation: cornerDraw 2.5s ease-in-out infinite 1.25s;
+    }
     .feature-icon {
       width: 90px;
       height: 90px;
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -1091,7 +1113,7 @@
     /* ============================
        RESPONSIVE
     ============================ */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
       .nav-links.open {
@@ -1105,6 +1127,8 @@
         padding: 16px;
         box-shadow: 0 8px 24px rgba(0,0,0,0.5);
       }
+    }
+    @media (max-width: 768px) {
       .hero { height: 320px; margin: 12px; border-radius: 14px; }
       .slide-car { height: 70%; }
       .slide-overlay { padding-top: 36px; }
@@ -1399,8 +1423,8 @@
   <div class="container">
 
     <div class="section-title" style="margin-top:0;">
-      <h2>¿Por qué elegir J&J Rental?</h2>
-      <p>Ofrecemos los más altos estándares de calidad, protección y confiabilidad en cada servicio.</p>
+      <h2 style="color:#ffffff;">¿Por qué elegir J&J Rental?</h2>
+      <p style="color:#ffffff;">Ofrecemos los más altos estándares de calidad, protección y confiabilidad en cada servicio.</p>
       <div class="divider"></div>
     </div>
     <div class="features-grid">
