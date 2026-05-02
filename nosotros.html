@@ -9,15 +9,15 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Open Sans', sans-serif; color: #cccccc; background: #000000; }
+    body { font-family: 'Open Sans', sans-serif; color: #ffffff; background: #0d0d0d; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
 
     :root {
       --navy: #0d2c54;
       --blue: #1a4f8a;
-      --green: #2e8b57;
-      --green-hover: #256b45;
+      --green: #f2b705;
+      --green-hover: #d4a004;
       --light-gray: #f5f7fa;
       --white: #ffffff;
     }
@@ -40,20 +40,25 @@
       justify-content: space-between;
       height: 110px;
     }
-    .nav-links { display: flex; gap: 36px; }
+    .nav-links {
+      display: flex; gap: 52px;
+      position: absolute; left: calc(50% + 250px);
+      transform: translateX(-50%);
+    }
     .nav-links a {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 600;
-      font-size: 13px;
+      font-weight: 900;
+      font-size: 15px;
       color: #fff;
-      background: #c0392b;
+      background: transparent;
       padding: 8px 16px;
       border-radius: 4px;
-      transition: background 0.2s, color 0.2s;
+      transition: color 0.2s;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .nav-links a:hover, .nav-links a.active { background: #96281b; color: #fff; }
+    .nav-links a:hover { background: transparent; color: #c0392b; }
+    .nav-links a.active { background: transparent; color: #c0392b; }
     .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -97,7 +102,7 @@
       font-family: 'Montserrat', sans-serif;
       font-size: clamp(28px, 5vw, 52px);
       font-weight: 800;
-      color: #fff;
+      color: #f2b705;
       text-transform: uppercase;
       letter-spacing: 2px;
       position: relative;
@@ -105,7 +110,7 @@
     }
     .page-hero h1 span { color: #e83232; }
     .page-hero p {
-      color: rgba(255,255,255,0.75);
+      color: #e6e6e6;
       font-size: 16px;
       margin-top: 14px;
       position: relative;
@@ -121,7 +126,7 @@
       position: relative;
       z-index: 1;
     }
-    .breadcrumb a { color: #4fc88e; }
+    .breadcrumb a { color: #f2b705; }
     .breadcrumb span { color: rgba(255,255,255,0.4); }
 
     /* SECTIONS */
