@@ -13,7 +13,7 @@
     ============================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Open Sans', sans-serif; color: #cccccc; background: #000000; }
+    body { font-family: 'Open Sans', sans-serif; color: #ffffff; background: #0d0d0d; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
     ul { list-style: none; }
@@ -24,8 +24,8 @@
     :root {
       --navy: #0d2c54;
       --blue: #1a4f8a;
-      --green: #2e8b57;
-      --green-hover: #256b45;
+      --green: #f2b705;
+      --green-hover: #d4a004;
       --light-gray: #111111;
       --mid-gray: #333333;
       --text: #cccccc;
@@ -108,15 +108,15 @@
       font-weight: 600;
       font-size: 13px;
       color: #fff;
-      background: #c0392b;
+      background: transparent;
       padding: 8px 16px;
       border-radius: 4px;
-      transition: background 0.2s, color 0.2s;
+      transition: color 0.2s;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .nav-links a:hover { background: #96281b; color: #fff; }
-    .nav-links a.active { background: #96281b; }
+    .nav-links a:hover { background: transparent; color: #c0392b; }
+    .nav-links a.active { background: transparent; color: #c0392b; }
     .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
 
     /* Dropdown Clientes */
@@ -156,11 +156,11 @@
       display: flex; align-items: center; justify-content: center;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700; font-size: 11px;
-      color: #cccccc; text-transform: uppercase; letter-spacing: 0.5px;
+      color: #e6e6e6; text-transform: uppercase; letter-spacing: 0.5px;
       border: 1px solid #333333;
       transition: border-color 0.2s, color 0.2s, background 0.2s;
     }
-    .dropdown-client:hover { border-color: var(--green); color: #ffffff; background: #222222; }
+    .dropdown-client:hover { border-color: #f2b705; color: #ffffff; background: #222222; }
 
     /* ============================
        HERO CAROUSEL
@@ -225,7 +225,7 @@
       margin-bottom: 12px;
       text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 1px 3px rgba(0,0,0,0.9);
     }
-    .slide-content h1 span { color: #4fc88e; }
+    .slide-content h1 span { color: #f2b705; }
     .slide-content p {
       font-size: clamp(13px, 1.8vw, 17px);
       margin-bottom: 22px;
@@ -252,7 +252,7 @@
       letter-spacing: 1.5px;
       text-shadow: 0 2px 10px rgba(0,0,0,0.7);
     }
-    .slide-tagline span { color: #4fc88e; }
+    .slide-tagline span { color: #f2b705; }
 
     .slide-overlay-light {
       background: none !important;
@@ -268,7 +268,7 @@
     .btn-hero {
       display: inline-block;
       background: var(--green);
-      color: #fff;
+      color: #000000;
       padding: 14px 36px;
       border-radius: 4px;
       font-family: 'Montserrat', sans-serif;
@@ -313,13 +313,13 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    .dot.active { background: #fff; }
+    .dot.active { background: #f2b705; }
 
     /* ============================
        QUOTE FORM BAR
     ============================ */
     .quote-bar {
-      background: #0d0d0d;
+      background: #1a1a1a;
       padding: 50px 20px;
     }
     .quote-bar .container { max-width: 1100px; margin: 0 auto; }
@@ -358,14 +358,14 @@
       border: 1px solid #333333;
       border-radius: 6px;
       background: #111111;
-      color: #cccccc;
+      color: #e6e6e6;
       font-size: 13px;
       font-family: 'Open Sans', sans-serif;
       outline: none;
       transition: border .2s, box-shadow .2s;
     }
     .quote-form input::placeholder { color: #888; }
-    .quote-form select option { background: #111111; color: #cccccc; }
+    .quote-form select option { background: #111111; color: #e6e6e6; }
     .quote-form input:focus,
     .quote-form select:focus { border-color: #c0392b; box-shadow: 0 0 0 3px rgba(192,57,43,0.1); }
     .quote-form-full { grid-column: 1 / -1; }
@@ -393,11 +393,11 @@
       font-family: 'Montserrat', sans-serif;
       font-size: clamp(22px, 3vw, 34px);
       font-weight: 800;
-      color: #ffffff;
+      color: #f2b705;
       text-transform: uppercase;
       margin-bottom: 12px;
     }
-    .section-title p { color: #cccccc; font-size: 15px; max-width: 600px; margin: 0 auto; }
+    .section-title p { color: #e6e6e6; font-size: 15px; max-width: 600px; margin: 0 auto; }
     .divider {
       width: 60px;
       height: 4px;
@@ -409,7 +409,7 @@
     /* ============================
        VEHICLES
     ============================ */
-    .vehicles { background: #000000; }
+    .vehicles { background: #1a1a1a; }
     .vehicles-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -462,7 +462,7 @@
       color: #ffffff;
       margin-bottom: 4px;
     }
-    .vehicle-info .brand { color: #cccccc; font-size: 13px; margin-bottom: 12px; }
+    .vehicle-info .brand { color: #e6e6e6; font-size: 13px; margin-bottom: 12px; }
     .vehicle-specs {
       display: flex;
       gap: 12px;
@@ -474,7 +474,7 @@
       align-items: center;
       gap: 5px;
       font-size: 12px;
-      color: #cccccc;
+      color: #e6e6e6;
     }
     .spec i { color: var(--green); }
     .btn-vehicle {
@@ -538,17 +538,17 @@
       font-family: 'Montserrat', sans-serif;
       font-size: clamp(22px, 2.5vw, 34px);
       font-weight: 800;
-      color: #fff;
+      color: #f2b705;
       text-transform: uppercase;
       margin-bottom: 0;
     }
     .nosotros-intro p {
-      color: rgba(255,255,255,0.85);
+      color: #e6e6e6;
       font-size: 15px;
       line-height: 1.8;
       margin-bottom: 12px;
     }
-    .nosotros-intro strong { color: #4fc88e; }
+    .nosotros-intro strong { color: #f2b705; }
 
     /* ── BRAND LOGOS ROW ── */
     .brands-row {
@@ -574,15 +574,15 @@
       min-width: 160px;
     }
     .brand-pill:hover {
-      border-color: var(--green);
-      box-shadow: 0 8px 28px rgba(46,139,87,.2);
+      border-color: #f2b705;
+      box-shadow: 0 8px 28px rgba(242,183,5,.2);
       transform: translateY(-5px);
     }
     .brand-pill span {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 12px;
-      color: #cccccc;
+      color: #e6e6e6;
       text-transform: uppercase;
       letter-spacing: 1.5px;
     }
@@ -631,7 +631,7 @@
     .service-list { background: var(--navy); }
     .service-list .section-title h2 { color: #fff; }
     .service-list .section-title p { color: rgba(255,255,255,0.7); }
-    .service-list .divider { background: #4fc88e; }
+    .service-list .divider { background: #f2b705; }
     .services-two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -663,7 +663,7 @@
       line-height: 1.6;
     }
     .service-item i {
-      color: #4fc88e;
+      color: #f2b705;
       font-size: 18px;
       margin-top: 2px;
       flex-shrink: 0;
@@ -672,7 +672,7 @@
     /* ============================
        CERTIFICATIONS
     ============================ */
-    .certifications { background: #0d0d0d; }
+    .certifications { background: #1a1a1a; }
     .cert-grid {
       display: flex;
       gap: 32px;
@@ -705,7 +705,7 @@
     .cert-badge.iso45001 { background: #c0392b; }
     .cert-label {
       font-size: 11px;
-      color: #cccccc;
+      color: #e6e6e6;
       text-align: center;
       max-width: 120px;
       font-weight: 600;
@@ -732,16 +732,16 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 13px;
-      color: #cccccc;
+      color: #e6e6e6;
       border: 1px solid #333333;
       transition: border-color 0.2s, color 0.2s;
     }
-    .client-logo:hover { border-color: var(--green); color: #ffffff; }
+    .client-logo:hover { border-color: #f2b705; color: #ffffff; }
 
     /* ============================
        BLOG
     ============================ */
-    .blog { background: #0d0d0d; }
+    .blog { background: #1a1a1a; }
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -766,7 +766,7 @@
     .blog-img-2 { background: linear-gradient(135deg, #1a3a1a, #2e8b57); color: rgba(255,255,255,0.3); }
     .blog-img-3 { background: linear-gradient(135deg, #3a1a1a, #8b2e2e); color: rgba(255,255,255,0.3); }
     .blog-body { padding: 22px; }
-    .blog-date { font-size: 11px; color: var(--green); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .blog-date { font-size: 11px; color: #f2b705; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
     .blog-body h4 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
@@ -775,9 +775,9 @@
       margin-bottom: 10px;
       line-height: 1.4;
     }
-    .blog-body p { color: #cccccc; font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
+    .blog-body p { color: #e6e6e6; font-size: 13px; line-height: 1.7; margin-bottom: 16px; }
     .btn-blog {
-      color: var(--green);
+      color: #f2b705;
       font-weight: 700;
       font-size: 13px;
       font-family: 'Montserrat', sans-serif;
@@ -791,7 +791,7 @@
     /* ============================
        CONTACT
     ============================ */
-    .contact { background: #000000; }
+    .contact { background: #1a1a1a; }
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -802,7 +802,7 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 20px;
-      color: #ffffff;
+      color: #f2b705;
       margin-bottom: 24px;
       text-transform: uppercase;
     }
@@ -819,13 +819,13 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
-    .contact-item div { font-size: 14px; color: #cccccc; line-height: 1.7; }
-    .contact-item strong { display: block; color: #ffffff; font-weight: 600; margin-bottom: 2px; }
+    .contact-item div { font-size: 14px; color: #e6e6e6; line-height: 1.7; }
+    .contact-item strong { display: block; color: #f2b705; font-weight: 600; margin-bottom: 2px; }
     .contact-form-wrap h3 {
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 20px;
-      color: #ffffff;
+      color: #f2b705;
       margin-bottom: 24px;
       text-transform: uppercase;
     }
@@ -841,7 +841,7 @@
       outline: none;
       transition: border 0.2s;
       background: #111111;
-      color: #cccccc;
+      color: #e6e6e6;
     }
     .contact-form input:focus,
     .contact-form textarea:focus,
@@ -849,7 +849,7 @@
     .contact-form textarea { min-height: 120px; resize: vertical; }
     .btn-contact {
       background: var(--green);
-      color: #fff;
+      color: #000000;
       border: none;
       padding: 14px;
       border-radius: 4px;
@@ -919,7 +919,7 @@
       gap: 6px;
       justify-content: center;
     }
-    .footer-col ul li a:hover { color: #4fc88e; }
+    .footer-col ul li a:hover { color: #f2b705; }
     .footer-col ul li a::before { content: '›'; color: var(--green); }
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,0.1);
@@ -973,7 +973,7 @@
     .contact-modal textarea::placeholder { color: rgba(255,255,255,0.4); }
     .contact-modal textarea { resize: none; }
     .contact-modal button[type="submit"] {
-      width: 100%; background: var(--green); color: #fff; border: none;
+      width: 100%; background: var(--green); color: #000000; border: none;
       padding: 12px; border-radius: 6px; font-family: 'Montserrat',sans-serif;
       font-weight: 700; font-size: 13px; text-transform: uppercase;
       letter-spacing: 0.5px; cursor: pointer; transition: background .2s;
@@ -1014,7 +1014,7 @@
       font-size: 40px;
       font-weight: 800;
       line-height: 1;
-      color: #4fc88e;
+      color: #f2b705;
     }
     .stat-label { font-size: 13px; margin-top: 6px; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.5px; }
 
@@ -1088,7 +1088,7 @@
 <section class="hero" id="inicio">
   <div class="carousel-slides" id="carouselSlides">
     <div class="slide slide-1">
-      <img src="prado.png" class="slide-car" alt="Toyota Prado TXL 2026" />
+      <img src="prado-nueva.jpg.jpeg" class="slide-car" alt="Toyota Prado TXL 2026" style="object-fit:cover;" />
       <div class="slide-overlay"></div>
       <div class="slide-tagline">Garantizamos confianza, calidad y <span>SEGURIDAD DE ALTO NIVEL.</span></div>
     </div>
@@ -1327,7 +1327,7 @@
         text-decoration: none;
         transition: background .2s, transform .2s;
         box-shadow: 0 4px 16px rgba(13,44,84,.2);
-      " onmouseover="this.style.background='#2e8b57';this.style.transform='translateY(-2px)'"
+      " onmouseover="this.style.background='#f2b705';this.style.transform='translateY(-2px)'"
          onmouseout="this.style.background='#0d2c54';this.style.transform='translateY(0)'">
         <i class="fas fa-car-side"></i> Ver Vehículos
       </a>
@@ -1439,7 +1439,7 @@
         <li><a href="#">Trabaje con nosotros</a></li>
         <li><a href="#">Colaboradores</a></li>
         <li><a href="#">Proveedores</a></li>
-        <li><a href="#" onclick="openContactModal(event)" style="color:#4fc88e;font-weight:700;"><i class="fas fa-envelope" style="margin-right:6px;"></i>Contáctenos</a></li>
+        <li><a href="#" onclick="openContactModal(event)" style="color:#f2b705;font-weight:700;"><i class="fas fa-envelope" style="margin-right:6px;"></i>Contáctenos</a></li>
       </ul>
     </div>
   </div>
@@ -1453,7 +1453,7 @@
 <div class="contact-modal-overlay" id="contactModal">
   <div class="contact-modal">
     <button class="contact-modal-close" onclick="closeContactModal()"><i class="fas fa-times"></i></button>
-    <h3><i class="fas fa-envelope" style="margin-right:8px;color:#4fc88e;"></i>Contáctenos</h3>
+    <h3><i class="fas fa-envelope" style="margin-right:8px;color:#f2b705;"></i>Contáctenos</h3>
     <form onsubmit="submitFooterContact(event)">
       <input type="text" placeholder="Su nombre" required />
       <input type="email" placeholder="Su correo electrónico" required />
