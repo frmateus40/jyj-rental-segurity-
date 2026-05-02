@@ -210,6 +210,18 @@
         filter: drop-shadow(0 0 12px rgba(242,183,5,1)) drop-shadow(0 0 28px rgba(242,183,5,0.6));
       }
     }
+    @keyframes cornerDrawMobile {
+      0%, 100% {
+        width: 12px; height: 12px;
+        opacity: 0.3;
+        filter: drop-shadow(0 0 3px rgba(242,183,5,0.4));
+      }
+      45%, 55% {
+        width: 60px; height: 60px;
+        opacity: 1;
+        filter: drop-shadow(0 0 10px rgba(242,183,5,1)) drop-shadow(0 0 20px rgba(242,183,5,0.6));
+      }
+    }
     @keyframes cornerDrawCard {
       0%, 100% {
         width: 14px; height: 14px;
@@ -1143,7 +1155,10 @@
       }
     }
     @media (max-width: 768px) {
-      .hero { height: 320px; margin: 12px; border-radius: 14px; }
+      .hero-wrap { margin: 16px 22px; }
+      .hero-wrap::before { animation: cornerDrawMobile 2.5s ease-in-out infinite; border-top-right-radius: 14px; }
+      .hero-wrap::after { animation: cornerDrawMobile 2.5s ease-in-out infinite 1.25s; border-bottom-left-radius: 14px; }
+      .hero { height: 300px; margin: 0; border-radius: 14px; }
       .slide-car { height: 70%; }
       .slide-overlay { padding-top: 36px; }
       .quote-form { grid-template-columns: 1fr; }
@@ -1169,7 +1184,8 @@
       .brand-pill { padding: 16px 20px; min-width: 120px; }
     }
     @media (max-width: 480px) {
-      .hero { height: 260px; }
+      .hero-wrap { margin: 12px 16px; }
+      .hero { height: 240px; }
       .features-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2,1fr); }
       .brand-pill { min-width: 100px; padding: 12px 14px; }
@@ -1189,7 +1205,7 @@
              srcset="logo-nuevo.png 1x, logo-nuevo@2x.png 2x"
              alt="J&J Rental Security"
              width="200" height="133"
-             style="height:90px; width:auto; display:block;" />
+             style="height:105px; width:auto; display:block;" />
       </a>
     </div>
     <div class="nav-links" id="navLinks">
