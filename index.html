@@ -703,21 +703,23 @@
       content: '';
       position: absolute;
       top: 0; right: 0;
-      border-top: 2px solid #f2b705;
-      border-right: 2px solid #f2b705;
+      width: 52px; height: 52px;
+      border-top: 3px solid #f2b705;
+      border-right: 3px solid #f2b705;
       border-top-right-radius: 10px;
       pointer-events: none;
-      animation: cornerDrawCard 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px rgba(242,183,5,1)) drop-shadow(0 0 14px rgba(242,183,5,0.7));
     }
     .feature-card::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0;
-      border-bottom: 2px solid #f2b705;
-      border-left: 2px solid #f2b705;
+      width: 52px; height: 52px;
+      border-bottom: 3px solid #f2b705;
+      border-left: 3px solid #f2b705;
       border-bottom-left-radius: 10px;
       pointer-events: none;
-      animation: cornerDrawCard 2.5s ease-in-out infinite 1.25s;
+      filter: drop-shadow(0 0 6px rgba(242,183,5,1)) drop-shadow(0 0 14px rgba(242,183,5,0.7));
     }
     .feature-icon {
       width: 90px;
