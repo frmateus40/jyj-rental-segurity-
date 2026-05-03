@@ -887,21 +887,24 @@
     ============================ */
     .certifications { background: #080808; }
     .cert-grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 32px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
+      justify-items: center;
+      align-items: start;
     }
+    @media (max-width: 900px) { .cert-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+    @media (max-width: 480px) { .cert-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
     .cert-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
+      text-align: center;
     }
     .cert-badge {
-      width: 110px;
-      height: 110px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -913,17 +916,24 @@
       text-align: center;
       line-height: 1.2;
     }
-    .cert-badge.iso9001 { background: #111; border: 2px solid var(--green); }
-    .cert-badge.iso14001 { background: #111; border: 2px solid var(--green); color: var(--green); }
-    .cert-badge.iso45001 { background: #111; border: 2px solid var(--red); }
+    .cert-badge.iso9001  { background: #0a1628; border: 3px solid var(--green); box-shadow: 0 0 24px rgba(201,164,76,0.3); }
+    .cert-badge.iso14001 { background: #0a1a0a; border: 3px solid #4caf50; color: #4caf50; box-shadow: 0 0 24px rgba(76,175,80,0.3); }
+    .cert-badge.iso45001 { background: #1a0a0a; border: 3px solid var(--red); box-shadow: 0 0 24px rgba(211,47,47,0.3); }
+    .cert-badge.nij      { background: #0d0d1a; border: 3px solid #5c6bc0; color: #7986cb; box-shadow: 0 0 24px rgba(92,107,192,0.3); }
     .cert-label {
-      font-size: 11px;
+      font-size: 13px;
       color: #ffffff;
-      text-align: center;
-      max-width: 120px;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .cert-desc {
+      font-size: 11px;
+      color: #888;
+      text-align: center;
+      max-width: 140px;
+      line-height: 1.5;
     }
 
     /* ============================
@@ -1618,18 +1628,22 @@
       <div class="cert-item">
         <div class="cert-badge iso9001">ISO<br>9001</div>
         <div class="cert-label">Gestión de Calidad</div>
+        <div class="cert-desc">Sistema de gestión de calidad certificado internacionalmente</div>
       </div>
       <div class="cert-item">
         <div class="cert-badge iso14001">ISO<br>14001</div>
         <div class="cert-label">Gestión Ambiental</div>
+        <div class="cert-desc">Compromiso con el medio ambiente y la sostenibilidad</div>
       </div>
       <div class="cert-item">
         <div class="cert-badge iso45001">ISO<br>45001</div>
         <div class="cert-label">Seguridad y Salud</div>
+        <div class="cert-desc">Gestión de seguridad y salud en el trabajo</div>
       </div>
       <div class="cert-item">
-        <div class="cert-badge" style="background:#111;border:2px solid #d32f2f;">NIJ<br>0108</div>
-        <div class="cert-label">Certificación de Blindaje</div>
+        <div class="cert-badge nij">NIJ<br>0108</div>
+        <div class="cert-label">Blindaje Certificado</div>
+        <div class="cert-desc">Estándar internacional de certificación en blindaje balístico</div>
       </div>
     </div>
   </div>
