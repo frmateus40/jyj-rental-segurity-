@@ -1410,8 +1410,11 @@
 
   </div>
 
-  <!-- Controles: adelantar | pausar (centro) | rápido -->
+  <!-- Controles: atrás | adelantar | pausar (centro) | rápido -->
   <div class="carousel-controls">
+    <button class="car-ctrl-btn" onclick="window.goToSlide(window._carCurrent - 1)" title="Atrás">
+      <i class="fas fa-backward-step"></i>
+    </button>
     <button class="car-ctrl-btn" onclick="window.goToSlide(window._carCurrent + 1)" title="Adelantar">
       <i class="fas fa-forward-step"></i>
     </button>
