@@ -321,9 +321,16 @@
     }
     .slide-1-caption .btn-ver:hover { background: #b71c1c; transform: translateY(-2px); }
     @media (max-width: 768px) {
-      .slide-1-caption { right: 20px; left: auto; bottom: 48px; }
-      .slide-1-caption h2 { font-size: 32px; letter-spacing: 3px; }
-      .slide-1-caption p { font-size: 12px; }
+      .slide-1-caption { right: 12px; left: auto; bottom: 20px; }
+      .slide-1-caption h2 { font-size: 18px; letter-spacing: 2px; margin-bottom: 4px; }
+      .slide-1-caption p { font-size: 10px; margin-bottom: 8px; }
+      .slide-1-caption .btn-ver { font-size: 10px; padding: 7px 14px; }
+    }
+    @media (max-width: 480px) {
+      .slide-1-caption { right: 8px; bottom: 14px; }
+      .slide-1-caption h2 { font-size: 15px; letter-spacing: 1px; }
+      .slide-1-caption p { font-size: 9px; }
+      .slide-1-caption .btn-ver { font-size: 9px; padding: 5px 11px; }
     }
 
     .slide-1 .slide-car, .slide-2 .slide-car {
@@ -1260,15 +1267,17 @@
       .stat-num { font-size: 28px; }
       .cert-badge { width: 80px; height: 80px; font-size: 15px; }
       .cert-label { font-size: 10px; }
-      .brands-row { gap: 12px; }
-      .brand-pill { padding: 16px 20px; min-width: 120px; }
+      .brands-row { gap: 14px; }
+      .brand-pill { padding: 12px; min-width: 130px; }
+      .brand-pill-img img { height: 100px !important; }
     }
     @media (max-width: 480px) {
       .hero-wrap { margin: 0; }
       .hero { height: 40vh; min-height: 220px; }
       .features-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2,1fr); }
-      .brand-pill { min-width: 100px; padding: 12px 14px; }
+      .brand-pill { min-width: 110px; padding: 10px; }
+      .brand-pill-img img { height: 80px !important; }
       .nav-inner > div:first-child img { height: 78px !important; max-width: none; }
     }
 
