@@ -170,9 +170,9 @@
     ============================ */
     .hero-wrap {
       position: relative;
-      margin: 24px auto;
-      max-width: 1300px;
-      border-radius: 20px;
+      margin: 20px 0;
+      max-width: 100%;
+      border-radius: 0;
     }
     .hero-wrap::before {
       content: '';
@@ -181,7 +181,7 @@
       width: 110px; height: 110px;
       border-top: 3px solid #f2b705;
       border-right: 3px solid #f2b705;
-      border-top-right-radius: 20px;
+      border-top-right-radius: 0;
       z-index: 20;
       pointer-events: none;
       animation: cornerDraw 2.5s ease-in-out infinite;
@@ -193,7 +193,7 @@
       width: 110px; height: 110px;
       border-bottom: 3px solid #f2b705;
       border-left: 3px solid #f2b705;
-      border-bottom-left-radius: 20px;
+      border-bottom-left-radius: 0;
       z-index: 20;
       pointer-events: none;
       animation: cornerDraw 2.5s ease-in-out infinite 1.25s;
@@ -236,10 +236,10 @@
     }
     .hero {
       position: relative;
-      height: 600px;
+      height: 720px;
       overflow: hidden;
       background: #111;
-      border-radius: 20px;
+      border-radius: 0;
       box-shadow: 0 16px 56px rgba(0,0,0,0.6);
     }
     .carousel-slides {
@@ -1159,10 +1159,10 @@
       .nav-inner > div:first-child img { height: 80px !important; max-width: none; }
     }
     @media (max-width: 768px) {
-      .hero-wrap { margin: 16px 22px; }
-      .hero-wrap::before { animation: cornerDrawMobile 2.5s ease-in-out infinite; border-top-right-radius: 14px; }
-      .hero-wrap::after { animation: cornerDrawMobile 2.5s ease-in-out infinite 1.25s; border-bottom-left-radius: 14px; }
-      .hero { height: 300px; margin: 0; border-radius: 14px; }
+      .hero-wrap { margin: 0; }
+      .hero-wrap::before { animation: cornerDrawMobile 2.5s ease-in-out infinite; border-top-right-radius: 0; }
+      .hero-wrap::after { animation: cornerDrawMobile 2.5s ease-in-out infinite 1.25s; border-bottom-left-radius: 0; }
+      .hero { height: 420px; margin: 0; border-radius: 0; }
       .slide-overlay { padding-top: 36px; }
       .quote-form { grid-template-columns: 1fr; }
       .footer-top { flex-direction: column; align-items: center; gap: 20px; padding: 20px 16px; }
@@ -1186,8 +1186,8 @@
       .brand-pill { padding: 16px 20px; min-width: 120px; }
     }
     @media (max-width: 480px) {
-      .hero-wrap { margin: 12px 16px; }
-      .hero { height: 240px; }
+      .hero-wrap { margin: 0; }
+      .hero { height: 320px; }
       .features-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2,1fr); }
       .brand-pill { min-width: 100px; padding: 12px 14px; }
@@ -1226,7 +1226,7 @@
 <section class="hero" id="inicio">
   <div class="carousel-slides" id="carouselSlides">
     <div class="slide slide-1">
-      <img src="nueva.jpg" class="slide-car" alt="Flota Blindada JYJ Rental Security" style="object-fit:cover; object-position:center center;" />
+      <img src="nueva.jpg" class="slide-car" alt="Flota Blindada JYJ Rental Security" />
       <div class="slide-overlay"></div>
       <div class="slide-tagline">FLOTA BLINDADA</div>
     </div>
