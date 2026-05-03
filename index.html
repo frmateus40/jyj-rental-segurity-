@@ -340,6 +340,16 @@
       filter: none;
     }
     .slide-1 .slide-overlay, .slide-2 .slide-overlay { background: none !important; }
+    .slide::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: radial-gradient(ellipse at center,
+        rgba(0,0,0,0) 38%,
+        rgba(0,0,0,0.60) 100%);
+      pointer-events: none;
+    }
     /* Banda oscura solo arriba para que el texto se lea */
     .slide-overlay {
       position: absolute;
