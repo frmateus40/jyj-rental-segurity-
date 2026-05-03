@@ -497,7 +497,10 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
     }
-    @media(max-width: 768px) { .quote-form { grid-template-columns: 1fr; } }
+    @media(max-width: 768px) {
+      .quote-form { grid-template-columns: 1fr; }
+      .quote-form-full, .btn-quote { width: 100% !important; max-width: 100% !important; }
+    }
     @media(max-width: 1024px) and (min-width: 769px) { .quote-form { grid-template-columns: repeat(2, 1fr); } }
     .quote-form-label {
       display: flex; flex-direction: column; gap: 6px;
@@ -524,7 +527,7 @@
     .quote-form select option { background: #111111; color: #e6e6e6; }
     .quote-form input:focus,
     .quote-form select:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(211,47,47,0.15); }
-    .quote-form-full { grid-column: 1 / -1; }
+    .quote-form-full { grid-column: 1 / -1; width: 100%; }
     .btn-quote {
       background: var(--red);
       color: #fff; border: none;
