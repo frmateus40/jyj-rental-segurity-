@@ -472,30 +472,6 @@
       box-shadow: 0 3px 14px rgba(211,47,47,0.6);
     }
     .car-ctrl-btn.fast-active { background: #b71c1c; box-shadow: 0 0 14px rgba(211,47,47,0.8); }
-    .carousel-dots {
-      position: absolute;
-      bottom: 22px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 5px;
-      z-index: 200;
-      pointer-events: all;
-    }
-    .dot {
-      width: 26px; height: 4px;
-      border-radius: 2px;
-      background: rgba(255,255,255,0.55);
-      cursor: pointer;
-      transition: background 0.3s, width 0.3s;
-      pointer-events: all;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.6);
-    }
-    .dot.active {
-      background: #d32f2f;
-      width: 48px;
-      box-shadow: 0 1px 8px rgba(211,47,47,0.7);
-    }
 
     /* ============================
        QUOTE FORM BAR
@@ -1447,11 +1423,6 @@
     </button>
   </div>
 
-  <!-- Dots (líneas) -->
-  <div class="carousel-dots" id="carouselDots">
-    <div class="dot active" onclick="goToSlide(0)"></div>
-    <div class="dot" onclick="goToSlide(1)"></div>
-  </div>
 </section>
 </div>
 
