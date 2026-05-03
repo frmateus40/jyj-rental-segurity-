@@ -62,7 +62,7 @@
     nav {
       background: #000000;
       box-shadow: none;
-      border-bottom: 1px solid #222;
+      border-bottom: none;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -173,7 +173,7 @@
     ============================ */
     .hero-wrap {
       position: relative;
-      margin: 20px 0;
+      margin: 0;
       max-width: 100%;
       border-radius: 0;
     }
@@ -217,71 +217,121 @@
     }
     .hero {
       position: relative;
-      height: 720px;
+      height: 70vh;
+      min-height: 400px;
       overflow: hidden;
-      background: #111;
+      background: #000;
       border-radius: 0;
-      box-shadow: 0 16px 56px rgba(0,0,0,0.6);
+      box-shadow: none;
+      margin-top: 0;
     }
     .carousel-slides {
-      display: flex;
+      position: relative;
+      width: 100%;
       height: 100%;
-      transition: transform 0.7s cubic-bezier(.4,0,.2,1);
-    }
-    .carousel-playpause {
-      position: absolute;
-      bottom: 18px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.55);
-      border: 2px solid #ffffff;
-      color: #ffffff;
-      width: 46px; height: 46px;
-      border-radius: 50%;
-      font-size: 17px;
-      cursor: pointer;
-      z-index: 10;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 0 10px rgba(255,255,255,0.2);
-    }
-    .carousel-playpause:hover {
-      background: rgba(255,255,255,0.15);
-      transform: translateX(-50%) scale(1.12);
-      box-shadow: 0 0 18px rgba(255,255,255,0.4);
     }
     .slide {
-      min-width: 100%;
+      position: absolute;
+      inset: 0;
+      width: 100%;
       height: 100%;
-      position: relative;
-      background: #111;
+      background: #000;
       overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
     }
-    /* Fondo difuminado desactivado */
-    .slide-blur-bg { display: none; }
-
-    /* Imagen ocupa todo el frame del carrusel */
-    .slide-car {
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    /* Fondo difuminado de la misma imagen */
+    .slide-blur-bg {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
+      filter: blur(22px) brightness(0.55) saturate(1.3);
+      transform: scale(1.08);
+      z-index: 0;
+    }
+
+    /* Imagen completa sin recorte */
+    .slide-car {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
       object-position: center center;
       z-index: 1;
       pointer-events: none;
     }
-    /* Primera imagen: 107% de escala */
-    .slide-1 .slide-car {
-      width: 100%;
-      height: auto;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%) scale(1.07);
-      transform-origin: center center;
-      object-fit: unset;
+    /* Carros PNG recortados: mostrar completo con ruedas */
+    .slide-car-nobg {
+      object-fit: contain;
+      object-position: center bottom;
+      padding-bottom: 20px;
     }
+    /* Texto overlay slide-1 */
+    .slide-1-caption {
+      position: absolute;
+      bottom: 60px;
+      right: 48px;
+      z-index: 5;
+      text-align: right;
+    }
+    .slide-1-caption h2 {
+      font-family: 'Bebas Neue', 'Montserrat', sans-serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 400;
+      color: #ffffff;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      line-height: 1;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+      margin-bottom: 8px;
+    }
+    .slide-1-caption p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(13px, 1.4vw, 17px);
+      font-weight: 400;
+      color: #dddddd;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.8);
+      margin-bottom: 18px;
+    }
+    .slide-1-caption .btn-ver {
+      display: inline-block;
+      background: #d32f2f;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 11px 28px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .slide-1-caption .btn-ver:hover { background: #b71c1c; transform: translateY(-2px); }
+    @media (max-width: 768px) {
+      .slide-1-caption { right: 20px; left: auto; bottom: 48px; }
+      .slide-1-caption h2 { font-size: 32px; letter-spacing: 3px; }
+      .slide-1-caption p { font-size: 12px; }
+    }
+
+    .slide-1 .slide-car, .slide-2 .slide-car {
+      object-fit: contain;
+      object-position: center center;
+      transform: none;
+      filter: none;
+    }
+    .slide-1 .slide-overlay, .slide-2 .slide-overlay { background: none !important; }
     /* Banda oscura solo arriba para que el texto se lea */
     .slide-overlay {
       position: absolute;
@@ -387,21 +437,28 @@
     .carousel-next { right: 16px; }
     .carousel-dots {
       position: absolute;
-      bottom: 18px;
+      bottom: 22px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 8px;
-      z-index: 10;
+      gap: 5px;
+      z-index: 200;
+      pointer-events: all;
     }
     .dot {
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.5);
+      width: 26px; height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.55);
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.3s, width 0.3s;
+      pointer-events: all;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.6);
     }
-    .dot.active { background: #f2b705; }
+    .dot.active {
+      background: #d32f2f;
+      width: 48px;
+      box-shadow: 0 1px 8px rgba(211,47,47,0.7);
+    }
 
     /* ============================
        QUOTE FORM BAR
@@ -409,6 +466,7 @@
     .quote-bar {
       background: #0a0a0a;
       padding: 60px 20px;
+      margin-top: 60px;
       border-top: 2px solid #1a1a1a;
       border-bottom: 2px solid #1a1a1a;
     }
@@ -659,15 +717,26 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
       background: #111111;
       border: 2px solid #333333;
       border-radius: 16px;
-      padding: 28px 36px;
+      padding: 65px;
       cursor: pointer;
       transition: border-color .25s, box-shadow .25s, transform .25s;
       text-decoration: none;
-      min-width: 160px;
+      min-width: 220px;
+    }
+    .brand-pill-img {
+      padding: 0;
+      overflow: hidden;
+      gap: 0;
+    }
+    .brand-pill-img span {
+      padding: 10px 0 12px;
+      width: 100%;
+      text-align: center;
+      background: #111111;
     }
     .brand-pill:hover {
       border-color: #f2b705;
@@ -1170,7 +1239,7 @@
     @media (max-width: 768px) {
       .hero-wrap { margin: 0; }
       .hero-wrap::before, .hero-wrap::after { display: none; }
-      .hero { height: 420px; margin: 0; border-radius: 0; }
+      .hero { height: calc(100vh - 110px); min-height: 300px; margin: 0; border-radius: 0; }
       .slide-overlay { padding-top: 36px; }
       .quote-form { grid-template-columns: 1fr; }
       .footer-top { flex-direction: column; align-items: center; gap: 20px; padding: 20px 16px; }
@@ -1195,7 +1264,7 @@
     }
     @media (max-width: 480px) {
       .hero-wrap { margin: 0; }
-      .hero { height: 320px; }
+      .hero { height: calc(100vh - 80px); min-height: 260px; }
       .features-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: repeat(2,1fr); }
       .brand-pill { min-width: 100px; padding: 12px 14px; }
@@ -1278,6 +1347,7 @@
       <a href="vehiculos.html">Vehículos</a>
       <a href="servicios.html">Servicios</a>
       <a href="clientes.html">Clientes</a>
+      <a href="pqrs.html">PQRS</a>
     </div>
     <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
   </div>
@@ -1287,87 +1357,40 @@
 <div class="hero-wrap">
 <section class="hero" id="inicio">
   <div class="carousel-slides" id="carouselSlides">
-    <div class="slide slide-1">
-      <img src="nueva.jpg" class="slide-car" alt="Flota Blindada JYJ Rental Security" />
-      <div class="slide-overlay"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
+
+    <!-- Slide 1: Toyota Sequoia -->
+    <div class="slide slide-1 active">
+      <img src="nueva.jpg" class="slide-blur-bg" aria-hidden="true" />
+      <img src="nueva.jpg" class="slide-car" alt="Toyota Sequoia 2026" />
+      <div class="slide-1-caption">
+        <h2>Toyota Sequoia 2026</h2>
+        <p>Vehículos Blindados</p>
+        <a href="vehiculos.html" class="btn-ver">Ver Vehículo</a>
+      </div>
     </div>
+
+    <!-- Slide 2: Ford Explorer -->
     <div class="slide slide-2">
-      <img src="montero.png" class="slide-car slide-car-nobg" alt="Mitsubishi Montero Sport 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
+      <img src="ford-carrusel.jpg" class="slide-blur-bg" aria-hidden="true" />
+      <img src="ford-carrusel.jpg" class="slide-car" alt="Ford Explorer Blindado" />
+      <div class="slide-1-caption">
+        <h2>Ford Explorer 2025</h2>
+        <p>Vehículos Blindados</p>
+        <a href="vehiculos.html" class="btn-ver">Ver Vehículo</a>
+      </div>
     </div>
-    <div class="slide slide-3">
-      <img src="4runner.png" class="slide-car slide-car-nobg" alt="Toyota 4Runner 2024" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-4">
-      <img src="yaris.png" class="slide-car slide-car-nobg" alt="Toyota Yaris Híbrido 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-5">
-      <img src="explorer.png" class="slide-car slide-car-nobg" alt="Ford Explorer 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-6">
-      <img src="escape.png" class="slide-car slide-car-nobg" alt="Ford Escape Híbrida 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-7">
-      <img src="expedition.png" class="slide-car slide-car-nobg" alt="Ford Expedition 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-8">
-      <img src="f150.png" class="slide-car slide-car-nobg" alt="Ford F-150 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-9">
-      <img src="tracker.png" class="slide-car slide-car-nobg" alt="Chevrolet Tracker SUV 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-10">
-      <img src="traverse.png" class="slide-car slide-car-nobg" alt="Chevrolet Traverse 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-11">
-      <img src="suburman.png" class="slide-car slide-car-nobg" alt="Chevrolet Suburban Premier 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-12">
-      <img src="sonet.png" class="slide-car slide-car-nobg" alt="Kia Sonet Desire MT 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-13">
-      <img src="stonic.png" class="slide-car slide-car-nobg" alt="Kia Stonic Híbrida 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-14">
-      <img src="sportage.png" class="slide-car slide-car-nobg" alt="Kia Sportage 2026" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
-    <div class="slide slide-15">
-      <img src="corolla.png" class="slide-car slide-car-nobg" alt="Toyota Corolla" />
-      <div class="slide-overlay slide-overlay-light"></div>
-      <div class="slide-tagline">FLOTA BLINDADA</div>
-    </div>
+
   </div>
-  <button class="carousel-btn carousel-prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-  <button class="carousel-btn carousel-next" onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
-  <button class="carousel-playpause" onclick="togglePlayPause()" title="Play / Pausa">
-    <i class="fas fa-pause" id="playPauseIcon"></i>
-  </button>
+
+  <!-- Flechas -->
+  <button class="carousel-btn carousel-prev" onclick="goToSlide(window._carCurrent - 1)">&#8249;</button>
+  <button class="carousel-btn carousel-next" onclick="goToSlide(window._carCurrent + 1)">&#8250;</button>
+
+  <!-- Dots (líneas) -->
+  <div class="carousel-dots" id="carouselDots">
+    <div class="dot active" onclick="goToSlide(0)"></div>
+    <div class="dot" onclick="goToSlide(1)"></div>
+  </div>
 </section>
 </div>
 
@@ -1442,7 +1465,6 @@
   </div>
 </div>
 
-<div style="height:3px; background:linear-gradient(to right, #0a0a0a, #d32f2f, #c9a44c, #d32f2f, #0a0a0a);"></div>
 
 <!-- MARCAS -->
 <section class="vehicles" id="vehiculos">
@@ -1465,11 +1487,8 @@
       </a>
 
       <!-- Ford -->
-      <a href="vehiculos.html" class="brand-pill">
-        <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" width="130" height="66">
-          <ellipse cx="100" cy="50" rx="96" ry="46" fill="#003399"/>
-          <text x="100" y="66" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-weight="bold" font-size="48" fill="white">Ford</text>
-        </svg>
+      <a href="vehiculos.html" class="brand-pill brand-pill-img">
+        <img src="ford-bg-jpg.jpg" alt="Ford" style="width:100%; height:180px; object-fit:cover; border-radius:8px; display:block;" />
         <span>Ford</span>
       </a>
 
@@ -1665,57 +1684,6 @@
      JAVASCRIPT
 ============================ -->
 <script>
-  // ---- FONDO DIFUMINADO: inyectar por cada slide ----
-  document.querySelectorAll('.slide').forEach(slide => {
-    const img = slide.querySelector('.slide-car');
-    if (!img) return;
-    const bg = document.createElement('div');
-    bg.className = 'slide-blur-bg';
-    const setSrc = () => { bg.style.backgroundImage = `url('${img.getAttribute('src')}')`; };
-    img.complete ? setSrc() : img.addEventListener('load', setSrc);
-    slide.insertBefore(bg, slide.firstChild);
-  });
-
-  // ---- CAROUSEL ----
-  let currentSlide = 0;
-  const totalSlides = 15;
-  let autoplayTimer;
-  let isPlaying = true;
-
-  function updateCarousel() {
-    document.getElementById('carouselSlides').style.transform = `translateX(-${currentSlide * 100}%)`;
-  }
-
-  function changeSlide(dir) {
-    currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
-    updateCarousel();
-    if (isPlaying) resetAutoplay();
-  }
-
-  function goToSlide(idx) {
-    currentSlide = idx;
-    updateCarousel();
-    if (isPlaying) resetAutoplay();
-  }
-
-  function resetAutoplay() {
-    clearInterval(autoplayTimer);
-    autoplayTimer = setInterval(() => changeSlide(1), 5000);
-  }
-
-  function togglePlayPause() {
-    isPlaying = !isPlaying;
-    const icon = document.getElementById('playPauseIcon');
-    if (isPlaying) {
-      icon.className = 'fas fa-pause';
-      resetAutoplay();
-    } else {
-      icon.className = 'fas fa-play';
-      clearInterval(autoplayTimer);
-    }
-  }
-
-  resetAutoplay();
 
   // ---- MOBILE MENU ----
   function toggleMenu() {
@@ -1753,14 +1721,16 @@
 
   // Trigger counters when stats section is visible
   const statsSection = document.querySelector('.stats');
-  let counted = false;
-  const observer = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting && !counted) {
-      counted = true;
-      animateCounters();
-    }
-  }, { threshold: 0.4 });
-  observer.observe(statsSection);
+  if (statsSection) {
+    let counted = false;
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !counted) {
+        counted = true;
+        animateCounters();
+      }
+    }, { threshold: 0.4 });
+    observer.observe(statsSection);
+  }
 
   // ---- FORM HANDLERS ----
   function submitQuote(e) {
@@ -1813,6 +1783,38 @@
       ? '0 4px 20px rgba(0,0,0,0.15)'
       : '0 2px 8px rgba(0,0,0,0.1)';
   });
+
+  // ---- CAROUSEL ----
+  (function() {
+    const slides = document.querySelectorAll('#carouselSlides .slide');
+    const dots   = document.querySelectorAll('#carouselDots .dot');
+    if (!slides.length) return;
+    var current = 0;
+    var timer;
+    window._carCurrent = current;
+
+    window.goToSlide = function(n) {
+      slides[current].classList.remove('active');
+      if (dots[current]) dots[current].classList.remove('active');
+      current = ((n % slides.length) + slides.length) % slides.length;
+      window._carCurrent = current;
+      slides[current].classList.add('active');
+      if (dots[current]) dots[current].classList.add('active');
+    };
+
+    function startAuto() {
+      clearInterval(timer);
+      timer = setInterval(function() { window.goToSlide(current + 1); }, 4000);
+    }
+
+    startAuto();
+
+    var hero = document.querySelector('.hero');
+    if (hero) {
+      hero.addEventListener('mouseenter', function() { clearInterval(timer); });
+      hero.addEventListener('mouseleave', startAuto);
+    }
+  })();
 </script>
 </body>
 </html>
