@@ -218,7 +218,7 @@
     }
     .hero {
       position: relative;
-      height: 70vh;
+      height: 100vh;
       min-height: 400px;
       overflow: hidden;
       background: #000;
@@ -259,13 +259,13 @@
       z-index: 0;
     }
 
-    /* Imagen completa sin recorte */
+    /* Imagen carrusel */
     .slide-car {
       position: absolute;
       inset: 0;
       width: 100%;
-      height: 100%;
-      object-fit: contain;
+      height: 100vh;
+      object-fit: cover;
       object-position: center center;
       z-index: 1;
       pointer-events: none;
@@ -334,7 +334,7 @@
     }
 
     .slide-1 .slide-car, .slide-2 .slide-car {
-      object-fit: contain;
+      object-fit: cover;
       object-position: center center;
       transform: none;
       filter: none;
