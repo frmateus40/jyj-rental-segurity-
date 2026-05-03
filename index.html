@@ -731,7 +731,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 3cm;
+      gap: 24px;
       flex-wrap: wrap;
       margin: 0;
     }
@@ -739,15 +739,15 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
       background: #111111;
       border: 2px solid #333333;
       border-radius: 16px;
-      padding: 80px;
+      padding: 28px 36px;
       cursor: pointer;
       transition: border-color .25s, box-shadow .25s, transform .25s;
       text-decoration: none;
-      min-width: 280px;
+      min-width: 180px;
     }
     .brand-pill-img {
       padding: 0;
@@ -1096,16 +1096,17 @@
       border-top: 2px solid #e0e0e0;
     }
     .footer-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      padding: 28px 20px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      padding: 40px 40px 24px;
       max-width: 1200px;
       margin: 0 auto;
       text-align: center;
     }
-    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px) { .footer-top { grid-template-columns: 1fr; } }
+    .footer-col { flex: 1 1 200px; max-width: 260px; }
+    @media (max-width: 560px) { .footer-col { flex: 1 1 100%; max-width: 100%; } }
     .footer-brand .logo-text { color: #111111; font-size: 24px; }
     .footer-brand p { font-size: 13px; line-height: 1.8; margin: 16px 0; color: #555555; }
     .footer-social { display: flex; gap: 10px; margin-top: 12px; justify-content: center; }
@@ -1113,15 +1114,13 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: #f0f0f0 !important;
-      color: #333 !important;
-      background: rgba(255,255,255,0.1);
+      background: #e8e8e8;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: #333;
       font-size: 15px;
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.2s;
     }
     .footer-social a:hover { background: var(--red); }
     .footer-col h4 {
@@ -1129,7 +1128,6 @@
       font-weight: 700;
       color: #111111;
       font-size: 13px;
-      color: #fff;
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-bottom: 14px;
