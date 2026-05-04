@@ -1493,9 +1493,14 @@
       dots.appendChild(d);
     });
 
-    setGallery(0);
-    document.getElementById('galleryOverlay').classList.add('open');
+    var overlay = document.getElementById('galleryOverlay');
+    overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    // Forzar reflow para que el grid calcule bien desde el primer render
+    overlay.getBoundingClientRect();
+    requestAnimationFrame(function() {
+      setGallery(0);
+    });
   }
 
   function setGallery(idx) {
