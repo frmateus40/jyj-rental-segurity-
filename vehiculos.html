@@ -62,7 +62,10 @@
       .container { padding: 0 12px; }
       .services-grid { grid-template-columns: 1fr; }
       .proceso-steps { grid-template-columns: 1fr 1fr; }
-      .vehicles-grid { grid-template-columns: 1fr; }
+      .vehicles-grid { grid-template-columns: 1fr; gap: 16px; }
+      .v-card { width: 100%; max-width: 100%; }
+      .v-img { height: 180px; }
+      section { padding: 24px 12px; }
       footer { padding-left: 40px !important; }
     }
 
@@ -145,7 +148,7 @@
 
     /* ── VEHICLE GRID ── */
     .vehicles-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 28px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px,100%),1fr)); gap: 28px;
     }
     .v-card {
       background: #111111; border-radius: 14px; overflow: hidden;
