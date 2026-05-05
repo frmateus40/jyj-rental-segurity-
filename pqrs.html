@@ -238,6 +238,37 @@
     .wa-option { display: flex; align-items: center; gap: 10px; background: #fff; border-radius: 24px; padding: 8px 16px 8px 10px; box-shadow: 0 2px 12px rgba(0,0,0,.15); text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 13px; color: #111;  transition: background .2s; }
     .wa-option:hover { background: #f0fff4; }
     .wa-option i { width: 32px; height: 32px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; }
+    .elegir-card {
+      background: #d32f2f;
+      border: 2px solid #b71c1c;
+      border-radius: 14px;
+      padding: 32px 24px;
+      text-align: center;
+      position: relative;
+      overflow: visible;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .elegir-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(0,0,0,.3); }
+    .elegir-card::before {
+      content: '';
+      position: absolute;
+      top: -2px; right: -2px;
+      width: 48px; height: 48px;
+      border-top: 3px solid rgba(255,255,255,0.55);
+      border-right: 3px solid rgba(255,255,255,0.55);
+      border-top-right-radius: 14px;
+      pointer-events: none;
+    }
+    .elegir-card::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: -2px;
+      width: 48px; height: 48px;
+      border-bottom: 3px solid rgba(255,255,255,0.55);
+      border-left: 3px solid rgba(255,255,255,0.55);
+      border-bottom-left-radius: 14px;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -486,7 +517,7 @@
     </div>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:24px;">
 
-      <div style="background:#d32f2f; border:2px solid #b71c1c; border-radius:14px; padding:32px 24px; text-align:center; transition:border-color .25s;">
+      <div class="elegir-card">
         <div style="width:60px; height:60px; border-radius:50%; background:#1a0a0a; border:2px solid #d32f2f; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:24px; color:#d32f2f;">
           <i class="fas fa-shield-halved"></i>
         </div>
@@ -494,7 +525,7 @@
         <p style="font-size:13px; color:#fff; line-height:1.7;">Protección NIJ 0108.01 de máxima seguridad para usted, su familia y su equipo de trabajo.</p>
       </div>
 
-      <div style="background:#d32f2f; border:2px solid #b71c1c; border-radius:14px; padding:32px 24px; text-align:center;">
+      <div class="elegir-card">
         <div style="width:60px; height:60px; border-radius:50%; background:#0a1628; border:2px solid #c9a44c; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:24px; color:#c9a44c;">
           <i class="fas fa-location-dot"></i>
         </div>
@@ -502,7 +533,7 @@
         <p style="font-size:13px; color:#fff; line-height:1.7;">Monitoreo constante de toda nuestra flota con reportes detallados de cada servicio y recorrido.</p>
       </div>
 
-      <div style="background:#d32f2f; border:2px solid #b71c1c; border-radius:14px; padding:32px 24px; text-align:center;">
+      <div class="elegir-card">
         <div style="width:60px; height:60px; border-radius:50%; background:#0a1a0a; border:2px solid #4caf50; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:24px; color:#4caf50;">
           <i class="fas fa-headset"></i>
         </div>
@@ -510,7 +541,7 @@
         <p style="font-size:13px; color:#fff; line-height:1.7;">Atención al cliente disponible las 24 horas del día, los 7 días de la semana. Servicio de grúa incluido.</p>
       </div>
 
-      <div style="background:#d32f2f; border:2px solid #b71c1c; border-radius:14px; padding:32px 24px; text-align:center;">
+      <div class="elegir-card">
         <div style="width:60px; height:60px; border-radius:50%; background:#1a1a0a; border:2px solid #f2b705; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:24px; color:#f2b705;">
           <i class="fas fa-gauge-high"></i>
         </div>
@@ -518,7 +549,7 @@
         <p style="font-size:13px; color:#fff; line-height:1.7;">Vehículos de alta gama con mantenimiento preventivo constante para rendimiento óptimo en cualquier terreno.</p>
       </div>
 
-      <div style="background:#d32f2f; border:2px solid #b71c1c; border-radius:14px; padding:32px 24px; text-align:center;">
+      <div class="elegir-card">
         <div style="width:60px; height:60px; border-radius:50%; background:#0d0d1a; border:2px solid #5c6bc0; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:24px; color:#7986cb;">
           <i class="fas fa-user-tie"></i>
         </div>
@@ -526,7 +557,7 @@
         <p style="font-size:13px; color:#fff; line-height:1.7;">Personal altamente capacitado en conducción segura, protección y manejo de situaciones de riesgo.</p>
       </div>
 
-      <div style="background:#d32f2f; border:2px solid #b71c1c; border-radius:14px; padding:32px 24px; text-align:center;">
+      <div class="elegir-card">
         <div style="width:60px; height:60px; border-radius:50%; background:#1a0a1a; border:2px solid #ab47bc; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; font-size:24px; color:#ce93d8;">
           <i class="fas fa-star"></i>
         </div>
