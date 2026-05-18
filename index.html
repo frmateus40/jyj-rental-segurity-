@@ -787,28 +787,28 @@
       transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
       overflow: visible;
     }
-    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(201,164,76,0.12); border-color: var(--green); }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); border-color: #000000; }
     .feature-card::before {
       content: '';
       position: absolute;
       top: 0; right: 0;
       width: 52px; height: 52px;
-      border-top: 3px solid #f2b705;
-      border-right: 3px solid #f2b705;
+      border-top: 3px solid #000000;
+      border-right: 3px solid #000000;
       border-top-right-radius: 10px;
       pointer-events: none;
-      filter: drop-shadow(0 0 6px rgba(242,183,5,1)) drop-shadow(0 0 14px rgba(242,183,5,0.7));
+      filter: drop-shadow(0 0 6px rgba(0,0,0,0.8)) drop-shadow(0 0 14px rgba(0,0,0,0.5));
     }
     .feature-card::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0;
       width: 52px; height: 52px;
-      border-bottom: 3px solid #f2b705;
-      border-left: 3px solid #f2b705;
+      border-bottom: 3px solid #000000;
+      border-left: 3px solid #000000;
       border-bottom-left-radius: 10px;
       pointer-events: none;
-      filter: drop-shadow(0 0 6px rgba(242,183,5,1)) drop-shadow(0 0 14px rgba(242,183,5,0.7));
+      filter: drop-shadow(0 0 6px rgba(0,0,0,0.8)) drop-shadow(0 0 14px rgba(0,0,0,0.5));
     }
     .feature-icon {
       width: 80px;
