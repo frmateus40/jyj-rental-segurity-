@@ -1111,9 +1111,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 20px 16px 18px;
-      max-width: 100%;
-      margin: 0 auto;
+      padding: 20px 0 18px;
+      width: 100%;
       text-align: center;
     }
     .footer-col { flex: 1 1 0; min-width: 0; }
@@ -1184,7 +1183,7 @@
     .footer-col ul li a::before { content: '›'; color: var(--red); }
     .footer-bottom {
       border-top: 1px solid #e0e0e0;
-      padding: 14px 16px;
+      padding: 14px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -1748,9 +1747,9 @@
   <div class="footer-top">
 
     <!-- Columna 1: Contacto -->
-    <div class="footer-col" style="flex:2 1 0;">
+    <div class="footer-col" style="flex:2 1 0; text-align:left; padding-left:20px;">
       <h4>Contáctenos</h4>
-      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:4px;">
+      <div style="display:flex; gap:14px; justify-content:flex-start; flex-wrap:wrap; margin-top:4px;">
         <a href="#" style="display:flex; align-items:center; gap:4px; color:#555; font-size:11px;"><i class="fas fa-location-dot" style="color:#d32f2f;"></i>Av. Suba 115-58 Torre B 219, Bogotá</a>
         <a href="tel:+573004353879" style="display:flex; align-items:center; gap:4px; color:#555; font-size:11px;"><i class="fas fa-phone" style="color:#d32f2f;"></i>300 435 3879</a>
         <a href="mailto:info@jyjvehiculosblindados.com" style="display:flex; align-items:center; gap:4px; color:#555; font-size:11px;"><i class="fas fa-envelope" style="color:#d32f2f;"></i>jyjvehiculosblindados.com</a>
@@ -1758,7 +1757,7 @@
     </div>
 
     <!-- Columna 2: Redes Sociales -->
-    <div class="footer-col" style="flex:1 1 0;">
+    <div class="footer-col" style="flex:1 1 0; text-align:center;">
       <h4>Redes Sociales</h4>
       <div class="footer-social" style="justify-content:center; margin-top:4px; gap:8px;">
         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -1769,12 +1768,12 @@
     </div>
 
     <!-- Columna 3: Legal -->
-    <div class="footer-col" style="flex:1 1 0;">
+    <div class="footer-col" style="flex:1 1 0; text-align:right; padding-right:20px;">
       <h4>Legal</h4>
-      <ul>
-        <li><a href="pqrs.html"><i class="fas fa-file-alt" style="margin-right:4px;color:#d32f2f;"></i>PQRS</a></li>
-        <li><a href="#">Política de privacidad</a></li>
-        <li><a href="#">Términos de servicio</a></li>
+      <ul style="align-items:flex-end;">
+        <li><a href="pqrs.html" style="justify-content:flex-end;"><i class="fas fa-file-alt" style="margin-right:4px;color:#d32f2f;"></i>PQRS</a></li>
+        <li><a href="#" style="justify-content:flex-end;">Política de privacidad</a></li>
+        <li><a href="#" style="justify-content:flex-end;">Términos de servicio</a></li>
       </ul>
     </div>
 
