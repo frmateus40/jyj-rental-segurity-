@@ -10,237 +10,104 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Open Sans', sans-serif; color: #ffffff; background: #0d0d0d; }
+    body { font-family: 'Open Sans', sans-serif; background: #0d0d0d; color: #fff; }
     a { text-decoration: none; color: inherit; }
     img { max-width: 100%; display: block; }
 
-    :root {
-      --red: #d32f2f;
-      --red-hover: #b71c1c;
-    }
+    :root { --red: #d32f2f; --red-hover: #b71c1c; }
 
     /* NAVBAR */
-    nav {
-      background: #000000;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      margin-top: 0.4cm;
-    }
+    nav { background: #000; position: sticky; top: 0; z-index: 1000; margin-top: 0.4cm; }
     .nav-inner {
-      max-width: 100%;
-      margin: 0;
-      padding: 0 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 110px;
-      position: relative;
+      max-width: 100%; padding: 0 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 110px; position: relative;
     }
-    .nav-links {
-      display: flex;
-      gap: 48px;
-      position: absolute;
-      right: 5cm;
-    }
+    .nav-links { display: flex; gap: 48px; position: absolute; right: 5cm; }
     .nav-links a {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 15px;
-      color: #fff;
-      background: transparent;
-      padding: 8px 16px;
-      border-radius: 4px;
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 15px;
+      color: #fff; padding: 8px 16px; text-transform: uppercase; letter-spacing: 0.5px;
       transition: color 0.2s;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
-    .nav-links a:hover { color: #c0392b; }
-    .nav-links a.active { color: #c0392b; }
+    .nav-links a:hover, .nav-links a.active { color: #c0392b; }
     .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
     .nav-presupuesto { display: none !important; }
     @media (max-width: 768px) {
       .nav-presupuesto {
-        display: block !important;
-        color: #fff !important;
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900;
-        font-size: 15px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        padding: 8px 16px;
-        background: transparent !important;
+        display: block !important; color: #fff !important;
+        font-family: 'Montserrat', sans-serif; font-weight: 900;
+        font-size: 15px; text-transform: uppercase; letter-spacing: 0.5px;
+        padding: 8px 16px; background: transparent !important;
       }
     }
-
     @media (max-width: 1024px) {
       .nav-links { display: none; }
       .hamburger { display: block; }
       .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 110px;
-        left: 0;
-        right: 0;
-        background: #111111;
-        padding: 16px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        z-index: 999;
+        display: flex; flex-direction: column;
+        position: fixed; top: 110px; left: 0; right: 0;
+        background: #111; padding: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5); z-index: 999;
       }
       .nav-inner > div:first-child { margin-left: 16px !important; }
-      .nav-inner > div:first-child img { height: 80px !important; max-width: none; }
+      .nav-inner > div:first-child img { height: 80px !important; }
     }
 
-    /* HERO BANNER */
-    .page-hero {
-      background: linear-gradient(135deg, #111 0%, #1a0000 100%);
-      padding: 60px 20px;
-      text-align: center;
-      border-bottom: 3px solid var(--red);
+    /* FORM WRAPPER */
+    .form-wrapper {
+      max-width: 860px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
     }
-    .page-hero h1 {
+    .form-title {
       font-family: 'Montserrat', sans-serif;
       font-weight: 900;
-      font-size: 38px;
+      font-size: 22px;
       color: #fff;
       text-transform: uppercase;
       letter-spacing: 1px;
+      margin-bottom: 8px;
     }
-    .page-hero h1 span { color: var(--red); }
-    .page-hero p {
-      color: #aaa;
-      font-size: 15px;
-      margin-top: 12px;
-    }
-    @media (max-width: 768px) {
-      .page-hero { padding: 40px 16px; }
-      .page-hero h1 { font-size: 24px; }
-    }
+    .form-title span { color: var(--red); }
+    .form-subtitle { color: #888; font-size: 13px; margin-bottom: 28px; }
+    .form-divider { width: 50px; height: 3px; background: var(--red); margin: 10px 0 28px; border-radius: 2px; }
 
-    /* FORM SECTION */
-    .quote-section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 20px 80px;
-    }
+    /* FORM */
     .quote-form {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      gap: 16px;
     }
-    @media (max-width: 640px) {
+    @media (max-width: 600px) {
       .quote-form { grid-template-columns: 1fr; }
-      .quote-section { padding: 32px 16px 60px; }
+      .form-wrapper { margin: 24px auto 40px; padding: 0 16px; }
+      .form-title { font-size: 18px; }
     }
-    .quote-form-label {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .quote-form-label { display: flex; flex-direction: column; gap: 6px; }
     .quote-form-label span {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      color: #aaa;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700;
+      color: #999; text-transform: uppercase; letter-spacing: 0.5px;
     }
     .quote-form input,
     .quote-form select {
-      background: #1a1a1a;
-      border: 1.5px solid #333;
-      border-radius: 6px;
-      padding: 12px 14px;
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color 0.2s;
-      width: 100%;
+      background: #1a1a1a; border: 1.5px solid #2e2e2e; border-radius: 6px;
+      padding: 12px 14px; color: #fff; font-size: 14px; outline: none;
+      transition: border-color 0.2s; width: 100%;
     }
-    .quote-form input::placeholder { color: #666; }
+    .quote-form input::placeholder { color: #555; }
     .quote-form input:focus,
-    .quote-form select:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(211,47,47,0.15); }
+    .quote-form select:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(211,47,47,0.12); }
     .quote-form select option { background: #1a1a1a; color: #fff; }
     .quote-form-full { grid-column: 1 / -1; }
     .btn-quote {
-      width: 100%;
-      background: var(--red);
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 15px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 16px 32px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 8px;
+      width: 100%; background: var(--red); color: #fff;
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 14px; text-transform: uppercase; letter-spacing: 1px;
+      padding: 15px 32px; border: none; border-radius: 6px; cursor: pointer;
+      transition: background 0.2s; display: flex; align-items: center;
+      justify-content: center; gap: 10px; margin-top: 6px;
     }
     .btn-quote:hover { background: var(--red-hover); }
-
-    /* FOOTER */
-    footer {
-      background: #ffffff;
-      color: #333;
-    }
-    .footer-top {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 24px;
-      padding: 14px 40px 10px;
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .footer-col { flex: 1 1 200px; max-width: 260px; }
-    .footer-col h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 800;
-      font-size: 13px;
-      color: #111;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-      border-bottom: 2px solid var(--red);
-      padding-bottom: 6px;
-    }
-    .footer-col ul li { margin-bottom: 8px; }
-    .footer-col ul li a { color: #555; font-size: 13px; }
-    .footer-social { display: flex; gap: 10px; margin-top: 12px; justify-content: center; }
-    .footer-social a {
-      width: 34px; height: 34px;
-      background: #111;
-      color: #fff;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px;
-      transition: background 0.2s;
-    }
-    .footer-social a:hover { background: var(--red); }
-    .footer-bottom {
-      background: #111;
-      color: #888;
-      font-size: 12px;
-      padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    @media (max-width: 768px) {
-      .footer-top { flex-direction: column; align-items: center; gap: 20px; padding: 20px 16px; }
-      .footer-bottom { flex-direction: column; text-align: center; gap: 6px; padding: 12px 16px; }
-      .footer-col { width: 100%; }
-    }
   </style>
 </head>
 <body>
@@ -250,7 +117,7 @@
   <div class="nav-inner">
     <div style="display:flex; align-items:center; margin-left:120px;">
       <a href="index.html">
-        <img src="logo-nuevo.png" alt="JYJ Rental Security" style="height:105px; width:auto; display:block;" />
+        <img src="logo-nuevo.png" alt="JYJ Rental Security" style="height:105px; width:auto;" />
       </a>
     </div>
     <div class="nav-links" id="navLinks">
@@ -265,14 +132,12 @@
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="page-hero">
-  <h1>Solicite su <span>Presupuesto</span></h1>
-  <p>Complete el formulario y un asesor se comunicará con usted a la brevedad</p>
-</div>
+<!-- FORMULARIO -->
+<div class="form-wrapper">
+  <h2 class="form-title">Solicite su <span>Presupuesto</span></h2>
+  <p class="form-subtitle">Complete el formulario y un asesor se comunicará con usted a la brevedad</p>
+  <div class="form-divider"></div>
 
-<!-- FORM -->
-<div class="quote-section">
   <form class="quote-form" action="https://formsubmit.co/jmateus718@gmail.com" method="POST">
     <input type="hidden" name="_subject" value="Nueva Solicitud de Presupuesto - JYJ Rental" />
     <input type="hidden" name="_next" value="https://frmateus40.github.io/jyj-rental-segurity-/gracias.html" />
@@ -337,45 +202,6 @@
     </div>
   </form>
 </div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-col" style="max-width:380px; flex:2 1 300px;">
-      <h4>Contáctenos</h4>
-      <div style="display:flex; gap:24px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
-        <div style="text-align:left;">
-          <a href="#" style="display:flex; align-items:center; gap:6px; color:#555; font-size:13px;"><i class="fas fa-location-dot" style="color:#d32f2f;"></i>Av. Suba 115-58 Torre B 219, Bogotá</a>
-        </div>
-        <div style="text-align:left;">
-          <a href="tel:+573004353879" style="display:flex; align-items:center; gap:6px; color:#555; font-size:13px;"><i class="fas fa-phone" style="color:#d32f2f;"></i>300 435 3879</a>
-          <a href="mailto:info@jyjvehiculosblindados.com" style="display:flex; align-items:center; gap:6px; color:#555; font-size:13px; margin-top:8px;"><i class="fas fa-envelope" style="color:#d32f2f;"></i>jyjvehiculosblindados.com</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Redes Sociales</h4>
-      <div class="footer-social" style="justify-content:center; margin-top:10px; gap:14px;">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="pqrs.html"><i class="fas fa-file-alt" style="margin-right:6px;color:#d32f2f;"></i>PQRS</a></li>
-        <li><a href="#">Política de privacidad</a></li>
-        <li><a href="#">Términos de servicio</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>&copy; 2026 JYJ Rental. Todos los derechos reservados.</span>
-    <span>Diseñado con <i class="fas fa-heart" style="color:#e74c3c;"></i> por JYJ Rental Security</span>
-  </div>
-</footer>
 
 <script>
   function toggleMenu() {
