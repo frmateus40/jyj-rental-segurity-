@@ -1095,8 +1095,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      gap: 24px;
-      padding: 24px 40px 16px;
+      gap: 16px;
+      padding: 14px 40px 10px;
       max-width: 1200px;
       margin: 0 auto;
       text-align: center;
@@ -1104,15 +1104,17 @@
     .footer-col { flex: 1 1 200px; max-width: 260px; }
     @media (max-width: 560px) {
       .footer-col { flex: 1 1 100%; max-width: 100%; }
-      .footer-top { gap: 0; padding: 16px 20px 8px; }
-      .footer-col { padding: 12px 0; border-bottom: 1px solid #e0e0e0; }
+      .footer-top { gap: 0; padding: 8px 16px 4px; }
+      .footer-col { padding: 6px 0; border-bottom: 1px solid #e0e0e0; }
       .footer-col:last-child { border-bottom: none; }
       .footer-mobile-cta { display: block !important; }
+      .quote-mobile-section { display: block !important; }
     }
     .footer-brand .logo-text { color: #111111; font-size: 24px; }
     .footer-brand p { font-size: 13px; line-height: 1.8; margin: 16px 0; color: #555555; }
     .footer-social { display: flex; gap: 10px; margin-top: 12px; justify-content: center; }
-    .footer-mobile-cta { display: none; text-align: center; padding: 16px 20px 4px; }
+    .footer-mobile-cta { display: none; text-align: center; padding: 12px 16px 4px; }
+    .quote-mobile-section { display: none; background: #f5f5f5; padding: 20px 16px; text-align: center; border-top: 3px solid #d32f2f; }
     .footer-mobile-cta a {
       display: inline-block;
       background: #d32f2f;
@@ -1725,6 +1727,13 @@
 
 
 
+
+<!-- SECCIÓN PRESUPUESTO SOLO MÓVIL -->
+<div class="quote-mobile-section">
+  <h3 style="font-family:'Montserrat',sans-serif; font-weight:800; font-size:20px; color:#111; text-transform:uppercase; margin-bottom:6px;">Un presupuesto <span style="color:#d32f2f;">a la medida</span></h3>
+  <p style="font-size:13px; color:#555; margin-bottom:14px;">Complete el formulario y un asesor le contactará a la brevedad</p>
+  <a href="#cotizar" style="display:inline-block; background:#d32f2f; color:#fff; font-family:'Montserrat',sans-serif; font-weight:700; font-size:14px; padding:12px 28px; border-radius:4px; text-transform:uppercase; letter-spacing:1px;"><i class="fas fa-paper-plane" style="margin-right:8px;"></i>Solicitar Presupuesto</a>
+</div>
 
 <!-- FOOTER -->
 <footer>
