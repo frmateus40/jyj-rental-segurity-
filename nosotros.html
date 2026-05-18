@@ -206,38 +206,43 @@
     @media (max-width: 900px) { .mv-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 580px) { .mv-grid { grid-template-columns: 1fr; } }
     .mv-card {
-      background: #111111;
+      background: #ffffff;
       border-radius: 16px;
       padding: 44px 40px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       position: relative;
       overflow: hidden;
       transition: transform 0.25s, box-shadow 0.25s;
+      border: 1px solid #e0e0e0;
     }
-    .mv-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,0.12); }
+    .mv-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,0,0,0.15); }
     .mv-card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 5px;
+      background: #111111;
     }
-    .mv-card.mision::before { background: var(--green); }
-    .mv-card.vision::before  { background: #e83232; }
+    .mv-card.mision::before { background: #111111; }
+    .mv-card.vision::before  { background: #111111; }
+    .mv-card.objetivos::before { background: #111111; }
     .mv-icon {
       width: 68px; height: 68px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 28px;
-      color: #fff;
+      color: #d32f2f;
+      background: transparent;
       margin-bottom: 24px;
     }
-    .mv-card.mision .mv-icon { background: var(--green); }
-    .mv-card.vision  .mv-icon { background: #e83232; }
+    .mv-card.mision .mv-icon { background: transparent; color: #d32f2f; }
+    .mv-card.vision  .mv-icon { background: transparent; color: #d32f2f; }
+    .mv-card.objetivos .mv-icon { background: transparent; color: #d32f2f; }
     .mv-card h3 {
       font-family: 'Montserrat', sans-serif;
       font-size: 24px;
       font-weight: 800;
-      color: #ffffff;
+      color: #111111;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
@@ -245,17 +250,17 @@
       width: 48px; height: 3px;
       border-radius: 2px;
       margin-bottom: 18px;
+      background: #d32f2f;
     }
-    .mv-card.mision .mv-divider { background: var(--green); }
-    .mv-card.vision  .mv-divider { background: #e83232; }
-    .mv-card.objetivos::before { background: #e87c00; }
-    .mv-card.objetivos .mv-icon { background: #e87c00; }
-    .mv-card.objetivos .mv-divider { background: #e87c00; }
-    .mv-card.objetivos ul li i { color: #e87c00; }
+    .mv-card.mision .mv-divider { background: #d32f2f; }
+    .mv-card.vision  .mv-divider { background: #d32f2f; }
+    .mv-card.objetivos .mv-divider { background: #d32f2f; }
+    .mv-card.objetivos ul li i { color: #d32f2f; }
     .mv-card p {
       font-size: 15px;
+      font-weight: 700;
       line-height: 1.85;
-      color: #cccccc;
+      color: #111111;
     }
     .mv-card ul {
       margin-top: 14px;
@@ -270,12 +275,13 @@
       align-items: flex-start;
       gap: 10px;
       font-size: 14px;
-      color: #cccccc;
+      font-weight: 700;
+      color: #111111;
       line-height: 1.6;
     }
-    .mv-card ul li i { font-size: 15px; margin-top: 2px; flex-shrink: 0; }
-    .mv-card.mision ul li i { color: var(--green); }
-    .mv-card.vision  ul li i { color: #e83232; }
+    .mv-card ul li i { font-size: 15px; margin-top: 2px; flex-shrink: 0; color: #d32f2f; }
+    .mv-card.mision ul li i { color: #d32f2f; }
+    .mv-card.vision  ul li i { color: #d32f2f; }
 
     /* VALORES */
     .valores-section {
