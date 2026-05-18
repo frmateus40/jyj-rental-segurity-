@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solicite su Presupuesto - JYJ Rental Security</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: #ffffff; background: #0d0d0d; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    :root {
+      --red: #d32f2f;
+      --red-hover: #b71c1c;
+    }
+
+    /* NAVBAR */
+    nav {
+      background: #000000;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      margin-top: 0.4cm;
+    }
+    .nav-inner {
+      max-width: 100%;
+      margin: 0;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 110px;
+      position: relative;
+    }
+    .nav-links {
+      display: flex;
+      gap: 48px;
+      position: absolute;
+      right: 5cm;
+    }
+    .nav-links a {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      color: #fff;
+      background: transparent;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: color 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a:hover { color: #c0392b; }
+    .nav-links a.active { color: #c0392b; }
+    .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
+    .nav-presupuesto { display: none !important; }
+    @media (max-width: 768px) {
+      .nav-presupuesto {
+        display: block !important;
+        color: #fff !important;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 8px 16px;
+        background: transparent !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 110px;
+        left: 0;
+        right: 0;
+        background: #111111;
+        padding: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        z-index: 999;
+      }
+      .nav-inner > div:first-child { margin-left: 16px !important; }
+      .nav-inner > div:first-child img { height: 80px !important; max-width: none; }
+    }
+
+    /* HERO BANNER */
+    .page-hero {
+      background: linear-gradient(135deg, #111 0%, #1a0000 100%);
+      padding: 60px 20px;
+      text-align: center;
+      border-bottom: 3px solid var(--red);
+    }
+    .page-hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 38px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .page-hero h1 span { color: var(--red); }
+    .page-hero p {
+      color: #aaa;
+      font-size: 15px;
+      margin-top: 12px;
+    }
+    @media (max-width: 768px) {
+      .page-hero { padding: 40px 16px; }
+      .page-hero h1 { font-size: 24px; }
+    }
+
+    /* FORM SECTION */
+    .quote-section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+    }
+    .quote-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 640px) {
+      .quote-form { grid-template-columns: 1fr; }
+      .quote-section { padding: 32px 16px 60px; }
+    }
+    .quote-form-label {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .quote-form-label span {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #aaa;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .quote-form input,
+    .quote-form select {
+      background: #1a1a1a;
+      border: 1.5px solid #333;
+      border-radius: 6px;
+      padding: 12px 14px;
+      color: #fff;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .quote-form input::placeholder { color: #666; }
+    .quote-form input:focus,
+    .quote-form select:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(211,47,47,0.15); }
+    .quote-form select option { background: #1a1a1a; color: #fff; }
+    .quote-form-full { grid-column: 1 / -1; }
+    .btn-quote {
+      width: 100%;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .btn-quote:hover { background: var(--red-hover); }
+
+    /* FOOTER */
+    footer {
+      background: #ffffff;
+      color: #333;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 14px 40px 10px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .footer-col { flex: 1 1 200px; max-width: 260px; }
+    .footer-col h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      color: #111;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid var(--red);
+      padding-bottom: 6px;
+    }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { color: #555; font-size: 13px; }
+    .footer-social { display: flex; gap: 10px; margin-top: 12px; justify-content: center; }
+    .footer-social a {
+      width: 34px; height: 34px;
+      background: #111;
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .footer-social a:hover { background: var(--red); }
+    .footer-bottom {
+      background: #111;
+      color: #888;
+      font-size: 12px;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    @media (max-width: 768px) {
+      .footer-top { flex-direction: column; align-items: center; gap: 20px; padding: 20px 16px; }
+      .footer-bottom { flex-direction: column; text-align: center; gap: 6px; padding: 12px 16px; }
+      .footer-col { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; margin-left:120px;">
+      <a href="index.html">
+        <img src="logo-nuevo.png" alt="JYJ Rental Security" style="height:105px; width:auto; display:block;" />
+      </a>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Inicio</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="vehiculos.html">Vehículos</a>
+      <a href="servicios.html">Servicios</a>
+      <a href="clientes.html">Clientes</a>
+      <a href="presupuesto.html" class="nav-presupuesto active">Solicite su Presupuesto</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <h1>Solicite su <span>Presupuesto</span></h1>
+  <p>Complete el formulario y un asesor se comunicará con usted a la brevedad</p>
+</div>
+
+<!-- FORM -->
+<div class="quote-section">
+  <form class="quote-form" action="https://formsubmit.co/jmateus718@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="Nueva Solicitud de Presupuesto - JYJ Rental" />
+    <input type="hidden" name="_next" value="https://frmateus40.github.io/jyj-rental-segurity-/gracias.html" />
+    <input type="hidden" name="_captcha" value="false" />
+    <input type="hidden" name="_template" value="table" />
+
+    <label class="quote-form-label">
+      <span><i class="fas fa-user" style="margin-right:4px;"></i>Nombre del cliente</span>
+      <input type="text" name="nombre" placeholder="Nombre completo" required />
+    </label>
+
+    <label class="quote-form-label">
+      <span><i class="fas fa-envelope" style="margin-right:4px;"></i>Correo electrónico</span>
+      <input type="email" name="correo" placeholder="ejemplo@correo.com" required />
+    </label>
+
+    <label class="quote-form-label">
+      <span><i class="fas fa-phone" style="margin-right:4px;"></i>Teléfono</span>
+      <input type="tel" name="telefono" placeholder="+57 000 000 0000" value="+57" required />
+    </label>
+
+    <label class="quote-form-label">
+      <span><i class="fas fa-city" style="margin-right:4px;"></i>Ciudad</span>
+      <input type="text" name="ciudad" placeholder="Ciudad de origen" />
+    </label>
+
+    <label class="quote-form-label">
+      <span><i class="fas fa-building" style="margin-right:4px;"></i>Empresa que solicita</span>
+      <input type="text" name="empresa" placeholder="Nombre de la empresa" />
+    </label>
+
+    <label class="quote-form-label">
+      <span><i class="fas fa-shield-halved" style="margin-right:4px;"></i>Nivel de blindaje</span>
+      <select name="blindaje" required>
+        <option value="" disabled selected>Seleccionar nivel</option>
+        <option value="II">Nivel II — Protección básica</option>
+        <option value="III">Nivel III — Protección media</option>
+        <option value="V">Nivel V — Protección máxima</option>
+      </select>
+    </label>
+
+    <label class="quote-form-label">
+      <span><i class="fas fa-calendar-days" style="margin-right:4px;"></i>Tiempo de alquiler</span>
+      <select name="tiempo" required>
+        <option value="" disabled selected>Seleccionar período</option>
+        <option>Días</option>
+        <option>Semanas</option>
+        <option>Meses</option>
+        <option>Años</option>
+      </select>
+    </label>
+
+    <label class="quote-form-label quote-form-full">
+      <span><i class="fas fa-comment-dots" style="margin-right:4px;"></i>Información adicional (opcional)</span>
+      <input type="text" name="info" placeholder="Destino, número de pasajeros, requerimientos especiales..." />
+    </label>
+
+    <div class="quote-form-full" style="margin-top:6px;">
+      <button type="submit" class="btn-quote">
+        <i class="fas fa-paper-plane"></i> Enviar Solicitud de Presupuesto
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-col" style="max-width:380px; flex:2 1 300px;">
+      <h4>Contáctenos</h4>
+      <div style="display:flex; gap:24px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+        <div style="text-align:left;">
+          <a href="#" style="display:flex; align-items:center; gap:6px; color:#555; font-size:13px;"><i class="fas fa-location-dot" style="color:#d32f2f;"></i>Av. Suba 115-58 Torre B 219, Bogotá</a>
+        </div>
+        <div style="text-align:left;">
+          <a href="tel:+573004353879" style="display:flex; align-items:center; gap:6px; color:#555; font-size:13px;"><i class="fas fa-phone" style="color:#d32f2f;"></i>300 435 3879</a>
+          <a href="mailto:info@jyjvehiculosblindados.com" style="display:flex; align-items:center; gap:6px; color:#555; font-size:13px; margin-top:8px;"><i class="fas fa-envelope" style="color:#d32f2f;"></i>jyjvehiculosblindados.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Redes Sociales</h4>
+      <div class="footer-social" style="justify-content:center; margin-top:10px; gap:14px;">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="pqrs.html"><i class="fas fa-file-alt" style="margin-right:6px;color:#d32f2f;"></i>PQRS</a></li>
+        <li><a href="#">Política de privacidad</a></li>
+        <li><a href="#">Términos de servicio</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 JYJ Rental. Todos los derechos reservados.</span>
+    <span>Diseñado con <i class="fas fa-heart" style="color:#e74c3c;"></i> por JYJ Rental Security</span>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
