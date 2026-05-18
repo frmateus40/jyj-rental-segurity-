@@ -110,8 +110,8 @@
       gap: 24px;
     }
     .service-card {
-      background: #111111;
-      border: 1px solid #333333;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
       border-radius: 14px;
       padding: 32px 28px;
       display: flex;
@@ -126,37 +126,27 @@
       content: '';
       position: absolute; top: 0; left: 0;
       width: 4px; height: 100%;
-      background: var(--green);
+      background: var(--red);
       border-radius: 4px 0 0 4px;
     }
     .service-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 12px 32px rgba(0,0,0,.12);
-      border-color: var(--green);
+      border-color: var(--red);
     }
-    .service-card:nth-child(2n)::before  { background: var(--navy); }
-    .service-card:nth-child(3n)::before  { background: var(--red); }
     .service-icon {
       width: 90px; height: 90px; flex-shrink: 0;
       border-radius: 16px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 42px; color: #fff;
+      font-size: 42px;
+      background: transparent;
+      color: var(--red);
     }
-    .service-card:nth-child(1)  .service-icon { background: #2e8b57; }
-    .service-card:nth-child(2)  .service-icon { background: #1a4f8a; }
-    .service-card:nth-child(3)  .service-icon { background: #7b3fa0; }
-    .service-card:nth-child(4)  .service-icon { background: #c0580a; }
-    .service-card:nth-child(5)  .service-icon { background: #c41e3a; }
-    .service-card:nth-child(6)  .service-icon { background: #0d2c54; }
-    .service-card:nth-child(7)  .service-icon { background: #2e7d6e; }
-    .service-card:nth-child(8)  .service-icon { background: #8b2e2e; }
-    .service-card:nth-child(9)  .service-icon { background: #4a7a2e; }
-    .service-card:nth-child(10) .service-icon { background: #1a3a7a; }
     .service-body h4 {
       font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 15px;
-      color: #ffffff; margin-bottom: 6px; line-height: 1.3;
+      color: #111111; margin-bottom: 6px; line-height: 1.3;
     }
-    .service-body p { font-size: 13px; color: #cccccc; line-height: 1.7; }
+    .service-body p { font-size: 13px; color: #444444; line-height: 1.7; }
 
     /* ── HIGHLIGHT BANNER ── */
     .highlight-banner {
