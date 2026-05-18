@@ -127,7 +127,19 @@
     .nav-links a.active { background: transparent; color: #c0392b; }
     .hamburger { display: none; font-size: 24px; cursor: pointer; color: #fff; }
     .nav-presupuesto { display: none !important; }
-    @media (max-width: 768px) { .nav-presupuesto { display: block !important; } }
+    @media (max-width: 768px) {
+      .nav-presupuesto {
+        display: block !important;
+        color: #fff !important;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        font-size: 15px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 8px 16px;
+        background: transparent !important;
+      }
+    }
 
     /* Dropdown Clientes */
     .nav-dropdown { position: relative; }
@@ -1410,7 +1422,7 @@
       <a href="vehiculos.html">Vehículos</a>
       <a href="servicios.html">Servicios</a>
       <a href="clientes.html">Clientes</a>
-      <a href="#cotizar" class="nav-presupuesto" onclick="document.getElementById('navLinks').classList.remove('open')">Solicite su Presupuesto</a>
+      <a href="#cotizar" class="nav-presupuesto" onclick="abrirPresupuesto(event)">Solicite su Presupuesto</a>
     </div>
     <div class="hamburger" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
   </div>
@@ -1815,6 +1827,14 @@
   // ---- MOBILE MENU ----
   function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  function abrirPresupuesto(e) {
+    e.preventDefault();
+    document.getElementById('navLinks').classList.remove('open');
+    var qb = document.getElementById('cotizar');
+    qb.style.display = 'block';
+    setTimeout(function() { qb.scrollIntoView({ behavior: 'smooth' }); }, 100);
   }
 
   function toggleClientes(e) {
