@@ -219,9 +219,14 @@
     .mv-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 5px;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 7px;
       background: #111111;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
     }
     .mv-card.mision::before { background: #111111; }
     .mv-card.vision::before  { background: #111111; }
