@@ -64,7 +64,7 @@
     nav {
       background: #000000;
       box-shadow: none;
-      border-bottom: none;
+      border-bottom: 1px solid #222;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -72,11 +72,12 @@
     .nav-inner {
       max-width: 100%;
       margin: 0;
-      padding: 0 20px 0 8px;
+      padding: 0 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 110px;
+      position: relative;
     }
     .logo {
       display: flex;
@@ -893,7 +894,9 @@
     /* ============================
        CERTIFICATIONS
     ============================ */
-    .certifications { background: #080808; }
+    .certifications { background: #ffffff !important; }
+    .certifications .section-title h2 { color: #111111 !important; }
+    .certifications .section-title p { color: #555555 !important; }
     .cert-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -920,14 +923,14 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: 20px;
-      color: #111111;
+      color: #d32f2f;
       text-align: center;
       line-height: 1.2;
     }
-    .cert-badge.iso9001  { background: #ffffff; border: 3px solid #111111; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-    .cert-badge.iso14001 { background: #ffffff; border: 3px solid #111111; color: #111111; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-    .cert-badge.iso45001 { background: #ffffff; border: 3px solid #111111; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-    .cert-badge.nij      { background: #ffffff; border: 3px solid #111111; color: #111111; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+    .cert-badge.iso9001  { background: #111111; border: 3px solid #111111; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+    .cert-badge.iso14001 { background: #111111; border: 3px solid #111111; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+    .cert-badge.iso45001 { background: #111111; border: 3px solid #111111; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+    .cert-badge.nij      { background: #111111; border: 3px solid #111111; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
     .cert-label {
       font-size: 16px;
       color: #d32f2f;
@@ -1399,7 +1402,20 @@
     ::selection { background: rgba(211,47,47,0.3); color: #fff; }
 
     /* Stronger section separation */
-    .vehicles, .certifications, .blog { border-top: 1px solid #111; border-bottom: 1px solid #111; }
+    .vehicles, .blog { border-top: 1px solid #111; border-bottom: 1px solid #111; }
+    .cert-gap { background: #000000; height: 48px; }
+
+    /* CERTIFICATIONS OVERRIDE */
+    section.certifications { background: #ffffff !important; }
+    section.certifications .section-title h2 { color: #111111 !important; }
+    section.certifications .section-title p { color: #555555 !important; }
+    section.certifications .cert-badge {
+      background: #111111 !important;
+      border: 3px solid #111111 !important;
+      color: #d32f2f !important;
+    }
+    section.certifications .cert-label { color: #d32f2f !important; }
+    section.certifications .cert-desc { color: #d32f2f !important; }
   </style>
 </head>
 <body>
@@ -1709,8 +1725,11 @@
   </div>
 </section>
 
+<!-- GAP NEGRO -->
+<div class="cert-gap"></div>
+
 <!-- CERTIFICATIONS -->
-<section class="certifications">
+<section class="certifications" style="background:#ffffff !important;">
   <div class="container">
     <div class="section-title">
       <h2>Nuestras Certificaciones</h2>
@@ -1719,24 +1738,24 @@
     </div>
     <div class="cert-grid">
       <div class="cert-item">
-        <div class="cert-badge iso9001">4140</div>
-        <div class="cert-label">Resolución N°</div>
-        <div class="cert-desc">Superintendencia de Vigilancia y Seguridad Privada</div>
+        <div class="cert-badge iso9001" style="background:#111111;color:#d32f2f;">4140</div>
+        <div class="cert-label" style="color:#d32f2f;">Resolución N°</div>
+        <div class="cert-desc" style="color:#d32f2f;">Superintendencia de Vigilancia y Seguridad Privada</div>
       </div>
       <div class="cert-item">
-        <div class="cert-badge iso14001">07</div>
-        <div class="cert-label">Día</div>
-        <div class="cert-desc">Día de expedición de la resolución</div>
+        <div class="cert-badge iso14001" style="background:#111111;color:#d32f2f;">07</div>
+        <div class="cert-label" style="color:#d32f2f;">Día</div>
+        <div class="cert-desc" style="color:#d32f2f;">Día de expedición de la resolución</div>
       </div>
       <div class="cert-item">
-        <div class="cert-badge iso45001">07</div>
-        <div class="cert-label">Mes</div>
-        <div class="cert-desc">Mes de expedición de la resolución</div>
+        <div class="cert-badge iso45001" style="background:#111111;color:#d32f2f;">07</div>
+        <div class="cert-label" style="color:#d32f2f;">Mes</div>
+        <div class="cert-desc" style="color:#d32f2f;">Mes de expedición de la resolución</div>
       </div>
       <div class="cert-item">
-        <div class="cert-badge nij">2010</div>
-        <div class="cert-label">Año</div>
-        <div class="cert-desc">Año de expedición de la resolución</div>
+        <div class="cert-badge nij" style="background:#111111;color:#d32f2f;">2010</div>
+        <div class="cert-label" style="color:#d32f2f;">Año</div>
+        <div class="cert-desc" style="color:#d32f2f;">Año de expedición de la resolución</div>
       </div>
     </div>
   </div>
