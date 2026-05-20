@@ -1121,10 +1121,41 @@
     .footer-col { flex: 1 1 200px; max-width: 260px; }
     @media (max-width: 560px) {
       .footer-col { flex: 1 1 100%; max-width: 100%; }
+      .mobile-features-strip {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        background: #111111;
+        padding: 18px 16px;
+        border-top: 2px solid #d32f2f;
+        border-bottom: 2px solid #d32f2f;
+        flex-wrap: wrap;
+      }
+      .mobile-features-strip .mf-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        text-align: center;
+        flex: 1 1 80px;
+      }
+      .mobile-features-strip .mf-item i {
+        font-size: 22px;
+        color: #d32f2f;
+      }
+      .mobile-features-strip .mf-item span {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 9px;
+        font-weight: 700;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
       .quote-bar {
         display: block;
         padding: 32px 16px;
-        margin-top: 32px;
+        margin-top: 0;
         border-top: 3px solid #000;
         border-bottom: 3px solid #000;
         background: #ffffff;
@@ -1322,10 +1353,11 @@
       .nav-inner > div:first-child { margin-left: 16px !important; }
       .nav-inner > div:first-child img { height: 80px !important; max-width: none; }
     }
+    .mobile-features-strip { display: none; }
     @media (max-width: 768px) {
       .hero-wrap { margin: 0; }
       .hero-wrap::before, .hero-wrap::after { display: none; }
-      .hero { height: 56vw; min-height: 220px; max-height: 320px; margin: 0; border-radius: 0; }
+      .hero { height: 68vw; min-height: 260px; max-height: 380px; margin: 0; border-radius: 0; }
       .slide-overlay { padding-top: 36px; }
       .quote-form { grid-template-columns: 1fr; }
       .footer-top { flex-direction: column; align-items: center; gap: 20px; padding: 20px 16px; }
@@ -1354,7 +1386,7 @@
     }
     @media (max-width: 480px) {
       .hero-wrap { margin: 0; }
-      .hero { height: 56vw; min-height: 200px; max-height: 300px; }
+      .hero { height: 68vw; min-height: 240px; max-height: 360px; }
       .carousel-controls { bottom: 6px; gap: 8px; left: 50%; transform: translateX(-50%); }
       .car-ctrl-btn { width: 22px; height: 22px; font-size: 8px; }
       .car-ctrl-pause { width: 28px; height: 28px; font-size: 10px; }
@@ -1501,6 +1533,14 @@
   </div>
 
 </section>
+</div>
+
+<!-- FRANJA FEATURES MÓVIL -->
+<div class="mobile-features-strip">
+  <div class="mf-item"><i class="fas fa-shield-halved"></i><span>Blindaje certificado</span></div>
+  <div class="mf-item"><i class="fas fa-headset"></i><span>Soporte 24/7</span></div>
+  <div class="mf-item"><i class="fas fa-location-dot"></i><span>GPS Control</span></div>
+  <div class="mf-item"><i class="fas fa-star"></i><span>Calidad premium</span></div>
 </div>
 
 <!-- QUOTE FORM -->
