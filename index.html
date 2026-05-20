@@ -1124,7 +1124,7 @@
       .quote-bar {
         display: block;
         padding: 32px 16px;
-        margin-top: 0;
+        margin-top: 32px;
         border-top: 3px solid #000;
         border-bottom: 3px solid #000;
         background: #ffffff;
@@ -1325,7 +1325,7 @@
     @media (max-width: 768px) {
       .hero-wrap { margin: 0; }
       .hero-wrap::before, .hero-wrap::after { display: none; }
-      .hero { height: 65vh; min-height: 360px; margin: 0; border-radius: 0; }
+      .hero { height: 56vw; min-height: 220px; max-height: 320px; margin: 0; border-radius: 0; }
       .slide-overlay { padding-top: 36px; }
       .quote-form { grid-template-columns: 1fr; }
       .footer-top { flex-direction: column; align-items: center; gap: 20px; padding: 20px 16px; }
@@ -1354,7 +1354,7 @@
     }
     @media (max-width: 480px) {
       .hero-wrap { margin: 0; }
-      .hero { height: 62vh; min-height: 340px; }
+      .hero { height: 56vw; min-height: 200px; max-height: 300px; }
       .carousel-controls { bottom: 6px; gap: 8px; left: 50%; transform: translateX(-50%); }
       .car-ctrl-btn { width: 22px; height: 22px; font-size: 8px; }
       .car-ctrl-pause { width: 28px; height: 28px; font-size: 10px; }
