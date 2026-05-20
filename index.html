@@ -64,7 +64,7 @@
     nav {
       background: #000000;
       box-shadow: none;
-      border-bottom: 1px solid #222;
+      border-bottom: none;
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -72,12 +72,11 @@
     .nav-inner {
       max-width: 100%;
       margin: 0;
-      padding: 0 32px;
+      padding: 0 20px 0 8px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 110px;
-      position: relative;
     }
     .logo {
       display: flex;
@@ -894,9 +893,9 @@
     /* ============================
        CERTIFICATIONS
     ============================ */
-    .certifications { background: #ffffff !important; border-top: 3px solid #000000; border-bottom: 3px solid #000000; }
-    .certifications .section-title h2 { color: #111111 !important; }
-    .certifications .section-title p { color: #555555 !important; }
+    .certifications { background: #ffffff; border-top: 3px solid #000000; border-bottom: 3px solid #000000; }
+    .certifications .section-title h2 { color: #111111; }
+    .certifications .section-title p { color: #555555; }
     .cert-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -947,6 +946,7 @@
       max-width: 140px;
       line-height: 1.5;
     }
+    .cert-gap { background: #000000; height: 48px; }
 
     /* ============================
        CLIENTS
@@ -1403,19 +1403,6 @@
 
     /* Stronger section separation */
     .vehicles, .blog { border-top: 1px solid #111; border-bottom: 1px solid #111; }
-    .cert-gap { background: #000000; height: 48px; }
-
-    /* CERTIFICATIONS OVERRIDE */
-    section.certifications { background: #ffffff !important; }
-    section.certifications .section-title h2 { color: #111111 !important; }
-    section.certifications .section-title p { color: #555555 !important; }
-    section.certifications .cert-badge {
-      background: #111111 !important;
-      border: 3px solid #111111 !important;
-      color: #d32f2f !important;
-    }
-    section.certifications .cert-label { color: #d32f2f !important; }
-    section.certifications .cert-desc { color: #d32f2f !important; }
   </style>
 </head>
 <body>
@@ -1732,8 +1719,8 @@
 <section class="certifications" style="background:#ffffff !important;">
   <div class="container">
     <div class="section-title">
-      <h2>Nuestras Certificaciones</h2>
-      <p>Contamos con las más importantes certificaciones internacionales de calidad y gestión.</p>
+      <h2 style="color:#111111;">Nuestras Certificaciones</h2>
+      <p style="color:#555555;">Contamos con las más importantes certificaciones internacionales de calidad y gestión.</p>
       <div class="divider"></div>
     </div>
     <div class="cert-grid">
