@@ -95,6 +95,12 @@
       background: #111111; border-bottom: 2px solid #333333;
       position: sticky; top: 88px; z-index: 900;
       box-shadow: 0 3px 12px rgba(0,0,0,.3);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .brand-tabs.hidden-scroll {
+      transform: translateY(-120%);
+      opacity: 0;
+      pointer-events: none;
     }
     .brand-tabs-inner {
       max-width: 1200px; margin: 0 auto; padding: 0 20px;
@@ -1465,6 +1471,21 @@
 </div>
 
 <script>
+  // Ocultar menú marcas al bajar, mostrar al subir
+  (function() {
+    var brandTabs = document.querySelector('.brand-tabs');
+    var lastY = window.scrollY;
+    window.addEventListener('scroll', function() {
+      var currentY = window.scrollY;
+      if (currentY > lastY && currentY > 200) {
+        brandTabs.classList.add('hidden-scroll');
+      } else {
+        brandTabs.classList.remove('hidden-scroll');
+      }
+      lastY = currentY;
+    }, { passive: true });
+  })();
+
   var _gImages = [];
   var _gIdx = 0;
   var _gItems = [];
